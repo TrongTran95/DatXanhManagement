@@ -19,6 +19,9 @@
 		804F4FE422DC5FF40083044C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE322DC5FF40083044C /* Project.swift */; };
 		804F4FE622DCAB120083044C /* ProjectCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE522DCAB120083044C /* ProjectCVC.swift */; };
 		804F4FE822DCACD80083044C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE722DCACD80083044C /* Extension.swift */; };
+		80C3413322DDA846001F77F5 /* CustomerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413222DDA846001F77F5 /* CustomerListVC.swift */; };
+		80C3413522DDB700001F77F5 /* CustomerListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413422DDB700001F77F5 /* CustomerListTVC.swift */; };
+		80C3413722DDC81C001F77F5 /* CustomerDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,9 @@
 		804F4FE322DC5FF40083044C /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		804F4FE522DCAB120083044C /* ProjectCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCVC.swift; sourceTree = "<group>"; };
 		804F4FE722DCACD80083044C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		80C3413222DDA846001F77F5 /* CustomerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListVC.swift; sourceTree = "<group>"; };
+		80C3413422DDB700001F77F5 /* CustomerListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListTVC.swift; sourceTree = "<group>"; };
+		80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				804F4FE522DCAB120083044C /* ProjectCVC.swift */,
+				80C3413422DDB700001F77F5 /* CustomerListTVC.swift */,
+				80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -105,6 +113,7 @@
 			children = (
 				804F4FC822DB67180083044C /* LoginVC.swift */,
 				804F4FE122DC51700083044C /* UserVC.swift */,
+				80C3413222DDA846001F77F5 /* CustomerListVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -180,6 +189,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80C3413722DDC81C001F77F5 /* CustomerDetailTVC.swift in Sources */,
+				80C3413322DDA846001F77F5 /* CustomerListVC.swift in Sources */,
+				80C3413522DDB700001F77F5 /* CustomerListTVC.swift in Sources */,
 				804F4FC922DB67180083044C /* LoginVC.swift in Sources */,
 				804F4FE222DC51700083044C /* UserVC.swift in Sources */,
 				804F4FC722DB67180083044C /* AppDelegate.swift in Sources */,

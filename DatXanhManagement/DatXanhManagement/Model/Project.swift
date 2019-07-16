@@ -31,6 +31,11 @@ class Project {
 		self.projectCode = projectCode
 	}
 	
+	//This method will set the value of customer List
+	func setCustomerList(customerList: [Customer]){
+		self.customerList = customerList
+	}
+	
 	//This method will get and set customer quantity of project
 	func getCustomerQuantityOfProject(){
 		let strParams: String = "projectCode=" + self.projectCode

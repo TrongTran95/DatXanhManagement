@@ -20,6 +20,9 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 	var user = User()
 	var projects = [Project]()
 	var customers = [Project]()
+	var chosenProjectIndex = 0
+	
+	var checkIfProjectAreSelectedBefore: Bool = false
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,9 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 		//Setup customer information
     }
 	
+	
 	override func viewDidAppear(_ animated: Bool) {
+		
 	}
 	
 	//Get project list of user
@@ -103,14 +108,33 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		//Reset customer list before get a new one
+		if (projects[indexPath.row].customerList.count != 0) {
+			projects[indexPath.row].setCustomerList(customerList: [Customer]())
+		}
+		
 		//Get customer list before segue to customer list screen
 		projects[indexPath.row].getCustomerListBaseOnProjectCode {
-			
+			//Save the choosen index
+			self.chosenProjectIndex = indexPath.row
+			DispatchQueue.main.async {
+				//Go to customer list page
+				self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
+			}
+			/*
 			//Test customer
 			let cc = self.projects[indexPath.row].customerList[0]
 			print("\(cc.customerStatusID) - \(cc.dateContact) - \(cc.dayOfBirth) - \(cc.email) - \(cc.fbAccount) - \(cc.firstName) - \(cc.gender) - \(cc.idCustomer) - \(cc.lastName) - \(cc.message) - \(cc.phoneNumber) - \(cc.projectCode)")
+			*/
 		}
 	}
 	
-
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		//destination is customer list page
+		if segue.identifier == "showCustomerListPage" {
+			guard let customerListVC = segue.destination as? CustomerListVC else {return}
+			//Assign project
+			customerListVC.project = self.projects[chosenProjectIndex]
+		}
+	}
 }
