@@ -248,30 +248,52 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trần Đức Trọng" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bj2-3Y-k0u">
-                                                    <rect key="frame" x="55" y="15.5" width="280" height="20.5"/>
+                                                    <rect key="frame" x="55" y="15.5" width="118" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01283636840" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E58-8u-y9u">
-                                                    <rect key="frame" x="56" y="38" width="279" height="18"/>
+                                                    <rect key="frame" x="56" y="38" width="99.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rub-yW-5kT">
+                                                    <rect key="frame" x="290.5" y="10" width="49.5" height="49.5"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btk-V4-f6w">
+                                                            <rect key="frame" x="5" y="5" width="39.5" height="39.5"/>
+                                                            <state key="normal" image="call_white"/>
+                                                            <connections>
+                                                                <action selector="makeAPhoneCallButtonPressed:" destination="kDg-4F-5th" eventType="touchUpInside" id="wfZ-dO-85E"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.1414324045" green="0.63264912370000004" blue="0.37034380439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstItem="btk-V4-f6w" firstAttribute="leading" secondItem="Rub-yW-5kT" secondAttribute="leading" constant="5" id="9Gv-im-wFE"/>
+                                                        <constraint firstItem="btk-V4-f6w" firstAttribute="top" secondItem="Rub-yW-5kT" secondAttribute="top" constant="5" id="BlV-a0-tlc"/>
+                                                        <constraint firstAttribute="trailing" secondItem="btk-V4-f6w" secondAttribute="trailing" constant="5" id="n9E-R2-BDv"/>
+                                                        <constraint firstAttribute="width" secondItem="Rub-yW-5kT" secondAttribute="height" multiplier="1:1" id="ph8-wN-kNq"/>
+                                                        <constraint firstAttribute="bottom" secondItem="btk-V4-f6w" secondAttribute="bottom" constant="5" id="zmB-3U-Chf"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="E58-8u-y9u" firstAttribute="centerY" secondItem="wDO-ib-CPN" secondAttribute="centerY" constant="12" id="1he-jM-rEj"/>
-                                                <constraint firstAttribute="trailing" secondItem="bj2-3Y-k0u" secondAttribute="trailing" constant="10" id="Cfu-nX-egX"/>
+                                                <constraint firstItem="Rub-yW-5kT" firstAttribute="top" secondItem="wDO-ib-CPN" secondAttribute="top" constant="10" id="DRT-2E-Oev"/>
                                                 <constraint firstItem="bj2-3Y-k0u" firstAttribute="centerY" secondItem="wDO-ib-CPN" secondAttribute="centerY" constant="-9" id="Op4-1J-9RK"/>
                                                 <constraint firstItem="bj2-3Y-k0u" firstAttribute="leading" secondItem="tlm-iL-3a3" secondAttribute="trailing" constant="10" id="Op5-mL-h8G"/>
-                                                <constraint firstAttribute="trailing" secondItem="E58-8u-y9u" secondAttribute="trailing" constant="10" id="dEw-UE-DJh"/>
+                                                <constraint firstAttribute="trailing" secondItem="Rub-yW-5kT" secondAttribute="trailing" constant="5" id="X2u-dQ-QCP"/>
+                                                <constraint firstAttribute="bottom" secondItem="Rub-yW-5kT" secondAttribute="bottom" constant="10" id="m24-ly-Qh1"/>
                                                 <constraint firstItem="E58-8u-y9u" firstAttribute="leading" secondItem="tlm-iL-3a3" secondAttribute="trailing" constant="11" id="mN2-QR-cuM"/>
                                                 <constraint firstItem="tlm-iL-3a3" firstAttribute="centerY" secondItem="wDO-ib-CPN" secondAttribute="centerY" id="q1g-e3-2u3"/>
                                                 <constraint firstItem="tlm-iL-3a3" firstAttribute="leading" secondItem="wDO-ib-CPN" secondAttribute="leading" constant="10" id="rEI-0x-nrF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btnPhoneCall" destination="btk-V4-f6w" id="NXw-YZ-n7f"/>
                                             <outlet property="lblCustomerName" destination="bj2-3Y-k0u" id="TgH-jT-PpT"/>
                                             <outlet property="lblOrder" destination="P6h-5P-T3u" id="rIH-jQ-87T"/>
                                             <outlet property="lblPhoneNumber" destination="E58-8u-y9u" id="6Jb-qS-1US"/>
@@ -280,8 +302,8 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qpg-Bh-lfB">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <view hidden="YES" alpha="0.0" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qpg-Bh-lfB">
+                                <rect key="frame" x="159" y="420" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqM-zr-o1a">
                                         <rect key="frame" x="47.5" y="101.5" width="280" height="400"/>
@@ -465,6 +487,7 @@
     </scenes>
     <resources>
         <image name="Thumbnail" width="300" height="300"/>
+        <image name="call_white" width="64" height="64"/>
         <image name="customer-white" width="48" height="48"/>
     </resources>
 </document>

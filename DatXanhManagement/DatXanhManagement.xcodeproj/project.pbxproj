@@ -77,11 +77,11 @@
 				804F4FDA22DC32C90083044C /* Controller */,
 				804F4FD922DC32C50083044C /* View */,
 				804F4FD822DC32B60083044C /* Model */,
-				804F4FC622DB67180083044C /* AppDelegate.swift */,
 				804F4FCA22DB67180083044C /* Main.storyboard */,
 				804F4FCD22DB67190083044C /* Assets.xcassets */,
 				804F4FCF22DB67190083044C /* LaunchScreen.storyboard */,
 				804F4FD222DB67190083044C /* Info.plist */,
+				804F4FC622DB67180083044C /* AppDelegate.swift */,
 				804F4FDD22DC34E30083044C /* UrlAddresses.swift */,
 				804F4FE722DCACD80083044C /* Extension.swift */,
 			);
@@ -349,6 +349,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WY86QYTGHL;
 				INFOPLIST_FILE = DatXanhManagement/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -367,6 +368,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WY86QYTGHL;
 				INFOPLIST_FILE = DatXanhManagement/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

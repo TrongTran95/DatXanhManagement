@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CallKit
 
 class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
@@ -37,6 +38,8 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		}
 	}
 	
+	//For using callkit and catching event
+	var callObserver: CXCallObserver!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +49,8 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		setupTableView()
 		//Setup data for page
 		setupData()
+		
+		
     }
 	
 	//Set up delegate and data source for tableviews
@@ -62,6 +67,9 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		self.title = self.project.projectName
 		//Set customer quantity information
 		self.lblCustomerQuantity.text = "2/\(project.customerList.count * 2) khách hàng cần được tư vấn"
+		//Setup call management
+		callObserver = CXCallObserver()
+		callObserver.setDelegate(self, queue: nil) // nil queue means main thread
 	}
 	
 	//Number of section of table view
@@ -111,16 +119,35 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			let cell = tbCustomerList.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomerListTVC
 			//Get current customer fro customer list
 			let currentCustomer = project.customerList[indexPath.row]
+			
 			//Set customer name
-			cell.lblCustomerName.text = "\(currentCustomer.lastName) \(currentCustomer.firstName)"
+			let limitLength = 20
+			let customerName = "\(currentCustomer.lastName) \(currentCustomer.firstName)"
+			var customerDisplayName = ""
+			if (customerName.count > limitLength){
+				customerDisplayName += ".."
+			}
+			customerDisplayName += customerName.maxLengthFromRightToLeft(length: limitLength)
+			cell.lblCustomerName.text = customerDisplayName
+			
 			//Set customer phone number
 			cell.lblPhoneNumber.text = currentCustomer.phoneNumber
+			
 			//Set order of customer
 			cell.lblOrder.text = "\(indexPath.row + 1)"
+			
 			//Set color for called customer
 			if (indexPath.section == 1) {
 				cell.viewOrder.backgroundColor = UIColor(red: 36/255, green: 161/255, blue: 94/255, alpha: 1)
 			}
+			
+			//Set tag for button phone call
+			cell.btnPhoneCall.tag = indexPath.row
+			
+			//Set section
+			cell.section = indexPath.section
+			cell.delegate = self
+			
 			return cell
 		}
 			
@@ -196,8 +223,38 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		else {
 			
 		}
+
+	}
+}
+
+extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
+	func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall) {
+		//https://stackoverflow.com/questions/36014975/detect-phone-calls-on-ios-with-ctcallcenter-swift
+		//End the phone call
+		if call.hasEnded == true {
+			print("Disconnected")
+			print("a")
+		}
+		//User call customer
+		if call.isOutgoing == true && call.hasConnected == false {
+			print("Dialing")
+			print("b")
+		}
+		//Customer call while using app
+		if call.isOutgoing == false && call.hasConnected == false && call.hasEnded == false {
+			print("Incoming")
+			print("c")
+		}
+		//Customer or user accept call
+		if call.hasConnected == true && call.hasEnded == false {
+			print("Connected")
+			print("d")
+		}
 	}
 	
-	
-
+	func didPressCallButton(tag: Int) {
+		let phoneNumber = project.customerList[tag].phoneNumber
+//		let trongs = "0783636848"
+		phoneNumber.makeAColl()
+	}
 }
