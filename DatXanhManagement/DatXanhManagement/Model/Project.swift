@@ -14,7 +14,7 @@ class Project {
 	private(set) public var projectStatusID:Int
 	private(set) public var projectThumbnail:String
 	private(set) public var customerQuantity:Int
-	private(set) public var customerList:[Customer]
+	private(set) public var customerListSeperated:[String:[Customer]]
 	
 	init() {
 		projectCode = ""
@@ -23,7 +23,7 @@ class Project {
 		projectStatusID = 2
 		projectThumbnail = ""
 		customerQuantity = 0
-		customerList = [Customer]()
+		customerListSeperated = [STILL_NOT:[], ALREADY:[]]
 	}
 	
 	//This method will set the value of project code
@@ -31,9 +31,11 @@ class Project {
 		self.projectCode = projectCode
 	}
 	
-	//This method will set the value of customer List
-	func setCustomerList(customerList: [Customer]){
-		self.customerList = customerList
+	//Check and reset customer list
+	func checkAndResetCustomerList(){
+		if (self.customerListSeperated[STILL_NOT]?.count != 0 || self.customerListSeperated[ALREADY]?.count != 0) {
+			customerListSeperated = [STILL_NOT:[], ALREADY:[]]
+		}
 	}
 	
 	//This method will get and set customer quantity of project
@@ -45,8 +47,8 @@ class Project {
 		}
 	}
 	
-	//This method will set the value of project code
-	func getCustomerListBaseOnProjectCode(completion: @escaping() -> Void){
+	//This method will get all information of customer and return a list of them
+	func getCustomerListBaseOnProjectCode(userPersonalEmail: String, completion: @escaping() -> Void){
 		let strParams: String = "projectCode=" + self.projectCode
 		getJsonUsingPost(strURL: urlGetCustomerListBaseOnProjectCode, strParams: strParams) { (json) in
 			let arrCustomer = json["customers"] as! [[String:Any]]
@@ -93,12 +95,21 @@ class Project {
 				if let customerStatusID = currentJsonCustomer["customerStatusID"] as? Int {
 					customer.setCustomerStatusID(customerStatusID: customerStatusID)
 				}
-				self.customerList.append(customer)
+				//Get calling detail of that customer
+				customer.getCallingDetail(email: userPersonalEmail, completion: {
+					if (customer.callStatus == 0) {
+						self.customerListSeperated[STILL_NOT]?.append(customer)
+					} else {
+						self.customerListSeperated[ALREADY]?.append(customer)
+					}
+					//After get all calling detail of customer, do completion
+					if (self.customerListSeperated[STILL_NOT]!.count + self.customerListSeperated[ALREADY]!.count == arrCustomer.count) {
+						completion()
+					}
+				})
 			}
-			completion()
 		}
 	}
-	
 	
 	func getProjectInfo(completion: @escaping() -> Void){
 		let strParams: String = "projectCode=" + self.projectCode

@@ -23,6 +23,11 @@ class Customer {
 	private(set) public var message:String
 	private(set) public var customerStatusID:Int
 	
+	private(set) public var idPhoneCall:Int
+	private(set) public var callStatus:Int
+	private(set) public var callSuccessTimes:Int
+	private(set) public var callSuccessMinutes:Float
+	
 	init() {
 		self.idCustomer = 0
 		self.gender = ""
@@ -37,6 +42,11 @@ class Customer {
 		self.dateContact = ""
 		self.message = ""
 		self.customerStatusID = 2
+		
+		self.idPhoneCall = 0
+		self.callStatus = 0
+		self.callSuccessTimes = 0
+		self.callSuccessMinutes = 0
 	}
 	
 	func setIDCustomer(idCustomer: Int) {
@@ -91,5 +101,36 @@ class Customer {
 		self.customerStatusID = customerStatusID
 	}
 	
+	func setCallStatus(callStatus: Int) {
+		self.callStatus = callStatus
+	}
+	
+	func setCallSuccessTimes(callSuccessTimes: Int) {
+		self.callSuccessTimes += callSuccessTimes
+	}
+	
+	func setCallSuccessMinutes(callSuccessMinutes: Float) {
+		self.callSuccessMinutes += callSuccessMinutes
+	}
+	
+	func getCallingDetail(email: String, completion: @escaping() -> Void) {
+		let strParams: String = "idCustomer=\(self.idCustomer)"  + "&userPersonalEmail=" + email
+		getJsonUsingPost(strURL: urlGetCustomerCallingDetail, strParams: strParams) { (json) in
+			let callingDetailJson = json["callingDetail"]! as! Dictionary<String, Any>
+			self.idPhoneCall = callingDetailJson["idPhoneCall"] as! Int
+			self.callStatus = callingDetailJson["status"] as! Int
+			self.callSuccessTimes = callingDetailJson["successTimes"] as! Int
+			self.callSuccessMinutes = ((callingDetailJson["successMinutes"] as? NSNumber)?.floatValue)!
+			completion()
+		}
+	}
+	
+	//Update customer calling detail after user success contact with customer
+	func updateCustomerCallingDetail(completion:@escaping() -> Void){
+		let strParams: String = "status=\(self.callStatus)" + "&successTimes=\(self.callSuccessTimes)" + "&successMinutes=\(self.callSuccessMinutes)" + "&idPhoneCall=\(self.idPhoneCall)"
+		getJsonUsingPost(strURL: urlUpdateCustomerCallingDetail, strParams: strParams) { (json) in
+			completion()
+		}
+	}
 	
 }

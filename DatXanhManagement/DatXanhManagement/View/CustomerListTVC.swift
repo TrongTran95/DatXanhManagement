@@ -17,10 +17,10 @@ class CustomerListTVC: UITableViewCell {
 	@IBOutlet weak var btnPhoneCall: UIButton!
 	
 	var delegate: CustomerListTVCDelegate?
-	var section = 0
+	var section = ""
 	
 	@IBAction func makeAPhoneCallButtonPressed(_ sender: UIButton) {
-		delegate?.didPressCallButton(tag: sender.tag)
+		delegate?.didPressCallButton(section: section, row: sender.tag)
 	}
 	
     override func awakeFromNib() {
@@ -36,5 +36,5 @@ class CustomerListTVC: UITableViewCell {
 }
 
 protocol CustomerListTVCDelegate: class {
-	func didPressCallButton(tag: Int)
+	func didPressCallButton(section: String, row: Int)
 }

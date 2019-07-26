@@ -8,12 +8,16 @@
 
 import Foundation
 
-public let urlLogin: String = "http://trongstest.tk/DatXanhManagement/api/CheckLogin.php"
+public let urlLogin: String = "http://trongstest.tk/api/CheckLogin.php"
 
-public let urlGetUserProjects: String = "http://trongstest.tk/DatXanhManagement/api/GetUserProjects.php"
+public let urlGetUserProjects: String = "http://trongstest.tk/api/GetUserProjects.php"
 
-public let urlGetProjectInfo: String = "http://trongstest.tk/DatXanhManagement/api/GetProjectInfo.php"
+public let urlGetProjectInfo: String = "http://trongstest.tk/api/GetProjectInfo.php"
 
-public let urlGetCustomerListBaseOnProjectCode: String = "http://trongstest.tk/DatXanhManagement/api/GetCustomerListBaseOnProjectCode.php"
+public let urlGetCustomerListBaseOnProjectCode: String = "http://trongstest.tk/api/GetCustomerListBaseOnProjectCode.php"
 
-public let urlGetCustomerQuantityOfProject: String = "http://trongstest.tk/DatXanhManagement/api/GetCustomerQuantityOfProject.php"
+public let urlGetCustomerQuantityOfProject: String = "http://trongstest.tk/api/GetCustomerQuantityOfProject.php"
+
+public let urlGetCustomerCallingDetail: String = "http://trongstest.tk/api/GetCustomerCallingDetail.php"
+
+public let urlUpdateCustomerCallingDetail: String = "http://trongstest.tk/api/UpdateCustomerCallingDetail.php"

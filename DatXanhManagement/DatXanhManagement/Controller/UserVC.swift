@@ -21,6 +21,7 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 	var projects = [Project]()
 	var customers = [Project]()
 	var chosenProjectIndex = 0
+	var customerDic = [String:[Customer]]()
 	
 	var checkIfProjectAreSelectedBefore: Bool = false
 	
@@ -90,6 +91,7 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 		let currentRow: Int = indexPath.row
 		if (projects[currentRow].projectThumbnail != "") {
 			//Download and upload image
+			print(projects[currentRow].projectThumbnail)
 			let imgURL:URL = URL(string: projects[currentRow].projectThumbnail)!
 			downloadImage(from: imgURL) { (data) in
 				//Show image after download from server
@@ -108,24 +110,28 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		//Reset customer list before get a new one
-		if (projects[indexPath.row].customerList.count != 0) {
-			projects[indexPath.row].setCustomerList(customerList: [Customer]())
-		}
+		//Check and Reset customer list before get a new one
+		projects[indexPath.row].checkAndResetCustomerList()
+		
+		//Save the choosen index
+		self.chosenProjectIndex = indexPath.row
 		
 		//Get customer list before segue to customer list screen
-		projects[indexPath.row].getCustomerListBaseOnProjectCode {
-			//Save the choosen index
-			self.chosenProjectIndex = indexPath.row
+		projects[indexPath.row].getCustomerListBaseOnProjectCode(userPersonalEmail: user.emailAddressPersonal) {
 			DispatchQueue.main.async {
+				/*
+				//Test customer's all information
+				let cc = self.projects[indexPath.row].customerList[1]
+				print("\(cc.customerStatusID) - \(cc.dateContact) - \(cc.dayOfBirth) - \(cc.email) - \(cc.fbAccount) - \(cc.firstName) - \(cc.gender) - \(cc.idCustomer) - \(cc.lastName) - \(cc.message) - \(cc.phoneNumber) - \(cc.projectCode) - \(cc.callStatus) - \(cc.callSuccessTimes) - \(cc.callSuccessMinutes)")
+				*/
+				
+				//Seperate customer to 2 types, Still not call yet and Already called
+//				self.customerDic = self.projects[self.chosenProjectIndex].getCustomerSeperatedByCallStatus()
+				
 				//Go to customer list page
 				self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
 			}
-			/*
-			//Test customer
-			let cc = self.projects[indexPath.row].customerList[0]
-			print("\(cc.customerStatusID) - \(cc.dateContact) - \(cc.dayOfBirth) - \(cc.email) - \(cc.fbAccount) - \(cc.firstName) - \(cc.gender) - \(cc.idCustomer) - \(cc.lastName) - \(cc.message) - \(cc.phoneNumber) - \(cc.projectCode)")
-			*/
+
 		}
 	}
 	
@@ -135,6 +141,7 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 			guard let customerListVC = segue.destination as? CustomerListVC else {return}
 			//Assign project
 			customerListVC.project = self.projects[chosenProjectIndex]
+			customerListVC.userPersonalEmail = self.user.emailAddressPersonal
 		}
 	}
 }
