@@ -14,10 +14,10 @@ public let urlGetUserProjects: String = "http://trongstest.tk/api/GetUserProject
 
 public let urlGetProjectInfo: String = "http://trongstest.tk/api/GetProjectInfo.php"
 
-public let urlGetCustomerListBaseOnProjectCode: String = "http://trongstest.tk/api/GetCustomerListBaseOnProjectCode.php"
+public let urlGetCustomerList: String = "http://trongstest.tk/api/GetCustomerList.php"
 
-public let urlGetCustomerQuantityOfProject: String = "http://trongstest.tk/api/GetCustomerQuantityOfProject.php"
+public let urlGetCustomerQuantity: String = "http://trongstest.tk/api/GetCustomerQuantity.php"
 
-public let urlGetCustomerCallingDetail: String = "http://trongstest.tk/api/GetCustomerCallingDetail.php"
+public let urlGetCustomerStillNotContactQuantity: String = "http://trongstest.tk/api/GetCustomerStillNotContactQuantity.php"
 
 public let urlUpdateCustomerCallingDetail: String = "http://trongstest.tk/api/UpdateCustomerCallingDetail.php"

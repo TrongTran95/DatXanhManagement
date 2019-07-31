@@ -10,40 +10,45 @@ import Foundation
 
 class Customer {
 	private(set) public var idCustomer:Int
-	private(set) public var gender:String
-	private(set) public var firstName:String
-	private(set) public var lastName:String
-	private(set) public var dayOfBirth:String
-	private(set) public var phoneNumber:String
-	private(set) public var email:String
-	private(set) public var fbAccount:String
-	private(set) public var projectCode:String
+	private(set) public var messageCode:String
+	private(set) public var projectName:String
 	private(set) public var source:String
 	private(set) public var dateContact:String
+	private(set) public var gender:String
+	private(set) public var lastName:String
+	private(set) public var firstName:String
+	private(set) public var phoneNumber:String
+	private(set) public var fbAccount:String
+	private(set) public var email:String
+	private(set) public var dayOfBirth:String
 	private(set) public var message:String
-	private(set) public var customerStatusID:Int
+	private(set) public var emailBusiness:String
+	private(set) public var emailTeam:String
+	private(set) public var emailPersonal:String
 	
-	private(set) public var idPhoneCall:Int
+	
 	private(set) public var callStatus:Int
 	private(set) public var callSuccessTimes:Int
 	private(set) public var callSuccessMinutes:Float
 	
 	init() {
 		self.idCustomer = 0
-		self.gender = ""
-		self.firstName = ""
-		self.lastName = ""
-		self.dayOfBirth = ""
-		self.phoneNumber = ""
-		self.email = ""
-		self.fbAccount = ""
-		self.projectCode = ""
+		self.messageCode = ""
+		self.projectName = ""
 		self.source = ""
 		self.dateContact = ""
+		self.gender = ""
+		self.lastName = ""
+		self.firstName = ""
+		self.phoneNumber = ""
+		self.fbAccount = ""
+		self.email = ""
+		self.dayOfBirth = ""
 		self.message = ""
-		self.customerStatusID = 2
+		self.emailBusiness = ""
+		self.emailTeam = ""
+		self.emailPersonal = ""
 		
-		self.idPhoneCall = 0
 		self.callStatus = 0
 		self.callSuccessTimes = 0
 		self.callSuccessMinutes = 0
@@ -51,6 +56,10 @@ class Customer {
 	
 	func setIDCustomer(idCustomer: Int) {
 		self.idCustomer = idCustomer
+	}
+	
+	func setProjectName(projectName: String) {
+		self.projectName = projectName
 	}
 	
 	func setGender(gender: String) {
@@ -81,8 +90,8 @@ class Customer {
 		self.fbAccount = fbAccount
 	}
 	
-	func setProjectCode(projectCode: String) {
-		self.projectCode = projectCode
+	func setMessageCode(messageCode: String) {
+		self.messageCode = messageCode
 	}
 	
 	func setSource(source: String) {
@@ -97,8 +106,16 @@ class Customer {
 		self.message = message
 	}
 	
-	func setCustomerStatusID(customerStatusID: Int) {
-		self.customerStatusID = customerStatusID
+	func setEmailTeam(emailTeam: String) {
+		self.emailTeam = emailTeam
+	}
+	
+	func setEmailBusiness(emailBusiness: String) {
+		self.emailBusiness = emailBusiness
+	}
+	
+	func setEmailPersonal(emailPersonal: String) {
+		self.emailPersonal = emailPersonal
 	}
 	
 	func setCallStatus(callStatus: Int) {
@@ -113,21 +130,22 @@ class Customer {
 		self.callSuccessMinutes += callSuccessMinutes
 	}
 	
+	/* Không còn dùng nữa vì customer đã chứa luôn thông tin cuộc gọi
 	func getCallingDetail(email: String, completion: @escaping() -> Void) {
 		let strParams: String = "idCustomer=\(self.idCustomer)"  + "&userPersonalEmail=" + email
 		getJsonUsingPost(strURL: urlGetCustomerCallingDetail, strParams: strParams) { (json) in
 			let callingDetailJson = json["callingDetail"]! as! Dictionary<String, Any>
-			self.idPhoneCall = callingDetailJson["idPhoneCall"] as! Int
 			self.callStatus = callingDetailJson["status"] as! Int
 			self.callSuccessTimes = callingDetailJson["successTimes"] as! Int
 			self.callSuccessMinutes = ((callingDetailJson["successMinutes"] as? NSNumber)?.floatValue)!
 			completion()
 		}
 	}
+	*/
 	
 	//Update customer calling detail after user success contact with customer
 	func updateCustomerCallingDetail(completion:@escaping() -> Void){
-		let strParams: String = "status=\(self.callStatus)" + "&successTimes=\(self.callSuccessTimes)" + "&successMinutes=\(self.callSuccessMinutes)" + "&idPhoneCall=\(self.idPhoneCall)"
+		let strParams: String = "status=\(self.callStatus)" + "&successTimes=\(self.callSuccessTimes)" + "&successMinutes=\(self.callSuccessMinutes)" + "&idCustomer=\(self.idCustomer)"
 		getJsonUsingPost(strURL: urlUpdateCustomerCallingDetail, strParams: strParams) { (json) in
 			completion()
 		}

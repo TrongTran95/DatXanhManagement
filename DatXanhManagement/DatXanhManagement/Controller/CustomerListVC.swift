@@ -39,7 +39,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	var startMoment = DateComponents()
 	var endMoment = DateComponents()
 	
-	var userPersonalEmail: String = ""
+	var userTeamEmail: String = ""
 	
 	
 	//Cancel button, turn off customer detail view, back to customer list
@@ -74,7 +74,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		//Hide back button title
 		self.navigationController?.navigationBar.topItem!.title = " "
 		//Set page's title (name of project)
-		self.title = self.project.projectName
+		self.title = self.project.name
 		//Set customer quantity information
 		setupCustomerQuantity()
 	}
@@ -298,7 +298,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			var description = ""
 			switch currentRow {
 			case 0: //Project name
-				description = project.projectName
+				description = project.name
 			case 1: //Phone number
 				description = chosenCustomer.phoneNumber
 			case 2: //Contact date
@@ -323,6 +323,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 				description = "Chưa có thông tin"
 			}
 			cell.lblDescription.text = description
+			
 			return cell
 		}
 	}
@@ -362,7 +363,13 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		}
 		//Table customer detail
 		else {
-			
+			//Phone call row
+			if (indexPath.row == 1) {
+				let phoneNumber = chosenCustomer.phoneNumber
+				print(phoneNumber)
+				let trongs = "0783636848"
+				trongs.makeAColl()
+			}
 		}
 
 	}
@@ -394,7 +401,7 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 						self.tbCustomerList.reloadData()
 					}
 					//Get customer list
-					self.project.getCustomerListBaseOnProjectCode(userPersonalEmail: self.userPersonalEmail) {
+					self.project.getCustomerList(emailTeam: self.userTeamEmail) {
 						//reload table's data
 						DispatchQueue.main.async {
 							self.tbCustomerList.reloadData()

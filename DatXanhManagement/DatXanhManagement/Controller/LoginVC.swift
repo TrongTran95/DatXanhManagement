@@ -27,8 +27,9 @@ class LoginVC: UIViewController {
 			//Start the login process
 			user.login(userName: userName, password: password) {
 				//Login success
-				if(self.user.emailAddressPersonal != ""){
-					DispatchQueue.main.async {	self.performSegue(withIdentifier: "showUserPage", sender: self)
+				if(self.user.emailTeam != ""){
+					DispatchQueue.main.async {
+						self.performSegue(withIdentifier: "showUserPage", sender: self)
 					}
 				}
 				//Wrong username or password
@@ -47,9 +48,11 @@ class LoginVC: UIViewController {
 	
 	@IBAction func changeUsername(_ sender: Any) {
 		if smTestUsername.selectedSegmentIndex == 0{
-			txtUsername.text = "adminstest@gmail.com"
+			txtUsername.text = "1ProjectsTest@gmail.com"
+		} else if smTestUsername.selectedSegmentIndex == 1{
+			txtUsername.text = "2ProjectsTest@gmail.com"
 		} else {
-			txtUsername.text = "minhstest@gmail.com"
+			txtUsername.text = "3ProjectsTest@gmail.com"
 		}
 	}
 	
