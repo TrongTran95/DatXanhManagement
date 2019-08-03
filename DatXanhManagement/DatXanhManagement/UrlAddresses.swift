@@ -8,16 +8,19 @@
 
 import Foundation
 
-public let urlLogin: String = "http://trongstest.tk/api/CheckLogin.php"
+public let urlHostApi: String = "http://trongstest.tk/api/"
 
-public let urlGetUserProjects: String = "http://trongstest.tk/api/GetUserProjects.php"
+public let urlLogin: String = "\(urlHostApi)CheckLogin.php"
 
-public let urlGetProjectInfo: String = "http://trongstest.tk/api/GetProjectInfo.php"
+public let urlGetUserProjects: String = "\(urlHostApi)GetUserProjects.php"
 
-public let urlGetCustomerList: String = "http://trongstest.tk/api/GetCustomerList.php"
+public let urlGetProjectInfo: String = "\(urlHostApi)GetProjectInfo.php"
 
-public let urlGetCustomerQuantity: String = "http://trongstest.tk/api/GetCustomerQuantity.php"
+public let urlGetCustomerList: String = "\(urlHostApi)GetCustomerList.php"
+//public let urlGetCustomerList: String = "http://trongstest.tk/TestFull.php"
 
-public let urlGetCustomerStillNotContactQuantity: String = "http://trongstest.tk/api/GetCustomerStillNotContactQuantity.php"
+public let urlGetCustomerQuantity: String = "\(urlHostApi)GetCustomerQuantity.php"
 
-public let urlUpdateCustomerCallingDetail: String = "http://trongstest.tk/api/UpdateCustomerCallingDetail.php"
+public let urlGetCustomerStillNotContactQuantity: String = "\(urlHostApi)GetCustomerStillNotContactQuantity.php"
+
+public let urlUpdateCustomerCallingDetail: String = "\(urlHostApi)UpdateCustomerCallingDetail.php"

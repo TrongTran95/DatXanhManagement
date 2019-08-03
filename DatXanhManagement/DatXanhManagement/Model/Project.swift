@@ -41,6 +41,7 @@ class Project {
 	//If url = customerStillNotContactQuantity: This method will get and set the quantity of customer that still not contact yet
 	func getCustomerQuantity(url: String, emailTeam: String, completion: @escaping() -> Void){
 		let strParams: String = "projectName=" + self.name + "&emailTeam=" + emailTeam
+		print("aaaaa\(strParams)")
 		getJsonUsingPost(strURL: url, strParams: strParams) { (json) in
 			let quantity = json["quantity"] as! Int
 			if (url == urlGetCustomerQuantity) {
@@ -121,7 +122,7 @@ class Project {
 				if let successTimes = currentJsonCustomer["successTimes"] as? Int {
 					customer.setCallSuccessTimes(callSuccessTimes: successTimes)
 				}
-				if let successMinutes = (currentJsonCustomer["status"] as? NSNumber)?.floatValue {
+				if let successMinutes = (currentJsonCustomer["successMinutes"] as? NSNumber)?.floatValue {
 					customer.setCallSuccessMinutes(callSuccessMinutes: successMinutes)
 				}
 				

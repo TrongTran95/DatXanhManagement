@@ -25,9 +25,9 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	var chosenCustomer = Customer()
 	
-	let arrImageTitle = ["mansion", "call-green", "date", "fb", "email", "gender", "birthday", "source", "message"]
+	let arrImageTitle = ["mansion", "message", "source", "call-green", "fb", "email", "date", "gender", "birthday", "call-green-status", "call-green-times", "call-green-clock"]
 	
-	let arrTitle = ["Dự án", "Số điện thoại", "Ngày liên lạc", "Facebook", "Email", "Giới tính", "Ngày sinh", "Nguồn", "Thông điệp"]
+	let arrTitle = ["Dự án", "Thông điệp", "Nguồn", "Số điện thoại", "Facebook", "Email", "Ngày liên lạc", "Giới tính", "Ngày sinh", "Tình trạng liên lạc", "Số lần liên lạc thành công", "Thời gian liên lạc thành công"]
 	
 	//For using callkit and catching event
 	var callObserver: CXCallObserver!
@@ -59,6 +59,10 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		setupPagesInfo()
 		//Setup calling manager
 		setupCallingManager()
+		
+		tbCustomerDetail.rowHeight = UITableView.automaticDimension
+		tbCustomerDetail.estimatedRowHeight = 600
+
     }
 	
 	//Set up delegate and data source for tableviews
@@ -255,15 +259,27 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 				cell.section = ALREADY
 			}
 			
-			//Set customer name
-			let limitLength = 20
-			let customerName = "\(currentCustomer.lastName) \(currentCustomer.firstName)"
-			var customerDisplayName = ""
-			if (customerName.count > limitLength){
-				customerDisplayName += ".."
+			//Set customer name (3 checks)
+			var displayName: String = ""
+			//Check if customer don't have first name (access facebook)
+			if (currentCustomer.firstName.contains("facebook.com")){
+				displayName = "Truy cập FB khách"
+			} else {
+				//Check if customer don't have last name
+				if (currentCustomer.lastName != "") {
+					displayName += "\(currentCustomer.lastName) "
+				}
+				displayName += "\(currentCustomer.firstName)"
+				
+				//Check if customer name too long
+				let limitLength = 18
+				if (displayName.count > limitLength){
+					displayName = "..\(displayName.maxLengthFromRightToLeft(length: limitLength))"
+				}
 			}
-			customerDisplayName += customerName.maxLengthFromRightToLeft(length: limitLength)
-			cell.lblCustomerName.text = customerDisplayName
+			cell.lblCustomerName.text = displayName
+			
+			
 			
 			//Set customer phone number
 			cell.lblPhoneNumber.text = currentCustomer.phoneNumber
@@ -274,6 +290,8 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			//Set color for called customer
 			if (indexPath.section == 1) {
 				cell.viewOrder.backgroundColor = UIColor(red: 36/255, green: 161/255, blue: 94/255, alpha: 1)
+			} else {
+				cell.viewOrder.backgroundColor = UIColor(red: 221/255, green: 80/255, blue: 94/255, alpha: 1)
 			}
 			
 			//Set tag for button phone call
@@ -294,27 +312,34 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			cell.imgTitle.image = UIImage(named: arrImageTitle[currentRow])
 			//Set title
 			cell.lblTitle.text = arrTitle[currentRow]
+			//let arrTitle = ["Dự án", "Thông điệp", "Nguồn", "Số điện thoại", "Facebook", "Email", "Ngày liên lạc", "Giới tính", "Ngày sinh", "Liên lạc", "Số lần liên lạc thành công", "Thời gian liên lạc thành công"]
 			//Get description
 			var description = ""
 			switch currentRow {
 			case 0: //Project name
 				description = project.name
-			case 1: //Phone number
-				description = chosenCustomer.phoneNumber
-			case 2: //Contact date
-				description = chosenCustomer.dateContact
-			case 3: //Facebook account
-				description = chosenCustomer.fbAccount
-			case 4: //Email address
-				description = chosenCustomer.email
-			case 5: //Gender
-				description = chosenCustomer.gender
-			case 6: //Birthday
-				description = chosenCustomer.dayOfBirth
-			case 7: //Source
-				description = chosenCustomer.source
-			case 8: //Message
+			case 1: //Message
 				description = chosenCustomer.message
+			case 2: //Source
+				description = chosenCustomer.source
+			case 3: //Phone number
+				description = chosenCustomer.phoneNumber
+			case 4: //Facebook account
+				description = chosenCustomer.fbAccount
+			case 5: //Email address
+				description = chosenCustomer.email
+			case 6: //Contact date
+				description = chosenCustomer.dateContact
+			case 7: //Gender
+				description = chosenCustomer.gender
+			case 8: //Birthday
+				description = chosenCustomer.dayOfBirth
+			case 9: //Call status
+				description = chosenCustomer.callStatus == 0 ? "Chưa liên lạc" : "Đã liên lạc"
+			case 10: //Call success times
+				description = "Đã liên lạc \(chosenCustomer.callSuccessTimes) lần"
+			case 11: //Call success minutes
+				description = "Đã liên lạc được \(Int(round(chosenCustomer.callSuccessMinutes))) phút"
 			default:
 				description = "Chưa có thông tin"
 			}
@@ -328,20 +353,10 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		}
 	}
 	
-	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		//Table customer list
-		if tableView == tbCustomerList {
-			return 70
-		}
-			//Table customer detail
-		else {
-			return 44
-		}
-	}
-	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		//Table customer list
 		if tableView == tbCustomerList {
+			tbCustomerDetail.reloadInputViews()
 			//Set chosen customser when click to any customer
 			//From Still not contact customer list
 			if indexPath.section == 0 {
@@ -352,8 +367,13 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 				chosenCustomer = project.customerListSeperated[ALREADY]![indexPath.row]
 			}
 			
+			//Reset scroll position to 0
+			tbCustomerDetail.contentOffset = CGPoint.zero
+			
 			//Reload table customer detail to update new values
-			tbCustomerDetail.reloadData()
+			DispatchQueue.main.async {
+				self.tbCustomerDetail.reloadData()
+			}
 			
 			//Show Customer detail view
 			viewCustomerDetailContainer.isHidden = false
@@ -364,7 +384,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		//Table customer detail
 		else {
 			//Phone call row
-			if (indexPath.row == 1) {
+			if (indexPath.row == 3) {
 				let phoneNumber = chosenCustomer.phoneNumber
 				print(phoneNumber)
 				let trongs = "0783636848"
