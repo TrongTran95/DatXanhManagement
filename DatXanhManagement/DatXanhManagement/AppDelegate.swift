@@ -8,6 +8,7 @@
 
 import UIKit
 import CallKit
+import OneSignal
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
+		
+		let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+		
+		// Replace 'YOUR_APP_ID' with your OneSignal App ID.
+		OneSignal.initWithLaunchOptions(launchOptions,
+										appId: "35bede42-3f48-4ddf-b157-ab1161815d2b",
+										handleNotificationAction: nil,
+										settings: onesignalInitSettings)
+		
+		OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+		
+		// Recommend moving the below line to prompt for push after informing the user about
+		//   how your app will use them.
+		OneSignal.promptForPushNotifications(userResponse: { accepted in
+			print("User accepted notifications: \(accepted)")
+		})
+		
+		
 		return true
 	}
 
