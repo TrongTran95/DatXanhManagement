@@ -54,8 +54,8 @@ class Project {
 	}
 	
 	//This method will get all information of customer and return a list of them
-	func getCustomerList(emailTeam: String, completion: @escaping() -> Void){
-		let strParams: String = "projectName=" + self.name + "&emailTeam=" + emailTeam
+	func getCustomerList(emailAddress: String, completion: @escaping() -> Void){
+		let strParams: String = "projectName=" + self.name + "&emailTeam=" + emailAddress
 		getJsonUsingPost(strURL: urlGetCustomerList, strParams: strParams) { (json) in
 			let arrCustomer = json["customers"] as! [[String:Any]]
 			//Assign customer list
@@ -125,6 +125,11 @@ class Project {
 				if let successMinutes = (currentJsonCustomer["successMinutes"] as? NSNumber)?.floatValue {
 					customer.setCallSuccessMinutes(callSuccessMinutes: successMinutes)
 				}
+                
+                //set newcomer status for new customer
+                if let statusNewcomer = currentJsonCustomer["statusNewcomer"] as? Int {
+                    customer.setStatusNewcomer(statusNewcomer: statusNewcomer)
+                }
 				
 				//Add customer to list seperated by calling status
 				if (customer.callStatus == 0) {

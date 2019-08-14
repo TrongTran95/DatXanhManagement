@@ -421,7 +421,7 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 						self.tbCustomerList.reloadData()
 					}
 					//Get customer list
-					self.project.getCustomerList(emailTeam: self.userTeamEmail) {
+					self.project.getCustomerList(emailAddress: self.userTeamEmail) {
 						//reload table's data
 						DispatchQueue.main.async {
 							self.tbCustomerList.reloadData()

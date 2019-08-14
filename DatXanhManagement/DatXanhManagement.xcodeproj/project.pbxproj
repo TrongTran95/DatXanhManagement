@@ -26,6 +26,9 @@
 		80C3413322DDA846001F77F5 /* CustomerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413222DDA846001F77F5 /* CustomerListVC.swift */; };
 		80C3413522DDB700001F77F5 /* CustomerListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413422DDB700001F77F5 /* CustomerListTVC.swift */; };
 		80C3413722DDC81C001F77F5 /* CustomerDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */; };
+		A24B8C1023026FC800252718 /* UserEmailDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B8C0F23026FC800252718 /* UserEmailDetail.swift */; };
+		A2DF72AE230269C400FA24FB /* TeamSettingTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */; };
+		A2DF72B223026A6B00FA24FB /* TeamSettingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */; };
 		B43FED3201598B83C189D411 /* libPods-DatXanhManagement.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4344484585C3CC265C1777 /* libPods-DatXanhManagement.a */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +84,9 @@
 		80C3413422DDB700001F77F5 /* CustomerListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListTVC.swift; sourceTree = "<group>"; };
 		80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailTVC.swift; sourceTree = "<group>"; };
 		91C853375A42ECEE37ACED1D /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		A24B8C0F23026FC800252718 /* UserEmailDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEmailDetail.swift; sourceTree = "<group>"; };
+		A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSettingTVController.swift; sourceTree = "<group>"; };
+		A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSettingTVC.swift; sourceTree = "<group>"; };
 		C6F8943D25EB14039DFEF298 /* Pods-DatXanhManagement.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatXanhManagement.debug.xcconfig"; path = "Target Support Files/Pods-DatXanhManagement/Pods-DatXanhManagement.debug.xcconfig"; sourceTree = "<group>"; };
 		E8E4AECCFA8F47DDDAD807B6 /* Pods-DatXanhManagement.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatXanhManagement.release.xcconfig"; path = "Target Support Files/Pods-DatXanhManagement/Pods-DatXanhManagement.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,9 +174,10 @@
 		804F4FD822DC32B60083044C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				804F4FDB22DC33130083044C /* User.swift */,
 				804F4FE322DC5FF40083044C /* Project.swift */,
 				8036D63522DCCAA40080775C /* Customer.swift */,
+				804F4FDB22DC33130083044C /* User.swift */,
+				A24B8C0F23026FC800252718 /* UserEmailDetail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,6 +188,7 @@
 				804F4FE522DCAB120083044C /* ProjectCVC.swift */,
 				80C3413422DDB700001F77F5 /* CustomerListTVC.swift */,
 				80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */,
+				A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,6 +199,7 @@
 				804F4FC822DB67180083044C /* LoginVC.swift */,
 				804F4FE122DC51700083044C /* UserVC.swift */,
 				80C3413222DDA846001F77F5 /* CustomerListVC.swift */,
+				A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -380,9 +389,12 @@
 				80C3413522DDB700001F77F5 /* CustomerListTVC.swift in Sources */,
 				804F4FC922DB67180083044C /* LoginVC.swift in Sources */,
 				804F4FE222DC51700083044C /* UserVC.swift in Sources */,
+				A2DF72AE230269C400FA24FB /* TeamSettingTVController.swift in Sources */,
+				A2DF72B223026A6B00FA24FB /* TeamSettingTVC.swift in Sources */,
 				804F4FC722DB67180083044C /* AppDelegate.swift in Sources */,
 				804F4FDE22DC34E30083044C /* UrlAddresses.swift in Sources */,
 				804F4FE622DCAB120083044C /* ProjectCVC.swift in Sources */,
+				A24B8C1023026FC800252718 /* UserEmailDetail.swift in Sources */,
 				804F4FDC22DC33130083044C /* User.swift in Sources */,
 				8036D63622DCCAA40080775C /* Customer.swift in Sources */,
 				804F4FE422DC5FF40083044C /* Project.swift in Sources */,

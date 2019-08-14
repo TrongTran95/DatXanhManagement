@@ -27,7 +27,7 @@ class LoginVC: UIViewController {
 			//Start the login process
 			user.login(userName: userName, password: password) {
 				//Login success
-				if(self.user.emailTeam != ""){
+				if(self.user.emailAddress != ""){
 					DispatchQueue.main.async {
 						self.performSegue(withIdentifier: "showUserPage", sender: self)
 					}
@@ -44,6 +44,7 @@ class LoginVC: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        
 	}
 	
 	@IBAction func changeUsername(_ sender: Any) {

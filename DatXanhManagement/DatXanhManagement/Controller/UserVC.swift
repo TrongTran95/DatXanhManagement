@@ -47,9 +47,9 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 				//Set project code
 				self.projects[i].setName(projectName: projectNames[i])
 				//Get project's customer quantity
-				self.projects[i].getCustomerQuantity(url: urlGetCustomerQuantity, emailTeam: self.user.emailTeam, completion: {
+				self.projects[i].getCustomerQuantity(url: urlGetCustomerQuantity, emailTeam: self.user.emailAddress, completion: {
 					//Get quantity of customer that still not contact yet
-					self.projects[i].getCustomerQuantity(url: urlGetCustomerStillNotContactQuantity, emailTeam: self.user.emailTeam, completion: {
+					self.projects[i].getCustomerQuantity(url: urlGetCustomerStillNotContactQuantity, emailTeam: self.user.emailAddress, completion: {
 						//Get project info and set project name
 						self.projects[i].getProjectInfo(completion: {
 							DispatchQueue.main.async {
@@ -138,19 +138,20 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 		self.chosenProjectIndex = indexPath.row
 		
 		//Get customer list before segue to customer list screen
-		projects[indexPath.row].getCustomerList(emailTeam: user.emailTeam) {
+		projects[indexPath.row].getCustomerList(emailAddress: user.emailAddress) {
 			DispatchQueue.main.async {
-				/*
-				//Test customer's all information
+				/*Test customer's all information
 				let cc = self.projects[indexPath.row].customerList[1]
 				print("\(cc.customerStatusID) - \(cc.dateContact) - \(cc.dayOfBirth) - \(cc.email) - \(cc.fbAccount) - \(cc.firstName) - \(cc.gender) - \(cc.idCustomer) - \(cc.lastName) - \(cc.message) - \(cc.phoneNumber) - \(cc.projectCode) - \(cc.callStatus) - \(cc.callSuccessTimes) - \(cc.callSuccessMinutes)")
 				*/
 				
 				//Go to customer list page
-				self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
+                //self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
 			}
-
 		}
+        
+        self.performSegue(withIdentifier: "showTeamSettingPage", sender: self)
+        
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -159,7 +160,10 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 			guard let customerListVC = segue.destination as? CustomerListVC else {return}
 			//Assign project
 			customerListVC.project = self.projects[chosenProjectIndex]
-			customerListVC.userTeamEmail = self.user.emailTeam
-		}
+			customerListVC.userTeamEmail = self.user.emailAddress
+		} else if segue.identifier == "showTeamSettingPage" {
+            guard let teamSettingTVC = segue.destination as? TeamSettingTVController else {return}
+            teamSettingTVC.user = self.user
+        }
 	}
 }

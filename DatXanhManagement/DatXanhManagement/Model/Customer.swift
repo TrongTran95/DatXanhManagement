@@ -26,10 +26,11 @@ class Customer {
 	private(set) public var emailTeam:String
 	private(set) public var emailPersonal:String
 	
-	
 	private(set) public var callStatus:Int
 	private(set) public var callSuccessTimes:Int
 	private(set) public var callSuccessMinutes:Float
+    
+    private(set) public var statusNewcomer:Int
 	
 	init() {
 		self.idCustomer = 0
@@ -51,8 +52,14 @@ class Customer {
 		
 		self.callStatus = 0
 		self.callSuccessTimes = 0
-		self.callSuccessMinutes = 0
+        self.callSuccessMinutes = 0
+        
+        self.statusNewcomer = 0
 	}
+    
+    func setStatusNewcomer(statusNewcomer: Int) {
+        self.statusNewcomer = statusNewcomer
+    }
 	
 	func setIDCustomer(idCustomer: Int) {
 		self.idCustomer = idCustomer

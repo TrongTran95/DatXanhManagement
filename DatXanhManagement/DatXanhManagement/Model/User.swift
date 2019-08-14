@@ -10,26 +10,26 @@ import Foundation
 
 
 class User {
-	private(set) public var emailTeam:String
+	private(set) public var emailAddress:String
+    private(set) public var type:Int
 	private(set) public var password:String
 	private(set) public var firstName:String
-	private(set) public var lastName:String
-	private(set) public var emailPersonal:String
-	private(set) public var emailBusiness:String
-	private(set) public var emailCompany:String
+    private(set) public var lastName:String
+    private(set) public var ios_token:String
+    private(set) public var userEmailDetailList: [UserEmailDetail]
 	
 	init(){
-		self.emailTeam = ""
+		self.emailAddress = ""
+        self.type = 0
 		self.password = ""
 		self.firstName = ""
 		self.lastName = ""
-		self.emailPersonal = ""
-		self.emailBusiness = ""
-		self.emailCompany = ""
+		self.ios_token = ""
+        userEmailDetailList = []
 	}
 	
 	func getUserProjects(completion: @escaping([String]) -> Void){
-		let strParams: String = "emailTeam=" + self.emailTeam
+		let strParams: String = "emailTeam=" + self.emailAddress
 		getJsonUsingPost(strURL: urlGetUserProjects, strParams: strParams) { (json) in
 			let projectJson = json["projects"] as! [String]
 			completion(projectJson)
@@ -37,7 +37,7 @@ class User {
 	}
 
 	func login(userName: String, password: String, completion: @escaping() -> Void){
-		let strParams: String = "emailTeam=" + userName + "&password=" + password
+		let strParams: String = "emailAddress=" + userName + "&password=" + password
 		print(strParams)
 		getJsonUsingPost(strURL: urlLogin, strParams: strParams) { (json) in
 			var errorExist:Bool!
@@ -49,9 +49,14 @@ class User {
 			} else {
 				//Login information is correct
 				let userJson:[String:Any] = json["user"] as! [String : Any]
-				if let emailTeam: String = userJson["emailTeam"] as? String {
-					self.emailTeam = emailTeam
+                print(userJson)
+				if let emailAddress: String = userJson["emailAddress"] as? String {
+					self.emailAddress = emailAddress
 				}
+                if let type: Int = userJson["type"] as? Int {
+                    print(type)
+                    self.type = type
+                }
 				if let password: String = userJson["password"] as? String {
 					self.password = password
 				}
@@ -61,15 +66,10 @@ class User {
 				if let lastName: String = userJson["lastName"] as? String {
 					self.lastName = lastName
 				}
-				if let emailPersonal: String = userJson["emailPersonal"] as? String {
-					self.emailPersonal = emailPersonal
+				if let ios_token: String = userJson["ios_token"] as? String {
+					self.ios_token = ios_token
 				}
-				if let emailBusiness: String = userJson["emailBusiness"] as? String {
-					self.emailBusiness = emailBusiness
-				}
-				if let emailCompany: String = userJson["emailCompany"] as? String {
-					self.emailCompany = emailCompany
-				}
+//                self.ios_token = userJson["ios_token"] as? String ?? ""
 				completion()
 			}
 		}

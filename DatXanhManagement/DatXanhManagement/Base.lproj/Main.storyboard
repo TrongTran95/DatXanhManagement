@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dV-Pw-z1I">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dV-Pw-z1I">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -208,11 +208,88 @@
                         <outlet property="lblCurrentProject" destination="ZOg-BJ-PPQ" id="KJt-dM-jyn"/>
                         <outlet property="lblWelcome" destination="oem-ZE-jGX" id="rQT-MI-VrG"/>
                         <segue destination="ThK-9Z-SVy" kind="show" identifier="showCustomerListPage" id="8c5-8X-qMb"/>
+                        <segue destination="xLb-Gi-fje" kind="show" identifier="showTeamSettingPage" id="4O0-lc-OXw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ky-Iq-Dw3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1960.8" y="133.5832083958021"/>
+        </scene>
+        <!--Team SettingTV Controller-->
+        <scene sceneID="zFe-nn-paN">
+            <objects>
+                <tableViewController id="xLb-Gi-fje" customClass="TeamSettingTVController" customModule="DatXanhManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="31R-dD-pCA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="70" id="c7N-bt-vaF" customClass="TeamSettingTVC" customModule="DatXanhManagement" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c7N-bt-vaF" id="QOM-Kc-iYu">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="6FT-oo-9kG">
+                                            <rect key="frame" x="266" y="30.5" width="94" height="29"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="94" id="bQo-Xu-hMp"/>
+                                            </constraints>
+                                            <connections>
+                                                <action selector="ReceiveNumberChange:" destination="c7N-bt-vaF" eventType="valueChanged" id="dt2-vT-g03"/>
+                                            </connections>
+                                        </stepper>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3at-Qv-vJO">
+                                            <rect key="frame" x="15" y="15" width="40" height="40"/>
+                                            <color key="backgroundColor" red="1" green="0.5738531644" blue="0.22431548139999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="SgS-kH-aby"/>
+                                                <constraint firstAttribute="width" secondItem="3at-Qv-vJO" secondAttribute="height" multiplier="1:1" id="t4V-1I-3xf"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Còn: 1 lượt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1O-QF-iwD">
+                                            <rect key="frame" x="276" y="11" width="74" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="abcxyzdefaaaaaaa@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pzk-Ht-xXd">
+                                            <rect key="frame" x="65" y="25" width="186" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Pzk-Ht-xXd" firstAttribute="leading" secondItem="3at-Qv-vJO" secondAttribute="trailing" constant="10" id="8b9-PY-VAb"/>
+                                        <constraint firstItem="6FT-oo-9kG" firstAttribute="leading" secondItem="Pzk-Ht-xXd" secondAttribute="trailing" constant="15" id="JV7-x0-CqN"/>
+                                        <constraint firstItem="C1O-QF-iwD" firstAttribute="centerY" secondItem="QOM-Kc-iYu" secondAttribute="centerY" constant="-15" id="L9B-xN-6GE"/>
+                                        <constraint firstItem="C1O-QF-iwD" firstAttribute="centerX" secondItem="6FT-oo-9kG" secondAttribute="centerX" id="PYd-cT-Sd9"/>
+                                        <constraint firstItem="3at-Qv-vJO" firstAttribute="centerY" secondItem="QOM-Kc-iYu" secondAttribute="centerY" id="Was-kv-wPK"/>
+                                        <constraint firstItem="Pzk-Ht-xXd" firstAttribute="centerY" secondItem="QOM-Kc-iYu" secondAttribute="centerY" id="loU-60-bdO"/>
+                                        <constraint firstItem="6FT-oo-9kG" firstAttribute="centerY" secondItem="QOM-Kc-iYu" secondAttribute="centerY" constant="10" id="oyl-kN-VXI"/>
+                                        <constraint firstItem="3at-Qv-vJO" firstAttribute="leading" secondItem="QOM-Kc-iYu" secondAttribute="leading" constant="15" id="qKF-oL-7tA"/>
+                                        <constraint firstAttribute="trailing" secondItem="6FT-oo-9kG" secondAttribute="trailing" constant="15" id="tWe-aW-u9K"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imgOrder" destination="3at-Qv-vJO" id="6gn-Lb-zSH"/>
+                                    <outlet property="lblName" destination="Pzk-Ht-xXd" id="o2B-ut-PyU"/>
+                                    <outlet property="lblReceiveNumber" destination="C1O-QF-iwD" id="PxQ-9l-kx0"/>
+                                    <outlet property="stReceiveNumber" destination="6FT-oo-9kG" id="Vmg-d1-FxW"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xLb-Gi-fje" id="qzM-jH-fEJ"/>
+                            <outlet property="delegate" destination="xLb-Gi-fje" id="Ebx-mU-1gZ"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="49C-iZ-5iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1961" y="869"/>
         </scene>
         <!--Customer ListVC-->
         <scene sceneID="G1d-py-SaV">
@@ -538,6 +615,6 @@
     <resources>
         <image name="Thumbnail" width="300" height="300"/>
         <image name="call_white" width="64" height="64"/>
-        <image name="customer-white" width="48" height="48"/>
+        <image name="customer-white" width="64" height="64"/>
     </resources>
 </document>
