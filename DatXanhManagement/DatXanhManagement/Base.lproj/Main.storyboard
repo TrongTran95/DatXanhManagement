@@ -260,13 +260,21 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAU-jF-hcx">
+                                            <rect key="frame" x="31" y="24.5" width="8" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="XAU-jF-hcx" firstAttribute="centerY" secondItem="3at-Qv-vJO" secondAttribute="centerY" id="6Sn-Zx-Q7K"/>
                                         <constraint firstItem="Pzk-Ht-xXd" firstAttribute="leading" secondItem="3at-Qv-vJO" secondAttribute="trailing" constant="10" id="8b9-PY-VAb"/>
                                         <constraint firstItem="6FT-oo-9kG" firstAttribute="leading" secondItem="Pzk-Ht-xXd" secondAttribute="trailing" constant="15" id="JV7-x0-CqN"/>
                                         <constraint firstItem="C1O-QF-iwD" firstAttribute="centerY" secondItem="QOM-Kc-iYu" secondAttribute="centerY" constant="-15" id="L9B-xN-6GE"/>
                                         <constraint firstItem="C1O-QF-iwD" firstAttribute="centerX" secondItem="6FT-oo-9kG" secondAttribute="centerX" id="PYd-cT-Sd9"/>
                                         <constraint firstItem="3at-Qv-vJO" firstAttribute="centerY" secondItem="QOM-Kc-iYu" secondAttribute="centerY" id="Was-kv-wPK"/>
+                                        <constraint firstItem="XAU-jF-hcx" firstAttribute="centerX" secondItem="3at-Qv-vJO" secondAttribute="centerX" id="i6g-9u-FsN"/>
                                         <constraint firstItem="Pzk-Ht-xXd" firstAttribute="centerY" secondItem="QOM-Kc-iYu" secondAttribute="centerY" id="loU-60-bdO"/>
                                         <constraint firstItem="6FT-oo-9kG" firstAttribute="centerY" secondItem="QOM-Kc-iYu" secondAttribute="centerY" constant="10" id="oyl-kN-VXI"/>
                                         <constraint firstItem="3at-Qv-vJO" firstAttribute="leading" secondItem="QOM-Kc-iYu" secondAttribute="leading" constant="15" id="qKF-oL-7tA"/>
@@ -276,6 +284,7 @@
                                 <connections>
                                     <outlet property="imgOrder" destination="3at-Qv-vJO" id="6gn-Lb-zSH"/>
                                     <outlet property="lblName" destination="Pzk-Ht-xXd" id="o2B-ut-PyU"/>
+                                    <outlet property="lblOrder" destination="XAU-jF-hcx" id="ixC-XZ-Z0b"/>
                                     <outlet property="lblReceiveNumber" destination="C1O-QF-iwD" id="PxQ-9l-kx0"/>
                                     <outlet property="stReceiveNumber" destination="6FT-oo-9kG" id="Vmg-d1-FxW"/>
                                 </connections>

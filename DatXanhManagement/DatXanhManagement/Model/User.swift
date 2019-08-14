@@ -25,8 +25,27 @@ class User {
 		self.firstName = ""
 		self.lastName = ""
 		self.ios_token = ""
-        userEmailDetailList = []
+        self.userEmailDetailList = []
 	}
+    
+    func setUserEmailDetailList(newUEDL: [UserEmailDetail]) {
+        self.userEmailDetailList = newUEDL
+    }
+    
+    //Use this function to remove a user email detail
+    func removeUserEmailDetail(at position: Int) {
+        self.userEmailDetailList.remove(at: position)
+    }
+    
+    //Use this function to add a new user email detail to a specific position
+    func insertUserEmailDetail(_ newUserEmailDetail: UserEmailDetail,at position: Int) {
+        self.userEmailDetailList.insert(newUserEmailDetail, at: position)
+    }
+    
+    //Use this function to reset all user email detail that got from server
+    func resetUserEmailDetailList(){
+        self.userEmailDetailList = []
+    }
 	
 	func getUserProjects(completion: @escaping([String]) -> Void){
 		let strParams: String = "emailTeam=" + self.emailAddress
@@ -74,5 +93,22 @@ class User {
 			}
 		}
 	}
+    
+    func getUserEmailDetailList(projectName: String, completion: @escaping () -> Void){
+        let strParams: String = "emailTeam=" + self.emailAddress + "&projectName=" +  projectName
+        getJsonUsingPost(strURL: urlGetUserEmailDetailList, strParams: strParams) { (json) in
+            print(json)
+            let userJson = json["userEmailDetailList"] as! [[String:Any]]
+            for userEmailDetail in userJson {
+                let newUED = UserEmailDetail()
+                newUED.setID(id: userEmailDetail["id"] as? Int ?? 0)
+                newUED.setEmailPersonal(emailPersonal: userEmailDetail["emailPersonal"] as? String ?? "")
+                newUED.setOrderNumber(orderNumber: userEmailDetail["orderNumber"] as? Int ?? 0)
+                newUED.setReceiveQuantity(receiveQuantity: userEmailDetail["receiveQuantity"] as? Int ?? 0)
+                self.userEmailDetailList.append(newUED)
+            }
+            completion()
+        }
+    }
 	
 }

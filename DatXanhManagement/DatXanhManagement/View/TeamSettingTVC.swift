@@ -18,26 +18,46 @@ class TeamSettingTVC: UITableViewCell {
     
     @IBOutlet weak var imgOrder: UIImageView!
     
-
+    @IBOutlet weak var lblOrder: UILabel!
+    
     @IBAction func ReceiveNumberChange(_ sender: UIStepper) {
         lblReceiveNumber.text = "Còn \(Int(sender.value).description) lượt"
     }
     
+    func setUserPersonalEmail(emailAddress: String){
+        lblName.text = emailAddress
+    }
+    
+    func setReceiveNumber(receiveNumber: Int){
+        lblReceiveNumber.text = "Còn: \(receiveNumber) lượt"
+    }
+    
+    func setOrder(orderNumber: Int){
+        lblOrder.text = "\(orderNumber)"
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        setup()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupStepper(maximumValue: Int){
+    func setup(){
+        imgOrder.layer.cornerRadius = 10
+    }
+    
+    func setupStepper(currentValue: Int, maximumValue: Int){
         //wraps: Stepping beyond maximum value will return to minimumvalue
         //autorepeat: user pressing and holding on the stepper repeatedly alters value
         stReceiveNumber.wraps = true
         stReceiveNumber.autorepeat = true
         stReceiveNumber.minimumValue = 1
         stReceiveNumber.maximumValue = Double(maximumValue)
+        stReceiveNumber.value = Double(currentValue)
     }
 
 }

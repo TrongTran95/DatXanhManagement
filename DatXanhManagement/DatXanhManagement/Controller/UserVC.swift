@@ -149,8 +149,15 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 //self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
 			}
 		}
+        if (self.user.userEmailDetailList.count != 0) {
+            self.user.resetUserEmailDetailList()
+        }
         
-        self.performSegue(withIdentifier: "showTeamSettingPage", sender: self)
+        self.user.getUserEmailDetailList(projectName: self.projects[indexPath.row].name) {
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "showTeamSettingPage", sender: self)
+            }
+        }
         
 	}
 	

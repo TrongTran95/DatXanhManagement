@@ -12,6 +12,8 @@ public let urlHostApi: String = "http://trongstest.tk/api/"
 
 public let urlLogin: String = "\(urlHostApi)CheckLogin.php"
 
+public let urlGetUserEmailDetailList: String = "\(urlHostApi)GetUserEmailDetailList.php"
+
 public let urlGetUserProjects: String = "\(urlHostApi)GetUserProjects.php"
 
 public let urlGetProjectInfo: String = "\(urlHostApi)GetProjectInfo.php"
