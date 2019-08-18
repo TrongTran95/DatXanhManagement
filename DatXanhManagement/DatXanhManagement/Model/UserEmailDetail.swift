@@ -20,6 +20,13 @@ class UserEmailDetail {
         orderNumber = 0
         receiveQuantity = 0
     }
+	
+	init(id: Int, emailPersonal: String, orderNumber: Int, receiveQuantity: Int) {
+		self.id = id
+		self.emailPersonal = emailPersonal
+		self.orderNumber = orderNumber
+		self.receiveQuantity = receiveQuantity
+	}
     
     //This method will set the value of id
     func setID(id: Int){

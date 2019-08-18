@@ -12,8 +12,9 @@ class TeamSettingTVController: UITableViewController {
     
     
     var user:User!
-    var tempUEDList: [UserEmailDetail] = []
-    
+    var tempUser: User = User()
+	var arrRemovedID: [Int] = []
+	
     var flagChangeOrder: Bool = false
     var flagRemove: Bool = false
     var flagChangeReceiveQuantity: Bool = false
@@ -21,59 +22,132 @@ class TeamSettingTVController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.tableView.setEditing(true, animated: true)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
-    @objc func abc(){
-        print("a")
-    }
+	
+	func setActiveForStepper(numberOfRow: Int, flag: Bool){
+		for i in 0..<numberOfRow {
+			let cell = self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! TeamSettingTVC
+			cell.stReceiveNumber.isEnabled = flag
+		}
+	}
 
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         // Toggles the actual editing actions appearing on a table view
         self.tableView.setEditing(editing, animated: true)
+		let currentUEDL = self.user.userEmailDetailList
+		//Edit button, begin editing processs
         if (self.isEditing) {
-            //Begin editing, save current data in case of any changes happen
-//            self.tempUEDList = self.user.userEmailDetailList
-            self.tempUEDList = copyUEDLFrom(currentUEDL: self.user.userEmailDetailList)
-        } else {
-            //Done button, save new data (if avaiable)
+            //Begin editing, save current data in case of any changes happen and we want to get the original data
+			self.tempUser.setUserEmailDetailList(userEmailDetailList: currentUEDL)
+			//Allow end user use stepper to change receive quantity
+			setActiveForStepper(numberOfRow: currentUEDL.count, flag: true)
+        }
+		//Done button, save new data (if avaiable)
+		else {
+			//Check if changes have been made
             if (flagRemove || flagChangeOrder || flagChangeReceiveQuantity) {
+				//Determine save new data or get back the original data
                 showAlert()
-                flagRemove = false
-                flagChangeReceiveQuantity = false
-                flagChangeOrder = false
             } else {
-                
-            }
+				/*Doing nothing here because there're no changes have been made from end user*/
+			}
+			//Unallow end user use stepper to change receive quantity
+			setActiveForStepper(numberOfRow: currentUEDL.count, flag: false)
         }
     }
-    
-    func copyUEDLFrom(currentUEDL: [UserEmailDetail]) -> [UserEmailDetail]{
-        var newUEDL:[UserEmailDetail] = []
-        for i in 0..<currentUEDL.count {
-            newUEDL.append(UserEmailDetail())
-            newUEDL[i].setOrderNumber(orderNumber: currentUEDL[i].orderNumber)
-        }
-        return newUEDL
-    }
+	
+	func resetData(){
+		//Set flag of changed to false
+		flagRemove = false
+		flagChangeReceiveQuantity = false
+		flagChangeOrder = false
+		//Remove data of temporary user email detail list to release memory
+		self.tempUser.setUserEmailDetailList(userEmailDetailList: [])
+		//Clear ID stored
+		self.arrRemovedID = []
+	}
     
     func showAlert(){
-        let alert = UIAlertController(title: "Data changed", message: "Do you want to save new data ?", preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-            print(self.tempUEDList[0].orderNumber)
-            self.user.setUserEmailDetailList(newUEDL: self.tempUEDList)
-            self.tableView.reloadData()
-            self.tempUEDList = []
+        let alert = UIAlertController(title: "Data changed", message: "Do you want to save new data ?", preferredStyle: .alert)
+		//Handler for cancel button
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
+			//Get data back from temporary user email detail list
+			self.user.setUserEmailDetailList(userEmailDetailList: self.tempUser.userEmailDetailList)
+			//Update new data of table view
+			self.tableView.reloadData()
+			//reset data
+			self.resetData()
         }
+		//Handler for save button
         let saveAction = UIAlertAction(title: "Save", style: .default) { (action) in
-            
+            //Nothing in the UI change because we've made change every time we do something in an editing process
+			//Update new data to server
+			//Remove user email detail from server and reorder
+			if (self.flagRemove) {
+				self.removeUED()
+			}
+			
+			//Update user email detail order
+			if (self.flagChangeOrder) {
+				self.makeChangeUserEmailDetailOrder()
+			}
+			
+			//Update user email detail receive quantity
+			if (self.flagChangeReceiveQuantity) {
+				self.makeChangeUserEmailDetailReceiveQuantity()
+			}
+			
+			//reset data
+			self.resetData()
         }
         alert.addAction(cancelAction)
         alert.addAction(saveAction)
         self.present(alert, animated: true, completion: nil)
     }
+	
+	func removeUED(){
+		for i in 0..<self.arrRemovedID.count {
+			self.user.removeUserEmailDetail(id: self.arrRemovedID[i], completion: { (error) in
+				if (error) {
+					print("fail remove")
+					return
+				} else {
+					print("success remove")
+					self.makeChangeUserEmailDetailOrder()
+				}
+			})
+		}
+	}
+	
+	func makeChangeUserEmailDetailReceiveQuantity(){
+		for i in 0..<self.user.userEmailDetailList.count {
+			let currentUED = self.user.userEmailDetailList[i]
+			self.user.updateUEDReceiveQuantity(id: currentUED.id, receiveQuantity: currentUED.receiveQuantity, completion: { (error) in
+				if (error) {
+					print("fail receive quantity")
+					return
+				} else {
+					print("sucess receive quantity")
+				}
+			})
+		}
+	}
+	
+	func makeChangeUserEmailDetailOrder(){
+		for i in 0..<self.user.userEmailDetailList.count {
+			let currentUED = self.user.userEmailDetailList[i]
+			self.user.updateUEDOrderNumber(userEmailDetail: currentUED, completion: { (error) in
+				if (error) {
+					print("fail order")
+					return
+				} else {
+					print("sucess order")
+				}
+			})
+		}
+	}
     
     // MARK: - Table view data source
 
@@ -87,7 +161,9 @@ class TeamSettingTVController: UITableViewController {
         cell.setOrder(orderNumber: currentUED.orderNumber)
         cell.setReceiveNumber(receiveNumber: currentUED.receiveQuantity)
         cell.setUserPersonalEmail(emailAddress: currentUED.emailPersonal)
-        cell.setupStepper(currentValue: currentUED.receiveQuantity, maximumValue: 10)
+		cell.setStepperTag(tag: indexPath.row)
+        cell.setupStepperData(currentValue: currentUED.receiveQuantity, maximumValue: 10)
+		cell.delegate = self
         return cell
     }
     
@@ -133,5 +209,26 @@ class TeamSettingTVController: UITableViewController {
         //Update flag to know that rows has been changed
         flagChangeOrder = true
     }
+	
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			//Save id of row need to remove
+			arrRemovedID.append(self.user.userEmailDetailList[indexPath.row].id)
+			
+			//Delete from the array
+			self.user.removeUserEmailDetail(at: indexPath.row)
+			
+			//Set new order after remove
+			for i in indexPath.row..<self.user.userEmailDetailList.count {
+				self.user.userEmailDetailList[i].setOrderNumber(orderNumber: i+1)
+			}
+			
+			//Delete row and update new order
+			tableView.reloadData()
+			
+			//Turn on remove flag to show alert
+			flagRemove = true
+		}
+	}
 
 }

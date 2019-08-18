@@ -26,3 +26,9 @@ public let urlGetCustomerQuantity: String = "\(urlHostApi)GetCustomerQuantity.ph
 public let urlGetCustomerStillNotContactQuantity: String = "\(urlHostApi)GetCustomerStillNotContactQuantity.php"
 
 public let urlUpdateCustomerCallingDetail: String = "\(urlHostApi)UpdateCustomerCallingDetail.php"
+
+public let urlUpdateUserEmailDetailReceiveQuantity: String = "\(urlHostApi)UpdateUserEmailDetailReceiveQuantity.php"
+
+public let urlUpdateUserEmailDetailOrderNumber: String = "\(urlHostApi)UpdateUserEmailDetailOrderNumber.php"
+
+public let urlRemoveUserEmailDetail: String = "\(urlHostApi)RemoveUserEmailDetail.php"

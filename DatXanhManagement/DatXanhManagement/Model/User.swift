@@ -27,10 +27,14 @@ class User {
 		self.ios_token = ""
         self.userEmailDetailList = []
 	}
-    
-    func setUserEmailDetailList(newUEDL: [UserEmailDetail]) {
-        self.userEmailDetailList = newUEDL
-    }
+	
+	//Use this function to copy a new user email detail list
+	func setUserEmailDetailList(userEmailDetailList: [UserEmailDetail]){
+		self.userEmailDetailList = []
+		for ued in userEmailDetailList {
+			self.userEmailDetailList.append(UserEmailDetail(id: ued.id, emailPersonal: ued.emailPersonal, orderNumber: ued.orderNumber, receiveQuantity: ued.receiveQuantity))
+		}
+	}
     
     //Use this function to remove a user email detail
     func removeUserEmailDetail(at position: Int) {
@@ -97,7 +101,6 @@ class User {
     func getUserEmailDetailList(projectName: String, completion: @escaping () -> Void){
         let strParams: String = "emailTeam=" + self.emailAddress + "&projectName=" +  projectName
         getJsonUsingPost(strURL: urlGetUserEmailDetailList, strParams: strParams) { (json) in
-            print(json)
             let userJson = json["userEmailDetailList"] as! [[String:Any]]
             for userEmailDetail in userJson {
                 let newUED = UserEmailDetail()
@@ -107,8 +110,36 @@ class User {
                 newUED.setReceiveQuantity(receiveQuantity: userEmailDetail["receiveQuantity"] as? Int ?? 0)
                 self.userEmailDetailList.append(newUED)
             }
+			//Sort user email detail list by order number
+			self.userEmailDetailList = self.userEmailDetailList.sorted(by: { $0.orderNumber < $1.orderNumber })
+			
             completion()
         }
     }
+	
+	//Remove user email detail from database
+	func removeUserEmailDetail(id: Int, completion:@escaping(Bool) -> Void){
+		let strParams: String = "id=\(id)"
+		getJsonUsingPost(strURL: urlRemoveUserEmailDetail, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
+	//Update order of user email detail in database
+	func updateUEDOrderNumber(userEmailDetail:UserEmailDetail, completion:@escaping(Bool) -> Void){
+		let strParams: String = "id=\(userEmailDetail.id)" + "&orderNumber=\(userEmailDetail.orderNumber)"
+		getJsonUsingPost(strURL: urlUpdateUserEmailDetailOrderNumber, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
+	//Update receive quantity of user email detail in database
+	func updateUEDReceiveQuantity(id: Int, receiveQuantity: Int, completion:@escaping(Bool) -> Void){
+		let strParams: String = "id=\(id)" + "&receiveQuantity=\(receiveQuantity)"
+		getJsonUsingPost(strURL: urlUpdateUserEmailDetailReceiveQuantity, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
 	
 }
