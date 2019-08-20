@@ -29,7 +29,8 @@ class LoginVC: UIViewController {
 				//Login success
 				if(self.user.emailAddress != ""){
 					DispatchQueue.main.async {
-						self.performSegue(withIdentifier: "showUserPage", sender: self)
+//                        self.performSegue(withIdentifier: "showUserPage", sender: self)
+                        self.performSegue(withIdentifier: "showTeamMenu", sender: self)
 					}
 				}
 				//Wrong username or password
@@ -62,7 +63,10 @@ class LoginVC: UIViewController {
 		if (segue.identifier == "showUserPage") {
 			guard let userVC = segue.destination as? UserVC else { return }
 			userVC.user = self.user
-		}
+        } else if (segue.identifier == "showTeamMenu") {
+            guard let teamTBC = segue.destination as? TeamTBC else { return }
+            teamTBC.emailTeam = self.user.emailAddress
+        }
 	}
 }
 

@@ -1,0 +1,6 @@
+module Pods_DatXanhManagement {
+  umbrella header "Pods-DatXanhManagement-umbrella.h"
+
+  export *
+  module * { export * }
+}

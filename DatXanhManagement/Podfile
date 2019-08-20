@@ -5,6 +5,8 @@ target 'DatXanhManagement' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
+  pod 'Toaster'
+
   # Pods for DatXanhManagement
 
 end

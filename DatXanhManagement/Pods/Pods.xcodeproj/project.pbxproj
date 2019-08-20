@@ -28,11 +28,26 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		A23794633E8F6C718BD55E75CC510137 /* Pods-DatXanhManagement-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE1AAE9B4263134DA519C0D6A48D80D /* Pods-DatXanhManagement-dummy.m */; };
-		AEA61BA6DD8C56C2EB6D5A6F78CBAB80 /* Pods-OneSignalNotificationServiceExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 625A6D12C05D252B13B2DFE24D65CB8A /* Pods-OneSignalNotificationServiceExtension-dummy.m */; };
+		028F4B7DE5DB12D4F395ACA47F9B5848 /* Toaster-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C291B7FE3F66603A59526D7FCE958 /* Toaster-dummy.m */; };
+		23109A6DB923985E3F497EB3F3B9454C /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDA35016A11857674482E0156BE586B /* Toast.swift */; };
+		27BE5AB267D1CC0765C927C53DB130DD /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7481C6093D467177A7737FBFDD8FE35F /* ToastView.swift */; };
+		2FF0EDE1EAE8CC0FB4D9465382C762FE /* Toaster-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 397A16CF5429ED99F36729A6EEC569DF /* Toaster-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		52D6A484089ABE64FF2ED6D8D5FEEB91 /* Pods-DatXanhManagement-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B443E071400901F34DEBCB8B987562 /* Pods-DatXanhManagement-dummy.m */; };
+		6DC3BA28BD09C911346FE2D555A50E8A /* Toaster.h in Headers */ = {isa = PBXBuildFile; fileRef = 30156B023C2000A0AD31D6F208DD4BFE /* Toaster.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9118F7CAC7FA2F11D52E553EB3A5E5C8 /* ToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472C697B7813FECF8A66EB2B24B5AC49 /* ToastCenter.swift */; };
+		A90B61FE3CEACE8EC302C405279FCDEA /* Pods-DatXanhManagement-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 562DD8C4A7E53BAB7FCBC362708ECBCF /* Pods-DatXanhManagement-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AA19540A22112BFC685D3034E537D095 /* ToastWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142587397676D481DD9C5E4767AEE3F1 /* ToastWindow.swift */; };
+		AEA61BA6DD8C56C2EB6D5A6F78CBAB80 /* Pods-OneSignalNotificationServiceExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 538C46215E42DF9F8EA8EB247A3FDC0F /* Pods-OneSignalNotificationServiceExtension-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		549C045F271971F9A003BB3093ED5108 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 057529CC3867543F4F51CB0379358A3E;
+			remoteInfo = "OneSignal-iOS10.0";
+		};
 		7DF7847415885BD2855C2A61D70E2D80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -40,35 +55,55 @@
 			remoteGlobalIDString = 20E506BA53E9955CF2642737C8827E6E;
 			remoteInfo = "OneSignal-iOS12.1";
 		};
-		C883BA0053185B0E1A06457374333B15 /* PBXContainerItemProxy */ = {
+		E679198D4671320D3DFB4009BA148ACC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 057529CC3867543F4F51CB0379358A3E;
-			remoteInfo = "OneSignal-iOS10.0";
+			remoteGlobalIDString = B90AB98A7BC6A346D671B36DB990DAC2;
+			remoteInfo = Toaster;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		19A4CEEE464A4FCF3AC7A0183366280F /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		22C6098B7C7C4CC826B0ABDD89D7C670 /* OneSignal-iOS12.1.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "OneSignal-iOS12.1.xcconfig"; path = "../OneSignal-iOS12.1/OneSignal-iOS12.1.xcconfig"; sourceTree = "<group>"; };
-		2B98FAC2A9EA8F052244B23B415AF174 /* Pods-DatXanhManagement-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DatXanhManagement-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0D48DE73D66A0FD57EED3A679DF1B2BC /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		10F75C44519ACC9A226EBE4E85561E9B /* Pods-DatXanhManagement.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-DatXanhManagement.modulemap"; sourceTree = "<group>"; };
+		125307A36C2BB68455EDEC634DC32AA9 /* Toaster.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Toaster.modulemap; sourceTree = "<group>"; };
+		142587397676D481DD9C5E4767AEE3F1 /* ToastWindow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToastWindow.swift; path = Sources/ToastWindow.swift; sourceTree = "<group>"; };
+		17B443E071400901F34DEBCB8B987562 /* Pods-DatXanhManagement-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DatXanhManagement-dummy.m"; sourceTree = "<group>"; };
+		30156B023C2000A0AD31D6F208DD4BFE /* Toaster.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Toaster.h; path = Sources/Toaster.h; sourceTree = "<group>"; };
+		3242EDAE8B6827F5B810F25BC85098BC /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		397A16CF5429ED99F36729A6EEC569DF /* Toaster-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Toaster-umbrella.h"; sourceTree = "<group>"; };
+		3EDA35016A11857674482E0156BE586B /* Toast.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Toast.swift; path = Sources/Toast.swift; sourceTree = "<group>"; };
+		407ADB14F5932FDB9A30301A9848C5E3 /* OneSignal-iOS12.1.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "OneSignal-iOS12.1.xcconfig"; path = "../OneSignal-iOS12.1/OneSignal-iOS12.1.xcconfig"; sourceTree = "<group>"; };
+		472C697B7813FECF8A66EB2B24B5AC49 /* ToastCenter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToastCenter.swift; path = Sources/ToastCenter.swift; sourceTree = "<group>"; };
 		4AF3B972C94DFF11700E306F18F01DF3 /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-OneSignalNotificationServiceExtension.a"; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		574A094C199F6DEDC5F868B8877AA5EB /* Pods-DatXanhManagement.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DatXanhManagement.release.xcconfig"; sourceTree = "<group>"; };
-		625A6D12C05D252B13B2DFE24D65CB8A /* Pods-OneSignalNotificationServiceExtension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OneSignalNotificationServiceExtension-dummy.m"; sourceTree = "<group>"; };
-		8AC9CA7D62CF89959772E96F7FC5FD70 /* OneSignal-iOS10.0.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "OneSignal-iOS10.0.xcconfig"; sourceTree = "<group>"; };
-		9856FC4EF7A28911A9A64F58D0020001 /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneSignal.framework; path = iOS_SDK/OneSignalSDK/Framework/OneSignal.framework; sourceTree = "<group>"; };
-		9BE4DD27BE7AC46112261D7D0A88A452 /* Pods-OneSignalNotificationServiceExtension-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OneSignalNotificationServiceExtension-acknowledgements.markdown"; sourceTree = "<group>"; };
+		538C46215E42DF9F8EA8EB247A3FDC0F /* Pods-OneSignalNotificationServiceExtension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OneSignalNotificationServiceExtension-dummy.m"; sourceTree = "<group>"; };
+		562DD8C4A7E53BAB7FCBC362708ECBCF /* Pods-DatXanhManagement-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-DatXanhManagement-umbrella.h"; sourceTree = "<group>"; };
+		59D4398113524D7414486E2C70D8393A /* Toaster.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Toaster.xcconfig; sourceTree = "<group>"; };
+		5A53AFA08F278EF0417467421AC3780C /* OneSignal-iOS10.0.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "OneSignal-iOS10.0.xcconfig"; sourceTree = "<group>"; };
+		5D6CEE91CF7F6339581DEF8971512B65 /* Pods-DatXanhManagement.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DatXanhManagement.debug.xcconfig"; sourceTree = "<group>"; };
+		7481C6093D467177A7737FBFDD8FE35F /* ToastView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToastView.swift; path = Sources/ToastView.swift; sourceTree = "<group>"; };
+		75C0AC5797B30143ED403835372E53FE /* Pods-OneSignalNotificationServiceExtension-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OneSignalNotificationServiceExtension-acknowledgements.markdown"; sourceTree = "<group>"; };
+		823C291B7FE3F66603A59526D7FCE958 /* Toaster-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Toaster-dummy.m"; sourceTree = "<group>"; };
+		836BA4104C4CFCCD927F9F1F395C3189 /* Pods-OneSignalNotificationServiceExtension-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OneSignalNotificationServiceExtension-acknowledgements.plist"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		ABE1AAE9B4263134DA519C0D6A48D80D /* Pods-DatXanhManagement-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-DatXanhManagement-dummy.m"; sourceTree = "<group>"; };
-		AF00E718BBAD58BF3ECEE7C8B5714442 /* Pods-DatXanhManagement-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DatXanhManagement-acknowledgements.plist"; sourceTree = "<group>"; };
 		B1C0A86872E3DFFC9907100DE00A96D7 /* libPods-DatXanhManagement.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-DatXanhManagement.a"; path = "libPods-DatXanhManagement.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B4276F3E8B6CE74E52360FA658F54B14 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
-		CF9F558CB2CE7CBBE86FBF9A6317675C /* Pods-DatXanhManagement.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DatXanhManagement.debug.xcconfig"; sourceTree = "<group>"; };
-		D38233F5E941128D892DA8C80337A697 /* Pods-OneSignalNotificationServiceExtension-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OneSignalNotificationServiceExtension-acknowledgements.plist"; sourceTree = "<group>"; };
+		B740F7435CCD36AC929ECEAE5EAF6F92 /* Toaster-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Toaster-prefix.pch"; sourceTree = "<group>"; };
+		BD810337F4A305D60D9250A197AA1EF1 /* libToaster.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libToaster.a; path = libToaster.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAF18E75BF34871D8DDD1D9F983D7204 /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OneSignal.framework; path = iOS_SDK/OneSignalSDK/Framework/OneSignal.framework; sourceTree = "<group>"; };
+		ED7404EA3BF803707D9F10EA223937CC /* Pods-DatXanhManagement-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-DatXanhManagement-acknowledgements.plist"; sourceTree = "<group>"; };
+		EDF6B950957E1F0F4BF47D9804ADEC35 /* Pods-DatXanhManagement-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-DatXanhManagement-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FA1E3FAD2941AF30343E6572C3AA43E9 /* Pods-DatXanhManagement.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-DatXanhManagement.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		45D1D2119E658C74C9A093CB82B7F6B4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8B1288E2706B38B2B9A3DB3796D33CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -76,7 +111,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CBC94D9A85C324A7951EBC981BF6EC92 /* Frameworks */ = {
+		F6F49BAA0E3E99D99B54C293A01C6D02 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -86,75 +121,97 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D40C0AE1924259957A7C76C1386542E /* Pods */ = {
+		050F5E4AE8A742117773F1420D468C0A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8B37B80AF7F36E987181BB46DEB97128 /* OneSignal */,
+				88229560D7B82AC224C8E144DFD47F5E /* OneSignal */,
+				1177B57A613406EFCFE8DB2FAA28CEC0 /* Toaster */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		3FE5056783E8A94B07C9B715F13B35F2 /* Frameworks */ = {
+		1177B57A613406EFCFE8DB2FAA28CEC0 /* Toaster */ = {
 			isa = PBXGroup;
 			children = (
-				9856FC4EF7A28911A9A64F58D0020001 /* OneSignal.framework */,
+				3EDA35016A11857674482E0156BE586B /* Toast.swift */,
+				472C697B7813FECF8A66EB2B24B5AC49 /* ToastCenter.swift */,
+				30156B023C2000A0AD31D6F208DD4BFE /* Toaster.h */,
+				7481C6093D467177A7737FBFDD8FE35F /* ToastView.swift */,
+				142587397676D481DD9C5E4767AEE3F1 /* ToastWindow.swift */,
+				25ADFD4F7EE3A2CDB729B95C43DC452E /* Support Files */,
 			);
-			name = Frameworks;
+			name = Toaster;
+			path = Toaster;
 			sourceTree = "<group>";
 		};
-		6ECC880DA23F907113D9D89C6AAF45AA /* Pods-OneSignalNotificationServiceExtension */ = {
+		25ADFD4F7EE3A2CDB729B95C43DC452E /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				9BE4DD27BE7AC46112261D7D0A88A452 /* Pods-OneSignalNotificationServiceExtension-acknowledgements.markdown */,
-				D38233F5E941128D892DA8C80337A697 /* Pods-OneSignalNotificationServiceExtension-acknowledgements.plist */,
-				625A6D12C05D252B13B2DFE24D65CB8A /* Pods-OneSignalNotificationServiceExtension-dummy.m */,
-				19A4CEEE464A4FCF3AC7A0183366280F /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
-				B4276F3E8B6CE74E52360FA658F54B14 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
+				125307A36C2BB68455EDEC634DC32AA9 /* Toaster.modulemap */,
+				59D4398113524D7414486E2C70D8393A /* Toaster.xcconfig */,
+				823C291B7FE3F66603A59526D7FCE958 /* Toaster-dummy.m */,
+				B740F7435CCD36AC929ECEAE5EAF6F92 /* Toaster-prefix.pch */,
+				397A16CF5429ED99F36729A6EEC569DF /* Toaster-umbrella.h */,
 			);
-			name = "Pods-OneSignalNotificationServiceExtension";
-			path = "Target Support Files/Pods-OneSignalNotificationServiceExtension";
+			name = "Support Files";
+			path = "../Target Support Files/Toaster";
 			sourceTree = "<group>";
 		};
-		7B4B4AF7C5C12B97A9A424EAFC343D02 /* Products */ = {
+		6E6C8E5F7744CD92FF60903B4ECF70EF /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				B1C0A86872E3DFFC9907100DE00A96D7 /* libPods-DatXanhManagement.a */,
-				4AF3B972C94DFF11700E306F18F01DF3 /* libPods-OneSignalNotificationServiceExtension.a */,
+				A945974A6215C9E7114C8B564521FCFA /* Pods-DatXanhManagement */,
+				AFABB3DAA9CEB4FD174801097FD44CE4 /* Pods-OneSignalNotificationServiceExtension */,
 			);
-			name = Products;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		8B37B80AF7F36E987181BB46DEB97128 /* OneSignal */ = {
+		88229560D7B82AC224C8E144DFD47F5E /* OneSignal */ = {
 			isa = PBXGroup;
 			children = (
-				3FE5056783E8A94B07C9B715F13B35F2 /* Frameworks */,
-				C6C0E300A89A27D6C85794DF2D958DA4 /* Support Files */,
+				D221963ABC1C87F79224090FF211C3DD /* Frameworks */,
+				DBE434A8F29FB9281FCF2FEEBF14A87A /* Support Files */,
 			);
 			name = OneSignal;
 			path = OneSignal;
 			sourceTree = "<group>";
 		};
-		B4A55EECC6DAC56CF9CFB2253FC5FB94 /* Pods-DatXanhManagement */ = {
+		A945974A6215C9E7114C8B564521FCFA /* Pods-DatXanhManagement */ = {
 			isa = PBXGroup;
 			children = (
-				2B98FAC2A9EA8F052244B23B415AF174 /* Pods-DatXanhManagement-acknowledgements.markdown */,
-				AF00E718BBAD58BF3ECEE7C8B5714442 /* Pods-DatXanhManagement-acknowledgements.plist */,
-				ABE1AAE9B4263134DA519C0D6A48D80D /* Pods-DatXanhManagement-dummy.m */,
-				CF9F558CB2CE7CBBE86FBF9A6317675C /* Pods-DatXanhManagement.debug.xcconfig */,
-				574A094C199F6DEDC5F868B8877AA5EB /* Pods-DatXanhManagement.release.xcconfig */,
+				10F75C44519ACC9A226EBE4E85561E9B /* Pods-DatXanhManagement.modulemap */,
+				EDF6B950957E1F0F4BF47D9804ADEC35 /* Pods-DatXanhManagement-acknowledgements.markdown */,
+				ED7404EA3BF803707D9F10EA223937CC /* Pods-DatXanhManagement-acknowledgements.plist */,
+				17B443E071400901F34DEBCB8B987562 /* Pods-DatXanhManagement-dummy.m */,
+				562DD8C4A7E53BAB7FCBC362708ECBCF /* Pods-DatXanhManagement-umbrella.h */,
+				5D6CEE91CF7F6339581DEF8971512B65 /* Pods-DatXanhManagement.debug.xcconfig */,
+				FA1E3FAD2941AF30343E6572C3AA43E9 /* Pods-DatXanhManagement.release.xcconfig */,
 			);
 			name = "Pods-DatXanhManagement";
 			path = "Target Support Files/Pods-DatXanhManagement";
 			sourceTree = "<group>";
 		};
-		C6C0E300A89A27D6C85794DF2D958DA4 /* Support Files */ = {
+		AFABB3DAA9CEB4FD174801097FD44CE4 /* Pods-OneSignalNotificationServiceExtension */ = {
 			isa = PBXGroup;
 			children = (
-				8AC9CA7D62CF89959772E96F7FC5FD70 /* OneSignal-iOS10.0.xcconfig */,
-				22C6098B7C7C4CC826B0ABDD89D7C670 /* OneSignal-iOS12.1.xcconfig */,
+				75C0AC5797B30143ED403835372E53FE /* Pods-OneSignalNotificationServiceExtension-acknowledgements.markdown */,
+				836BA4104C4CFCCD927F9F1F395C3189 /* Pods-OneSignalNotificationServiceExtension-acknowledgements.plist */,
+				538C46215E42DF9F8EA8EB247A3FDC0F /* Pods-OneSignalNotificationServiceExtension-dummy.m */,
+				0D48DE73D66A0FD57EED3A679DF1B2BC /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				3242EDAE8B6827F5B810F25BC85098BC /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/OneSignal-iOS10.0";
+			name = "Pods-OneSignalNotificationServiceExtension";
+			path = "Target Support Files/Pods-OneSignalNotificationServiceExtension";
+			sourceTree = "<group>";
+		};
+		BF8BEA09A1FDC37E036F8E579E949CB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B1C0A86872E3DFFC9907100DE00A96D7 /* libPods-DatXanhManagement.a */,
+				4AF3B972C94DFF11700E306F18F01DF3 /* libPods-OneSignalNotificationServiceExtension.a */,
+				BD810337F4A305D60D9250A197AA1EF1 /* libToaster.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -162,19 +219,18 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
-				1D40C0AE1924259957A7C76C1386542E /* Pods */,
-				7B4B4AF7C5C12B97A9A424EAFC343D02 /* Products */,
-				D1054144D8EA2808B55F6F86808808BD /* Targets Support Files */,
+				050F5E4AE8A742117773F1420D468C0A /* Pods */,
+				BF8BEA09A1FDC37E036F8E579E949CB2 /* Products */,
+				6E6C8E5F7744CD92FF60903B4ECF70EF /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		D1054144D8EA2808B55F6F86808808BD /* Targets Support Files */ = {
+		D221963ABC1C87F79224090FF211C3DD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B4A55EECC6DAC56CF9CFB2253FC5FB94 /* Pods-DatXanhManagement */,
-				6ECC880DA23F907113D9D89C6AAF45AA /* Pods-OneSignalNotificationServiceExtension */,
+				DAF18E75BF34871D8DDD1D9F983D7204 /* OneSignal.framework */,
 			);
-			name = "Targets Support Files";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
@@ -184,9 +240,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DBE434A8F29FB9281FCF2FEEBF14A87A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				5A53AFA08F278EF0417467421AC3780C /* OneSignal-iOS10.0.xcconfig */,
+				407ADB14F5932FDB9A30301A9848C5E3 /* OneSignal-iOS12.1.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/OneSignal-iOS10.0";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		0D7D402B2CCE0E921087370A52FA5758 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A90B61FE3CEACE8EC302C405279FCDEA /* Pods-DatXanhManagement-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		31BCFB5AE4B0BEE11C1A1CB83FA7942C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -194,16 +268,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5CD259FCE1DA0A332B4EFC60CCB366DF /* Headers */ = {
+		34B0DF86C5D72464ABCD14B03FC4F7E0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FF0EDE1EAE8CC0FB4D9465382C762FE /* Toaster-umbrella.h in Headers */,
+				6DC3BA28BD09C911346FE2D555A50E8A /* Toaster.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		B90AB98A7BC6A346D671B36DB990DAC2 /* Toaster */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E51BDC2F2F60BC6BB3E56AB49025ECF3 /* Build configuration list for PBXNativeTarget "Toaster" */;
+			buildPhases = (
+				34B0DF86C5D72464ABCD14B03FC4F7E0 /* Headers */,
+				F7AF98D66D0655D7469A6B711EED6DA9 /* Sources */,
+				F6F49BAA0E3E99D99B54C293A01C6D02 /* Frameworks */,
+				4A6C215F86B072C338272F6DCA6B190B /* Copy generated compatibility header */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Toaster;
+			productName = Toaster;
+			productReference = BD810337F4A305D60D9250A197AA1EF1 /* libToaster.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		BD0F10574EB554D7E668F50D2A5B77DF /* Pods-OneSignalNotificationServiceExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 06287B769D8C813E8662BE126BFCAA2E /* Build configuration list for PBXNativeTarget "Pods-OneSignalNotificationServiceExtension" */;
@@ -224,16 +318,17 @@
 		};
 		F5C9ABBB05D43254CEEC98C3DC7D1AD7 /* Pods-DatXanhManagement */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9C6BEC4FDB0E2A174237C87F5F6D9841 /* Build configuration list for PBXNativeTarget "Pods-DatXanhManagement" */;
+			buildConfigurationList = 6BFCFDCF9166CBB27613CA2B732C89AD /* Build configuration list for PBXNativeTarget "Pods-DatXanhManagement" */;
 			buildPhases = (
-				5CD259FCE1DA0A332B4EFC60CCB366DF /* Headers */,
-				7FF0A5600DE13E4D7FFDE585ABE65D1E /* Sources */,
-				CBC94D9A85C324A7951EBC981BF6EC92 /* Frameworks */,
+				0D7D402B2CCE0E921087370A52FA5758 /* Headers */,
+				4A24CA6B535BAF354F28820821797817 /* Sources */,
+				45D1D2119E658C74C9A093CB82B7F6B4 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C938745D569D0170F146923E4B9DD273 /* PBXTargetDependency */,
+				E0737EA83199423E1B8D1B49D52C467D /* PBXTargetDependency */,
+				587430CE697E3117F7B4792DCDE97CAE /* PBXTargetDependency */,
 			);
 			name = "Pods-DatXanhManagement";
 			productName = "Pods-DatXanhManagement";
@@ -257,7 +352,7 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 7B4B4AF7C5C12B97A9A424EAFC343D02 /* Products */;
+			productRefGroup = BF8BEA09A1FDC37E036F8E579E949CB2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -265,9 +360,37 @@
 				20E506BA53E9955CF2642737C8827E6E /* OneSignal-iOS12.1 */,
 				F5C9ABBB05D43254CEEC98C3DC7D1AD7 /* Pods-DatXanhManagement */,
 				BD0F10574EB554D7E668F50D2A5B77DF /* Pods-OneSignalNotificationServiceExtension */,
+				B90AB98A7BC6A346D671B36DB990DAC2 /* Toaster */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4A6C215F86B072C338272F6DCA6B190B /* Copy generated compatibility header */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h",
+				"${PODS_ROOT}/Headers/Public/Toaster/Toaster.modulemap",
+				"${PODS_ROOT}/Headers/Public/Toaster/Toaster-umbrella.h",
+			);
+			name = "Copy generated compatibility header";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap",
+				"${BUILT_PRODUCTS_DIR}/Toaster-umbrella.h",
+				"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "COMPATIBILITY_HEADER_PATH=\"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h\"\nMODULE_MAP_PATH=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap\"\n\nditto \"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h\" \"${COMPATIBILITY_HEADER_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/Toaster/Toaster.modulemap\" \"${MODULE_MAP_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/Toaster/Toaster-umbrella.h\" \"${BUILT_PRODUCTS_DIR}\"\nprintf \"\\n\\nmodule ${PRODUCT_MODULE_NAME}.Swift {\\n  header \\\"${COMPATIBILITY_HEADER_PATH}\\\"\\n  requires objc\\n}\\n\" >> \"${MODULE_MAP_PATH}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		294FE740D66BD7433E9C34BC77BFB464 /* Sources */ = {
@@ -278,22 +401,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7FF0A5600DE13E4D7FFDE585ABE65D1E /* Sources */ = {
+		4A24CA6B535BAF354F28820821797817 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A23794633E8F6C718BD55E75CC510137 /* Pods-DatXanhManagement-dummy.m in Sources */,
+				52D6A484089ABE64FF2ED6D8D5FEEB91 /* Pods-DatXanhManagement-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7AF98D66D0655D7469A6B711EED6DA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23109A6DB923985E3F497EB3F3B9454C /* Toast.swift in Sources */,
+				9118F7CAC7FA2F11D52E553EB3A5E5C8 /* ToastCenter.swift in Sources */,
+				028F4B7DE5DB12D4F395ACA47F9B5848 /* Toaster-dummy.m in Sources */,
+				27BE5AB267D1CC0765C927C53DB130DD /* ToastView.swift in Sources */,
+				AA19540A22112BFC685D3034E537D095 /* ToastWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C938745D569D0170F146923E4B9DD273 /* PBXTargetDependency */ = {
+		587430CE697E3117F7B4792DCDE97CAE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "OneSignal-iOS10.0";
-			target = 057529CC3867543F4F51CB0379358A3E /* OneSignal-iOS10.0 */;
-			targetProxy = C883BA0053185B0E1A06457374333B15 /* PBXContainerItemProxy */;
+			name = Toaster;
+			target = B90AB98A7BC6A346D671B36DB990DAC2 /* Toaster */;
+			targetProxy = E679198D4671320D3DFB4009BA148ACC /* PBXContainerItemProxy */;
 		};
 		CF8698A718DBCB80E2061C9AD991628E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -301,9 +436,40 @@
 			target = 20E506BA53E9955CF2642737C8827E6E /* OneSignal-iOS12.1 */;
 			targetProxy = 7DF7847415885BD2855C2A61D70E2D80 /* PBXContainerItemProxy */;
 		};
+		E0737EA83199423E1B8D1B49D52C467D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "OneSignal-iOS10.0";
+			target = 057529CC3867543F4F51CB0379358A3E /* OneSignal-iOS10.0 */;
+			targetProxy = 549C045F271971F9A003BB3093ED5108 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		161237BEA65AE45B111079B2C3331C50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59D4398113524D7414486E2C70D8393A /* Toaster.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/Toaster/Toaster-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MODULEMAP_FILE = Headers/Public/Toaster/Toaster.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = Toaster;
+				PRODUCT_NAME = Toaster;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		196DFA3E4A09A28224918543529A1885 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -368,9 +534,32 @@
 			};
 			name = Debug;
 		};
+		38F57489B291AF9706EFAF59670F3667 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D6CEE91CF7F6339581DEF8971512B65 /* Pods-DatXanhManagement.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-DatXanhManagement/Pods-DatXanhManagement.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 		4F52F7AF2D8FA9021330EBA28F8BE276 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22C6098B7C7C4CC826B0ABDD89D7C670 /* OneSignal-iOS12.1.xcconfig */;
+			baseConfigurationReference = 407ADB14F5932FDB9A30301A9848C5E3 /* OneSignal-iOS12.1.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -386,32 +575,9 @@
 			};
 			name = Debug;
 		};
-		575A1DB7CF7DCC7FE9F3A12032F19107 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 574A094C199F6DEDC5F868B8877AA5EB /* Pods-DatXanhManagement.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		627461CCA8D1F597E059793738705169 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8AC9CA7D62CF89959772E96F7FC5FD70 /* OneSignal-iOS10.0.xcconfig */;
+			baseConfigurationReference = 5A53AFA08F278EF0417467421AC3780C /* OneSignal-iOS10.0.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -428,7 +594,7 @@
 		};
 		8DE26712EF7DED223B85CBF5394E836F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 22C6098B7C7C4CC826B0ABDD89D7C670 /* OneSignal-iOS12.1.xcconfig */;
+			baseConfigurationReference = 407ADB14F5932FDB9A30301A9848C5E3 /* OneSignal-iOS12.1.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -447,7 +613,7 @@
 		};
 		95792E65C19D209A2212B2EE7D01CFD4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8AC9CA7D62CF89959772E96F7FC5FD70 /* OneSignal-iOS10.0.xcconfig */;
+			baseConfigurationReference = 5A53AFA08F278EF0417467421AC3780C /* OneSignal-iOS10.0.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -463,9 +629,59 @@
 			};
 			name = Release;
 		};
+		9741DA00CF58F955696E1D62B123EF28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA1E3FAD2941AF30343E6572C3AA43E9 /* Pods-DatXanhManagement.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-DatXanhManagement/Pods-DatXanhManagement.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A4CACAD22C278EC2AD2D6F858C1E139E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59D4398113524D7414486E2C70D8393A /* Toaster.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/Toaster/Toaster-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MODULEMAP_FILE = Headers/Public/Toaster/Toaster.modulemap;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = Toaster;
+				PRODUCT_NAME = Toaster;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		AB4912BE0EDCF51F0845984FB889E91E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 19A4CEEE464A4FCF3AC7A0183366280F /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 0D48DE73D66A0FD57EED3A679DF1B2BC /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -548,7 +764,7 @@
 		};
 		CEC2553569556029FB266D2FBA7B7FB1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4276F3E8B6CE74E52360FA658F54B14 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = 3242EDAE8B6827F5B810F25BC85098BC /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -569,28 +785,6 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
-		};
-		E5A6882AE44E4C0BDEC6CC219A34767B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF9F558CB2CE7CBBE86FBF9A6317675C /* Pods-DatXanhManagement.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -622,11 +816,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9C6BEC4FDB0E2A174237C87F5F6D9841 /* Build configuration list for PBXNativeTarget "Pods-DatXanhManagement" */ = {
+		6BFCFDCF9166CBB27613CA2B732C89AD /* Build configuration list for PBXNativeTarget "Pods-DatXanhManagement" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E5A6882AE44E4C0BDEC6CC219A34767B /* Debug */,
-				575A1DB7CF7DCC7FE9F3A12032F19107 /* Release */,
+				38F57489B291AF9706EFAF59670F3667 /* Debug */,
+				9741DA00CF58F955696E1D62B123EF28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E51BDC2F2F60BC6BB3E56AB49025ECF3 /* Build configuration list for PBXNativeTarget "Toaster" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				161237BEA65AE45B111079B2C3331C50 /* Debug */,
+				A4CACAD22C278EC2AD2D6F858C1E139E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

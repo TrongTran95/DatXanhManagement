@@ -10,4 +10,10 @@ import UIKit
 
 class TeamMenuCVC: UICollectionViewCell {
     
+    @IBOutlet weak var lblTitle: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
 }

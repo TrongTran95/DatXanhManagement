@@ -30,6 +30,13 @@ extension UIImageView {
 	}
 }
 
+func createCancelAlert(title: String, message: String, cancelTitle: String) -> UIAlertController {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel, handler: nil)
+    alert.addAction(cancelAction)
+    return alert
+}
+
 func getJsonUsingPost(strURL: String, strParams: String, completion: @escaping(Dictionary<String, Any>) -> Void){
 	//Create an url
 	let url = URL(string: strURL)

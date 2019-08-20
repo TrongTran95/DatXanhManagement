@@ -32,3 +32,9 @@ public let urlUpdateUserEmailDetailReceiveQuantity: String = "\(urlHostApi)Updat
 public let urlUpdateUserEmailDetailOrderNumber: String = "\(urlHostApi)UpdateUserEmailDetailOrderNumber.php"
 
 public let urlRemoveUserEmailDetail: String = "\(urlHostApi)RemoveUserEmailDetail.php"
+
+public let urlCheckUserExist: String = "\(urlHostApi)CheckUserExist.php"
+
+public let urlGetUserMemberList: String = "\(urlHostApi)GetUserMemberList.php"
+
+public let urlAddUserMember: String = "\(urlHostApi)AddUserMember.php"

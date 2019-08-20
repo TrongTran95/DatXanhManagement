@@ -33,6 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		OneSignal.promptForPushNotifications(userResponse: { accepted in
 			print("User accepted notifications: \(accepted)")
 		})
+        
+//        UITabBar.appearance().barTintColor = .black
+        UITabBar.appearance().tintColor = .red
 		
 		
 		return true

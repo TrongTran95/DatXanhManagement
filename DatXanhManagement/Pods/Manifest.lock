@@ -1,16 +1,20 @@
 PODS:
   - OneSignal (2.10.0)
+  - Toaster (2.2.0)
 
 DEPENDENCIES:
   - OneSignal (< 3.0, >= 2.6.2)
+  - Toaster
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - OneSignal
+    - Toaster
 
 SPEC CHECKSUMS:
   OneSignal: 0f5ff711d9f25da54885e4ab06ef0abc221a46ef
+  Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
 
-PODFILE CHECKSUM: 5b107a1e5e81b40ca4f23584c38398a74f336d57
+PODFILE CHECKSUM: ef0ee96ab25f5b6cbf3d950389a91a69c4f56810
 
 COCOAPODS: 1.7.5
