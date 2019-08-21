@@ -22,14 +22,29 @@ class TeamSettingTVController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+		setupUI()
+//        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+	
+	func setupUI(){
+		self.tabBarController?.navigationItem.title = "Order Sample"
+		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(abc))
+		self.tabBarController?.navigationItem.rightBarButtonItems = [addButton, self.editButtonItem]
+	}
+	
+	@objc func abc(){
+		
+	}
 	
 	func setActiveForStepper(numberOfRow: Int, flag: Bool){
 		for i in 0..<numberOfRow {
 			let cell = self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! TeamSettingTVC
 			cell.stReceiveNumber.isEnabled = flag
 		}
+	}
+	
+	override func viewDidLayoutSubviews() {
+		setupUI()
 	}
 
     override func setEditing(_ editing: Bool, animated: Bool) {

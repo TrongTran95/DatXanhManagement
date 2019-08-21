@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dV-Pw-z1I">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dV-Pw-z1I">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -210,7 +210,6 @@
                         <outlet property="lblCurrentProject" destination="ZOg-BJ-PPQ" id="KJt-dM-jyn"/>
                         <outlet property="lblWelcome" destination="oem-ZE-jGX" id="rQT-MI-VrG"/>
                         <segue destination="ThK-9Z-SVy" kind="show" identifier="showCustomerListPage" id="8c5-8X-qMb"/>
-                        <segue destination="xLb-Gi-fje" kind="show" identifier="showTeamSettingPage" id="4O0-lc-OXw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ky-Iq-Dw3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -227,7 +226,7 @@
                         <color key="backgroundColor" red="1" green="0.50651831023331062" blue="0.95713258424682002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="Mc4-Pn-XeF"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Order Sample" id="8BT-xM-BUg"/>
+                    <tabBarItem key="tabBarItem" title="Order Sample" image="OrderSample" id="8BT-xM-BUg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FbT-BX-Cmm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -259,7 +258,7 @@
                         <color key="backgroundColor" red="0.7650770589" green="0.80522286070000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="qXa-sx-LCN"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Seperate" id="Bs3-MJ-Osg"/>
+                    <tabBarItem key="tabBarItem" title="Seperate" image="Seperate" id="Bs3-MJ-Osg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xQy-gW-YBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -323,7 +322,7 @@
                             <outlet property="delegate" destination="HCe-aR-7Kf" id="6TJ-ju-4fd"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Team Members" id="LB0-C8-Amu"/>
+                    <tabBarItem key="tabBarItem" title="Team Members" image="TeamMembers" id="LB0-C8-Amu"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5TU-Ug-j1h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -340,9 +339,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="HCe-aR-7Kf" kind="relationship" relationship="viewControllers" id="A3W-Br-AOm"/>
-                        <segue destination="bIb-hr-fGo" kind="relationship" relationship="viewControllers" id="EnC-Pa-LUA"/>
-                        <segue destination="wyG-99-n6r" kind="relationship" relationship="viewControllers" id="R80-7W-oOR"/>
-                        <segue destination="IhC-qi-m1B" kind="relationship" relationship="viewControllers" id="pYO-I7-pQ8"/>
+                        <segue destination="xLb-Gi-fje" kind="relationship" relationship="viewControllers" id="Fuh-1w-X5S"/>
+                        <segue destination="wyG-99-n6r" kind="relationship" relationship="viewControllers" id="7Cy-fW-dPN"/>
+                        <segue destination="IhC-qi-m1B" kind="relationship" relationship="viewControllers" id="qA5-DY-AZu"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdi-M4-UrF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -420,7 +419,7 @@
             </objects>
             <point key="canvasLocation" x="1961" y="-736"/>
         </scene>
-        <!--Team SettingTV Controller-->
+        <!--Order Sample-->
         <scene sceneID="zFe-nn-paN">
             <objects>
                 <tableViewController id="xLb-Gi-fje" customClass="TeamSettingTVController" customModule="DatXanhManagement" customModuleProvider="target" sceneMemberID="viewController">
@@ -500,6 +499,7 @@
                             <outlet property="delegate" destination="xLb-Gi-fje" id="Ebx-mU-1gZ"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Order Sample" image="OrderSample" id="Zq7-hY-g1P"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49C-iZ-5iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -827,8 +827,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="OrderSample" width="30" height="30"/>
+        <image name="Seperate" width="30" height="30"/>
+        <image name="TeamMembers" width="30" height="30"/>
         <image name="Thumbnail" width="300" height="300"/>
         <image name="call_white" width="64" height="64"/>
-        <image name="customer-white" width="64" height="64"/>
+        <image name="customer-white" width="48" height="48"/>
     </resources>
 </document>

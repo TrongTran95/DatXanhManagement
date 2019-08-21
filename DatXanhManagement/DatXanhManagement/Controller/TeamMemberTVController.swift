@@ -17,9 +17,9 @@ class TeamMemberTVController: UITableViewController {
         return "Member quantity: \(quantity)"
     }
     
-    var users: [String] = []
+    var userMembers: [UserMember] = []
     
-    var tempUsers: [String] = []
+    var tempUserMembers: [UserMember] = []
     
     var flagRemove: Bool = false
     
@@ -27,10 +27,12 @@ class TeamMemberTVController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupUI()
+		
         setupData()
     }
+	override func viewDidLayoutSubviews() {
+		setupUI()
+	}
     
     func setupUI(){
         self.tabBarController?.navigationItem.title = "Team members"
@@ -41,7 +43,8 @@ class TeamMemberTVController: UITableViewController {
     func setupData(){
         Services.shared.getUserMemberList(emailTeam: emailTeam, completion: { (dic) in
             for user in dic {
-                self.users.append(user["emailPersonal"] as! String)
+				let newMember = UserMember(id: user["id"] as! Int, emailPersonl: user["emailPersonal"] as! String)
+                self.userMembers.append(newMember)
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -56,12 +59,66 @@ class TeamMemberTVController: UITableViewController {
         //Edit button, begin editing processs
         if (self.isEditing) {
             //Begin editing, save current data in case of any changes happen and we want to get the original data
-            self.tempUsers = self.users
+            self.tempUserMembers = self.userMembers
         }
         //Done button, save new data (if avaiable)
         else {
+			if flagRemove == true {
+				showAlert()
+			} else {
+				resetData()
+			}
         }
     }
+	
+	func showAlert(){
+		let alert = UIAlertController(title: "Data changed", message: "Do you want to save new data ?", preferredStyle: .alert)
+		//Handler for cancel button
+		let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
+			//Get data back from temporary user email detail list
+			self.userMembers = self.tempUserMembers
+			//Update new data of table view
+			self.tableView.reloadData()
+			//Release data
+			self.resetData()
+		}
+		//Handler for save button
+		let saveAction = UIAlertAction(title: "Save", style: .default) { (action) in
+			//Nothing in the UI change because we've made change every time we do something in an editing process
+			//Update new data to server
+			//Remove user email detail from server
+			for index in self.arrRemoveIndex {
+				self.removeUserMember(emailAddress: self.tempUserMembers[index].emailPersonal)
+			}
+			
+			//Release data
+			self.resetData()
+		}
+		alert.addAction(cancelAction)
+		alert.addAction(saveAction)
+		self.present(alert, animated: true, completion: nil)
+	}
+	
+	func resetData(){
+		//Turn off flag remove
+		flagRemove = false
+		arrRemoveIndex = []
+		tempUserMembers = []
+	}
+	
+	func removeUserMember(emailAddress: String){
+		Services.shared.removeUserMember(emailTeam: self.emailTeam, emailPersonal: emailAddress) { (error) in
+			if !error {
+				DispatchQueue.main.async {
+					Toast(text: "Successed", duration: Delay.short).show()
+				}
+			} else {
+				DispatchQueue.main.async {
+					Toast(text: "Failed", duration: Delay.short).show()
+				}
+			}
+		}
+	}
     
     @objc func addButtonClicked (){
         let alert = UIAlertController(title: "Add new member", message: "", preferredStyle: .alert)
@@ -76,11 +133,11 @@ class TeamMemberTVController: UITableViewController {
             }
             
             let newMemberEmailAdress: String = textField.text!
-            //Check if user existing in table view
-            if (self.users.contains(newMemberEmailAdress)) {
-                self.present(createCancelAlert(title: "User existed", message: "This user already existed in member list", cancelTitle: "Cancel"), animated: true, completion: nil)
-                return
-            }
+			//Check if user existing in table view
+			if self.tempUserMembers.contains(where: {$0.emailPersonal == newMemberEmailAdress}) {
+				self.present(createCancelAlert(title: "User existed", message: "This user already existed in member list", cancelTitle: "Cancel"), animated: true, completion: nil)
+				return
+			}
             //Check if user existing in database, if not then add new member
             self.checkAndAddUserMember(newMemberEmailAdress)
         }
@@ -112,7 +169,9 @@ class TeamMemberTVController: UITableViewController {
                 //Update UI
                 DispatchQueue.main.async {
                     //Add new member to user array
-                    self.users.append(newMemberEmailAdress)
+					var newUserMember = UserMember()
+					newUserMember.emailPersonal = newMemberEmailAdress
+                    self.userMembers.append(newUserMember)
                     //Reload UI
                     self.tableView.reloadData()
                     //Show annoucement
@@ -132,16 +191,16 @@ class TeamMemberTVController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return memberQuantity(users.count)
+        return memberQuantity(userMembers.count)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return userMembers.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TeamMembersCell", for: indexPath) as! TeamMemberTVC
-        cell.lblEmail.text = users[indexPath.row]
+        cell.lblEmail.text = userMembers[indexPath.row].emailPersonal
         cell.lblNumber.text = "\(indexPath.row + 1)"
         return cell
     }
@@ -160,12 +219,7 @@ class TeamMemberTVController: UITableViewController {
             arrRemoveIndex.append(indexPath.row)
             
             //Delete from the array
-            users.remove(at: indexPath.row)
-            
-            //Set new order after remove
-//            for i in indexPath.row..<self.users.count {
-//                self.user.userEmailDetailList[i].setOrderNumber(orderNumber: i+1)
-//            }
+            userMembers.remove(at: indexPath.row)
             
             //Delete row and update new order
             self.tableView.reloadData()

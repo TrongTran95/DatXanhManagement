@@ -50,14 +50,6 @@ class User {
     func resetUserEmailDetailList(){
         self.userEmailDetailList = []
     }
-	
-	func getUserProjects(completion: @escaping([String]) -> Void){
-		let strParams: String = "emailTeam=" + self.emailAddress
-		getJsonUsingPost(strURL: urlGetUserProjects, strParams: strParams) { (json) in
-			let projectJson = json["projects"] as! [String]
-			completion(projectJson)
-		}
-	}
 
 	func login(userName: String, password: String, completion: @escaping() -> Void){
 		let strParams: String = "emailAddress=" + userName + "&password=" + password
@@ -98,24 +90,7 @@ class User {
 		}
 	}
     
-    func getUserEmailDetailList(projectName: String, completion: @escaping () -> Void){
-        let strParams: String = "emailTeam=" + self.emailAddress + "&projectName=" +  projectName
-        getJsonUsingPost(strURL: urlGetUserEmailDetailList, strParams: strParams) { (json) in
-            let userJson = json["userEmailDetailList"] as! [[String:Any]]
-            for userEmailDetail in userJson {
-                let newUED = UserEmailDetail()
-                newUED.setID(id: userEmailDetail["id"] as? Int ?? 0)
-                newUED.setEmailPersonal(emailPersonal: userEmailDetail["emailPersonal"] as? String ?? "")
-                newUED.setOrderNumber(orderNumber: userEmailDetail["orderNumber"] as? Int ?? 0)
-                newUED.setReceiveQuantity(receiveQuantity: userEmailDetail["receiveQuantity"] as? Int ?? 0)
-                self.userEmailDetailList.append(newUED)
-            }
-			//Sort user email detail list by order number
-			self.userEmailDetailList = self.userEmailDetailList.sorted(by: { $0.orderNumber < $1.orderNumber })
-			
-            completion()
-        }
-    }
+    
 	
 	//Remove user email detail from database
 	func removeUserEmailDetail(id: Int, completion:@escaping(Bool) -> Void){

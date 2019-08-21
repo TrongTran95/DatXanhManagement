@@ -38,3 +38,5 @@ public let urlCheckUserExist: String = "\(urlHostApi)CheckUserExist.php"
 public let urlGetUserMemberList: String = "\(urlHostApi)GetUserMemberList.php"
 
 public let urlAddUserMember: String = "\(urlHostApi)AddUserMember.php"
+
+public let urlRemoveUserMember: String = "\(urlHostApi)RemoveUserMember.php"

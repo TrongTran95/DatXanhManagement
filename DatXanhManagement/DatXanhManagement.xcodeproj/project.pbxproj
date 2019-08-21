@@ -23,6 +23,7 @@
 		804F4FE622DCAB120083044C /* ProjectCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE522DCAB120083044C /* ProjectCVC.swift */; };
 		804F4FE822DCACD80083044C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE722DCACD80083044C /* Extension.swift */; };
 		805209B022E849780085EA2D /* PublicConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805209AF22E849780085EA2D /* PublicConstraint.swift */; };
+		8097E728230D900C0014C211 /* UserMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097E727230D900C0014C211 /* UserMember.swift */; };
 		80C3413322DDA846001F77F5 /* CustomerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413222DDA846001F77F5 /* CustomerListVC.swift */; };
 		80C3413522DDB700001F77F5 /* CustomerListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413422DDB700001F77F5 /* CustomerListTVC.swift */; };
 		80C3413722DDC81C001F77F5 /* CustomerDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */; };
@@ -86,6 +87,7 @@
 		805209AF22E849780085EA2D /* PublicConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicConstraint.swift; sourceTree = "<group>"; };
 		8086BDE522F52C2A00E94F08 /* DatXanhManagement.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatXanhManagement.entitlements; sourceTree = "<group>"; };
 		8086BDE622F52D2F00E94F08 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		8097E727230D900C0014C211 /* UserMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMember.swift; sourceTree = "<group>"; };
 		80C3413222DDA846001F77F5 /* CustomerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListVC.swift; sourceTree = "<group>"; };
 		80C3413422DDB700001F77F5 /* CustomerListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListTVC.swift; sourceTree = "<group>"; };
 		80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailTVC.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				8036D63522DCCAA40080775C /* Customer.swift */,
 				804F4FDB22DC33130083044C /* User.swift */,
 				A24B8C0F23026FC800252718 /* UserEmailDetail.swift */,
+				8097E727230D900C0014C211 /* UserMember.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -214,10 +217,10 @@
 				804F4FC822DB67180083044C /* LoginVC.swift */,
 				804F4FE122DC51700083044C /* UserVC.swift */,
 				80C3413222DDA846001F77F5 /* CustomerListVC.swift */,
-				A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */,
 				A2E770D4230A43AB000CF05C /* TeamMenuVC.swift */,
 				A2E770D8230A4FE5000CF05C /* TeamTBC.swift */,
 				A2E770DA230A53A5000CF05C /* TeamMemberTVController.swift */,
+				A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				A2E770D5230A43AB000CF05C /* TeamMenuVC.swift in Sources */,
 				804F4FDE22DC34E30083044C /* UrlAddresses.swift in Sources */,
 				A2E770D9230A4FE5000CF05C /* TeamTBC.swift in Sources */,
+				8097E728230D900C0014C211 /* UserMember.swift in Sources */,
 				804F4FE622DCAB120083044C /* ProjectCVC.swift in Sources */,
 				A24B8C1023026FC800252718 /* UserEmailDetail.swift in Sources */,
 				804F4FDC22DC33130083044C /* User.swift in Sources */,

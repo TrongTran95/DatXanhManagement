@@ -40,7 +40,7 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 	
 	//Get project list of user
 	func getUserProjects(){
-		user.getUserProjects { (projectNames) in
+		Services.shared.getUserProjects(emailTeam: user.emailAddress) { (projectNames) in
 			for i in 0..<projectNames.count{
 				//Add a new null project
 				self.projects.append(Project())
@@ -152,12 +152,12 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if (self.user.userEmailDetailList.count != 0) {
             self.user.resetUserEmailDetailList()
         }
-        
-        self.user.getUserEmailDetailList(projectName: self.projects[indexPath.row].name) {
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "showTeamSettingPage", sender: self)
-            }
-        }
+		Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projects[indexPath.row].name) { (userEmailDetailList) in
+			self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
+			DispatchQueue.main.async {
+				self.performSegue(withIdentifier: "showTeamSettingPage", sender: self)
+			}
+		}
         
 	}
 	

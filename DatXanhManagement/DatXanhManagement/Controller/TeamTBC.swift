@@ -8,13 +8,46 @@
 
 import UIKit
 
-class TeamTBC: UITabBarController {
-    
-    var emailTeam: String = ""
+class TeamTBC: UITabBarController, UITabBarControllerDelegate {
+	var firstTab: TeamMemberTVController!
+	var secondTab: TeamSettingTVController!
+    var user: User!
+	var projectName: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let firstTab = self.viewControllers![0] as! TeamMemberTVController
-        firstTab.emailTeam = self.emailTeam
+		firstTab = self.viewControllers![0] as? TeamMemberTVController
+		secondTab = self.viewControllers![1] as? TeamSettingTVController
+		
+        firstTab.emailTeam = self.user.emailAddress
+		
+		Services.shared.getUserProjects(emailTeam: self.user.emailAddress) { (arrProject) in
+			self.projectName = arrProject[0]
+			
+			Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projectName) { (userEmailDetailList) in
+				print(userEmailDetailList.count)
+				self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
+				self.secondTab.user = self.user
+			}
+		}
     }
+	
+	override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+		switch item.title! {
+		case "Team Members":
+			print("Selected item")
+		case "Order Sample":
+			print("Selected item")
+		case "Seperate":
+			print("Selected item")
+		case "Chart":
+			print("Selected item")
+		default:
+			print("Selected item")
+		}
+	}
+	
+	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+		
+	}
 }

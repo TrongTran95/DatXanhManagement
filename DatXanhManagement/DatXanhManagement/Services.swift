@@ -12,6 +12,34 @@ class Services {
     public static let shared = Services()
     
     private init(){}
+	
+	func getUserEmailDetailList(emailTeam: String, projectName: String, completion: @escaping ([UserEmailDetail]) -> Void){
+		var userEmailDetailList: [UserEmailDetail] = []
+		let strParams: String = "emailTeam=" + emailTeam + "&projectName=" +  projectName
+		getJsonUsingPost(strURL: urlGetUserEmailDetailList, strParams: strParams) { (json) in
+			let userJson = json["userEmailDetailList"] as! [[String:Any]]
+			for userEmailDetail in userJson {
+				let newUED = UserEmailDetail()
+				newUED.setID(id: userEmailDetail["id"] as? Int ?? 0)
+				newUED.setEmailPersonal(emailPersonal: userEmailDetail["emailPersonal"] as? String ?? "")
+				newUED.setOrderNumber(orderNumber: userEmailDetail["orderNumber"] as? Int ?? 0)
+				newUED.setReceiveQuantity(receiveQuantity: userEmailDetail["receiveQuantity"] as? Int ?? 0)
+				userEmailDetailList.append(newUED)
+			}
+			//Sort user email detail list by order number
+			userEmailDetailList = userEmailDetailList.sorted(by: { $0.orderNumber < $1.orderNumber })
+			
+			completion(userEmailDetailList)
+		}
+	}
+	
+	func getUserProjects(emailTeam: String, completion: @escaping([String]) -> Void){
+		let strParams: String = "emailTeam=" + emailTeam
+		getJsonUsingPost(strURL: urlGetUserProjects, strParams: strParams) { (json) in
+			let projectJson = json["projects"] as! [String]
+			completion(projectJson)
+		}
+	}
     
     func addNewUserMember(emailTeam: String, emailPersonal: String, completion: @escaping (Bool) -> Void) {
         let strParams = "emailTeam=" + emailTeam + "&emailPersonal=" + emailPersonal
@@ -26,11 +54,18 @@ class Services {
             completion(json["userMemberList"] as! [[String:Any]])
         }
     }
-    
-    func checkUserExist(emailTeam: String, emailPersonal: String, completion: @escaping (Bool) -> Void){
-        let strParams = "emailTeam=" + emailTeam + "&emailPersonal=" + emailPersonal
-        getJsonUsingPost(strURL: urlCheckUserExist, strParams: strParams) { (json) in
-            completion(json["error"] as! Bool)
-        }
-    }
+	
+	func checkUserExist(emailTeam: String, emailPersonal: String, completion: @escaping (Bool) -> Void){
+		let strParams = "emailTeam=" + emailTeam + "&emailPersonal=" + emailPersonal
+		getJsonUsingPost(strURL: urlCheckUserExist, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
+	func removeUserMember(emailTeam: String, emailPersonal: String, completion: @escaping (Bool) -> Void){
+		let strParams = "emailTeam=" + emailTeam + "&emailPersonal=" + emailPersonal
+		getJsonUsingPost(strURL: urlRemoveUserMember, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
 }

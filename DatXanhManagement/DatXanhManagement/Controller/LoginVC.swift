@@ -65,7 +65,7 @@ class LoginVC: UIViewController {
 			userVC.user = self.user
         } else if (segue.identifier == "showTeamMenu") {
             guard let teamTBC = segue.destination as? TeamTBC else { return }
-            teamTBC.emailTeam = self.user.emailAddress
+            teamTBC.user = self.user
         }
 	}
 }
