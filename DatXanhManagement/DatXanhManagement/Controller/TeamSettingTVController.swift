@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toaster
 
 class TeamSettingTVController: UITableViewController {
     
@@ -19,27 +20,104 @@ class TeamSettingTVController: UITableViewController {
     var flagRemove: Bool = false
     var flagChangeReceiveQuantity: Bool = false
     
+    var addView: AddMemberView? = nil
+    var projectName: String!
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 		setupUI()
-//        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 	
 	func setupUI(){
 		self.tabBarController?.navigationItem.title = "Order Sample"
-		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(abc))
+		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddMemberView))
 		self.tabBarController?.navigationItem.rightBarButtonItems = [addButton, self.editButtonItem]
 	}
 	
-	@objc func abc(){
-		
+	@objc func showAddMemberView(){
+        Services.shared.getUserMemberList(emailTeam: user.emailAddress, completion: { (dic) in
+            var userMembers:[UserMember] = []
+            for user in dic {
+                let newMember = UserMember(id: user["id"] as! Int, emailPersonl: user["emailPersonal"] as! String)
+                userMembers.append(newMember)
+            }
+            DispatchQueue.main.async {
+                if (self.addView == nil) {
+                    self.setupAddMemberView(transfer: userMembers)
+                } else {
+                    self.addView?.userMembers = userMembers
+                    self.addView?.tvUserMemberList.reloadData()
+                }
+            }
+        })
 	}
+    
+    //Handler for cancel button
+    func turnOffAddView(){
+        addView?.removeFromSuperview()
+        addView = nil
+    }
+    
+    func addNewUserEmailDetail(){
+        var arrEmailPersonal: [String] = []
+        //Filter email personal list where switch have been change to ON (true)
+        for key in addView!.dicSwitchValue.keys {
+            if addView?.dicSwitchValue[key] == true {
+                arrEmailPersonal.append(self.addView!.userMembers[key].emailPersonal)
+            }
+        }
+        //Check if any switch has been turned on
+        //Switch that turned on available
+        if (arrEmailPersonal.count != 0) {
+            //Start the add user email detail process (count is params to make a recursive function)
+            Services.shared.addUserEmailDetail(count: 0, emailTeam: self.user.emailAddress, emailPersonal: arrEmailPersonal, projectName: self.projectName) { (error) in
+                //All add successed
+                if (!error) {
+                    //Get new user email detail list to update UI
+                    Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projectName, completion: { (userEmailDetailList) in
+                        //Set new user email detail list
+                        self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
+                        DispatchQueue.main.async {
+                            //Update UI
+                            self.tableView.reloadData()
+                            //Turn off add view and show annoucement
+                            self.turnOffAddView()
+                            Toast(text: "Successed", duration: Delay.short).show()
+                        }
+                    })
+                }
+                //There's some error while adding new user email detail, show annoucement
+                else {
+                    DispatchQueue.main.async {
+                        Toast(text: "Failed", duration: Delay.short).show()
+                    }
+                }
+            }
+        }
+        //All switch is currently being turned off
+        else {
+            Toast(text: "Please choose at least 1 member to add", duration: Delay.short).show()
+        }
+    }
+    
+    func setupAddMemberView(transfer userMembers: [UserMember]){
+        addView = AddMemberView()
+        addView!.userMembers = userMembers
+        addView?.delegate = self
+        let height = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height)!
+        
+        self.navigationController!.view.insertSubview(addView!, belowSubview: self.navigationController!.navigationBar)
+        self.navigationController!.view.addConstraints(AutoLayout.shared.getTopLeftBottomRightConstraint(currentView: addView!, destinationView: self.navigationController!.view, constant: [height, 0, 0, 0]))
+    }
 	
 	func setActiveForStepper(numberOfRow: Int, flag: Bool){
 		for i in 0..<numberOfRow {
-			let cell = self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as! TeamSettingTVC
-			cell.stReceiveNumber.isEnabled = flag
+            if let cell = self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as? TeamSettingTVC {
+                cell.stReceiveNumber.isEnabled = flag
+            }
 		}
 	}
 	
@@ -173,6 +251,9 @@ class TeamSettingTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamSettingTVC
         let currentUED = self.user.userEmailDetailList[indexPath.row]
+        if (tableView.isEditing == false) {
+            cell.setStepperEnable(value: false)
+        }
         cell.setOrder(orderNumber: currentUED.orderNumber)
         cell.setReceiveNumber(receiveNumber: currentUED.receiveQuantity)
         cell.setUserPersonalEmail(emailAddress: currentUED.emailPersonal)

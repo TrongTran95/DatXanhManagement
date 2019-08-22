@@ -19,7 +19,6 @@ public let urlGetUserProjects: String = "\(urlHostApi)GetUserProjects.php"
 public let urlGetProjectInfo: String = "\(urlHostApi)GetProjectInfo.php"
 
 public let urlGetCustomerList: String = "\(urlHostApi)GetCustomerList.php"
-//public let urlGetCustomerList: String = "http://trongstest.tk/TestFull.php"
 
 public let urlGetCustomerQuantity: String = "\(urlHostApi)GetCustomerQuantity.php"
 
@@ -40,3 +39,5 @@ public let urlGetUserMemberList: String = "\(urlHostApi)GetUserMemberList.php"
 public let urlAddUserMember: String = "\(urlHostApi)AddUserMember.php"
 
 public let urlRemoveUserMember: String = "\(urlHostApi)RemoveUserMember.php"
+
+public let urlAddUserEmailDetail: String = "\(urlHostApi)AddUserEmailDetail.php"

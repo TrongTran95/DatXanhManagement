@@ -23,28 +23,23 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 		
 		Services.shared.getUserProjects(emailTeam: self.user.emailAddress) { (arrProject) in
 			self.projectName = arrProject[0]
-			
 			Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projectName) { (userEmailDetailList) in
-				print(userEmailDetailList.count)
 				self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
 				self.secondTab.user = self.user
+                self.secondTab.projectName = self.projectName
 			}
 		}
     }
 	
 	override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-		switch item.title! {
-		case "Team Members":
-			print("Selected item")
-		case "Order Sample":
-			print("Selected item")
-		case "Seperate":
-			print("Selected item")
-		case "Chart":
-			print("Selected item")
-		default:
-			print("Selected item")
-		}
+//        switch item.title! {
+//        case "Team Members":
+//        case "Order Sample":
+//        case "Seperate":
+//        case "Chart":
+//        default:
+//        }
+        print(item.title!)
 	}
 	
 	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {

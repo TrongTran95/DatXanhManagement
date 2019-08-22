@@ -29,6 +29,11 @@
 		80C3413722DDC81C001F77F5 /* CustomerDetailTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */; };
 		A201D99C230A663E001F2872 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = A201D99B230A663E001F2872 /* Services.swift */; };
 		A24B8C1023026FC800252718 /* UserEmailDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A24B8C0F23026FC800252718 /* UserEmailDetail.swift */; };
+		A2CF02B3230E2AC9002CE7FD /* AddMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF02B2230E2AC9002CE7FD /* AddMemberView.swift */; };
+		A2CF02B5230E32D1002CE7FD /* AutoLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF02B4230E32D1002CE7FD /* AutoLayout.swift */; };
+		A2CF02B7230E3496002CE7FD /* AddMemberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF02B6230E3496002CE7FD /* AddMemberView.xib */; };
+		A2CF02BA230E3912002CE7FD /* AddMemberTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF02B8230E3912002CE7FD /* AddMemberTVC.swift */; };
+		A2CF02BB230E3912002CE7FD /* AddMemberTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF02B9230E3912002CE7FD /* AddMemberTVC.xib */; };
 		A2DF72AE230269C400FA24FB /* TeamSettingTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */; };
 		A2DF72B223026A6B00FA24FB /* TeamSettingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */; };
 		A2E770D5230A43AB000CF05C /* TeamMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E770D4230A43AB000CF05C /* TeamMenuVC.swift */; };
@@ -94,6 +99,11 @@
 		91C853375A42ECEE37ACED1D /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		A201D99B230A663E001F2872 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		A24B8C0F23026FC800252718 /* UserEmailDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEmailDetail.swift; sourceTree = "<group>"; };
+		A2CF02B2230E2AC9002CE7FD /* AddMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberView.swift; sourceTree = "<group>"; };
+		A2CF02B4230E32D1002CE7FD /* AutoLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoLayout.swift; sourceTree = "<group>"; };
+		A2CF02B6230E3496002CE7FD /* AddMemberView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMemberView.xib; sourceTree = "<group>"; };
+		A2CF02B8230E3912002CE7FD /* AddMemberTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberTVC.swift; sourceTree = "<group>"; };
+		A2CF02B9230E3912002CE7FD /* AddMemberTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMemberTVC.xib; sourceTree = "<group>"; };
 		A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSettingTVController.swift; sourceTree = "<group>"; };
 		A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSettingTVC.swift; sourceTree = "<group>"; };
 		A2E770D4230A43AB000CF05C /* TeamMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMenuVC.swift; sourceTree = "<group>"; };
@@ -182,6 +192,7 @@
 				804F4FE722DCACD80083044C /* Extension.swift */,
 				805209AF22E849780085EA2D /* PublicConstraint.swift */,
 				A201D99B230A663E001F2872 /* Services.swift */,
+				A2CF02B4230E32D1002CE7FD /* AutoLayout.swift */,
 			);
 			path = DatXanhManagement;
 			sourceTree = "<group>";
@@ -207,6 +218,7 @@
 				A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */,
 				A2E770D6230A4410000CF05C /* TeamMenuCVC.swift */,
 				A2E770DC230A53C8000CF05C /* TeamMembersTVC.swift */,
+				A2CF02BC230E461C002CE7FD /* AddMemberView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +235,17 @@
 				A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		A2CF02BC230E461C002CE7FD /* AddMemberView */ = {
+			isa = PBXGroup;
+			children = (
+				A2CF02B2230E2AC9002CE7FD /* AddMemberView.swift */,
+				A2CF02B6230E3496002CE7FD /* AddMemberView.xib */,
+				A2CF02B8230E3912002CE7FD /* AddMemberTVC.swift */,
+				A2CF02B9230E3912002CE7FD /* AddMemberTVC.xib */,
+			);
+			path = AddMemberView;
 			sourceTree = "<group>";
 		};
 		DFBB202D593A5ED85464FBE5 /* Frameworks */ = {
@@ -338,7 +361,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				804F4FD122DB67190083044C /* LaunchScreen.storyboard in Resources */,
+				A2CF02BB230E3912002CE7FD /* AddMemberTVC.xib in Resources */,
 				804F4FCE22DB67190083044C /* Assets.xcassets in Resources */,
+				A2CF02B7230E3496002CE7FD /* AddMemberView.xib in Resources */,
 				804F4FCC22DB67180083044C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,17 +437,20 @@
 				804F4FC922DB67180083044C /* LoginVC.swift in Sources */,
 				804F4FE222DC51700083044C /* UserVC.swift in Sources */,
 				A2E770DB230A53A5000CF05C /* TeamMemberTVController.swift in Sources */,
+				A2CF02BA230E3912002CE7FD /* AddMemberTVC.swift in Sources */,
 				A2DF72AE230269C400FA24FB /* TeamSettingTVController.swift in Sources */,
 				A2DF72B223026A6B00FA24FB /* TeamSettingTVC.swift in Sources */,
 				804F4FC722DB67180083044C /* AppDelegate.swift in Sources */,
 				A2E770D5230A43AB000CF05C /* TeamMenuVC.swift in Sources */,
 				804F4FDE22DC34E30083044C /* UrlAddresses.swift in Sources */,
 				A2E770D9230A4FE5000CF05C /* TeamTBC.swift in Sources */,
+				A2CF02B5230E32D1002CE7FD /* AutoLayout.swift in Sources */,
 				8097E728230D900C0014C211 /* UserMember.swift in Sources */,
 				804F4FE622DCAB120083044C /* ProjectCVC.swift in Sources */,
 				A24B8C1023026FC800252718 /* UserEmailDetail.swift in Sources */,
 				804F4FDC22DC33130083044C /* User.swift in Sources */,
 				8036D63622DCCAA40080775C /* Customer.swift in Sources */,
+				A2CF02B3230E2AC9002CE7FD /* AddMemberView.swift in Sources */,
 				A2E770D7230A4410000CF05C /* TeamMenuCVC.swift in Sources */,
 				A2E770DD230A53C8000CF05C /* TeamMembersTVC.swift in Sources */,
 				804F4FE422DC5FF40083044C /* Project.swift in Sources */,

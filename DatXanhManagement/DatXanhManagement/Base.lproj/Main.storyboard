@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dV-Pw-z1I">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dV-Pw-z1I">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -216,22 +216,6 @@
             </objects>
             <point key="canvasLocation" x="1960.8" y="133.5832083958021"/>
         </scene>
-        <!--Order Sample-->
-        <scene sceneID="K7t-pw-g8n">
-            <objects>
-                <viewController id="bIb-hr-fGo" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UPA-D8-Yhm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.50651831023331062" blue="0.95713258424682002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="Mc4-Pn-XeF"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Order Sample" image="OrderSample" id="8BT-xM-BUg"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FbT-BX-Cmm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2367" y="1700"/>
-        </scene>
         <!--Chart-->
         <scene sceneID="Eoa-g0-w8X">
             <objects>
@@ -288,8 +272,8 @@
                                                 <constraint firstAttribute="width" constant="40" id="Vrs-fW-7px"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="trongtdt@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNy-Jd-bal">
-                                            <rect key="frame" x="65" y="24.5" width="279" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="trongtdt@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNy-Jd-bal">
+                                            <rect key="frame" x="65" y="24.5" width="279" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -326,7 +310,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5TU-Ug-j1h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1545" y="1700"/>
+            <point key="canvasLocation" x="2394" y="1700"/>
         </scene>
         <!--TeamTBC-->
         <scene sceneID="XMi-TR-VRa">
@@ -503,7 +487,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49C-iZ-5iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1961" y="921"/>
+            <point key="canvasLocation" x="1535" y="1700"/>
         </scene>
         <!--Customer ListVC-->
         <scene sceneID="G1d-py-SaV">
@@ -832,6 +816,6 @@
         <image name="TeamMembers" width="30" height="30"/>
         <image name="Thumbnail" width="300" height="300"/>
         <image name="call_white" width="64" height="64"/>
-        <image name="customer-white" width="48" height="48"/>
+        <image name="customer-white" width="64" height="64"/>
     </resources>
 </document>

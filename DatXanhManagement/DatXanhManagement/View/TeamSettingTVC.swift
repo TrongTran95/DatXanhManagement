@@ -31,6 +31,10 @@ class TeamSettingTVC: UITableViewCell {
 			delegate.flagChangeReceiveQuantity = true
 		}
     }
+    
+    func setStepperEnable(value: Bool){
+        stReceiveNumber.isEnabled = value
+    }
 	
 	func setStepperTag(tag: Int){
 		stReceiveNumber.tag = tag
@@ -69,7 +73,7 @@ class TeamSettingTVC: UITableViewCell {
 		stReceiveNumber.wraps = true
 		stReceiveNumber.autorepeat = true
 		stReceiveNumber.minimumValue = 1
-		stReceiveNumber.isEnabled = false
+//        stReceiveNumber.isEnabled = false
 	}
     
     func setupStepperData(currentValue: Int, maximumValue: Int){

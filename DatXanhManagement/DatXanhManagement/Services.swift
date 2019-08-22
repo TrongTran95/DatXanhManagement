@@ -32,6 +32,26 @@ class Services {
 			completion(userEmailDetailList)
 		}
 	}
+    
+    func addUserEmailDetail(count: Int, emailTeam: String, emailPersonal: [String], projectName: String, completion: @escaping (Bool) -> Void){
+        let strParams = "emailTeam=" + emailTeam + "&emailPersonal=" + emailPersonal[count] + "&projectName=" + projectName
+        getJsonUsingPost(strURL: urlAddUserEmailDetail, strParams: strParams) { (json) in
+            if (count < emailPersonal.count - 1) {
+                if !(json["error"] as! Bool) {
+                    self.addUserEmailDetail(count: count + 1, emailTeam: emailTeam, emailPersonal: emailPersonal, projectName: projectName, completion: { (flag) in
+                        completion(json["error"] as! Bool)
+                    })
+                } else {
+                    completion(json["error"] as! Bool)
+                    return
+                }
+            }
+            else {
+                completion(json["error"] as! Bool)
+                return
+            }
+        }
+    }
 	
 	func getUserProjects(emailTeam: String, completion: @escaping([String]) -> Void){
 		let strParams: String = "emailTeam=" + emailTeam
