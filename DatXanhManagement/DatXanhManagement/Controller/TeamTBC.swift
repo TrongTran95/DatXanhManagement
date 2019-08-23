@@ -30,16 +30,21 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 			}
 		}
     }
+    
+    func resetEditingMode(){
+        firstTab.setEditing(false, animated: false)
+        secondTab.setEditing(false, animated: false)
+    }
 	
 	override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-//        switch item.title! {
+        switch item.title! {
 //        case "Team Members":
 //        case "Order Sample":
 //        case "Seperate":
 //        case "Chart":
-//        default:
-//        }
-        print(item.title!)
+        default:
+            resetEditingMode()
+        }
 	}
 	
 	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {

@@ -34,6 +34,7 @@
 		A2CF02B7230E3496002CE7FD /* AddMemberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF02B6230E3496002CE7FD /* AddMemberView.xib */; };
 		A2CF02BA230E3912002CE7FD /* AddMemberTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CF02B8230E3912002CE7FD /* AddMemberTVC.swift */; };
 		A2CF02BB230E3912002CE7FD /* AddMemberTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2CF02B9230E3912002CE7FD /* AddMemberTVC.xib */; };
+		A2D1DF09230F7CEA00735E13 /* SeperateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1DF08230F7CEA00735E13 /* SeperateVC.swift */; };
 		A2DF72AE230269C400FA24FB /* TeamSettingTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */; };
 		A2DF72B223026A6B00FA24FB /* TeamSettingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */; };
 		A2E770D5230A43AB000CF05C /* TeamMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E770D4230A43AB000CF05C /* TeamMenuVC.swift */; };
@@ -104,6 +105,7 @@
 		A2CF02B6230E3496002CE7FD /* AddMemberView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMemberView.xib; sourceTree = "<group>"; };
 		A2CF02B8230E3912002CE7FD /* AddMemberTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberTVC.swift; sourceTree = "<group>"; };
 		A2CF02B9230E3912002CE7FD /* AddMemberTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddMemberTVC.xib; sourceTree = "<group>"; };
+		A2D1DF08230F7CEA00735E13 /* SeperateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeperateVC.swift; sourceTree = "<group>"; };
 		A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSettingTVController.swift; sourceTree = "<group>"; };
 		A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSettingTVC.swift; sourceTree = "<group>"; };
 		A2E770D4230A43AB000CF05C /* TeamMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMenuVC.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				A2E770D8230A4FE5000CF05C /* TeamTBC.swift */,
 				A2E770DA230A53A5000CF05C /* TeamMemberTVController.swift */,
 				A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */,
+				A2D1DF08230F7CEA00735E13 /* SeperateVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				A2CF02B5230E32D1002CE7FD /* AutoLayout.swift in Sources */,
 				8097E728230D900C0014C211 /* UserMember.swift in Sources */,
 				804F4FE622DCAB120083044C /* ProjectCVC.swift in Sources */,
+				A2D1DF09230F7CEA00735E13 /* SeperateVC.swift in Sources */,
 				A24B8C1023026FC800252718 /* UserEmailDetail.swift in Sources */,
 				804F4FDC22DC33130083044C /* User.swift in Sources */,
 				8036D63622DCCAA40080775C /* Customer.swift in Sources */,
