@@ -10,6 +10,10 @@
 		1A5798BFB4A50FCF43978660 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0AA3555554567AA7255B30 /* libPods-OneSignalNotificationServiceExtension.a */; };
 		800EC67522F527ED00E1CBA9 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800EC67422F527ED00E1CBA9 /* NotificationService.swift */; };
 		800EC67922F527ED00E1CBA9 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 800EC67222F527ED00E1CBA9 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		802870A123110B34000FD176 /* AddSeperateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802870A023110B34000FD176 /* AddSeperateView.swift */; };
+		802870A323110B43000FD176 /* AddSeperateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802870A223110B43000FD176 /* AddSeperateView.xib */; };
+		802870A62311267F000FD176 /* AddSeperateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802870A42311267F000FD176 /* AddSeperateTVC.swift */; };
+		802870A72311267F000FD176 /* AddSeperateTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802870A52311267F000FD176 /* AddSeperateTVC.xib */; };
 		8036D63622DCCAA40080775C /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8036D63522DCCAA40080775C /* Customer.swift */; };
 		804F4FC722DB67180083044C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FC622DB67180083044C /* AppDelegate.swift */; };
 		804F4FC922DB67180083044C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FC822DB67180083044C /* LoginVC.swift */; };
@@ -76,6 +80,10 @@
 		800EC67222F527ED00E1CBA9 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		800EC67422F527ED00E1CBA9 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		800EC67622F527ED00E1CBA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		802870A023110B34000FD176 /* AddSeperateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSeperateView.swift; sourceTree = "<group>"; };
+		802870A223110B43000FD176 /* AddSeperateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSeperateView.xib; sourceTree = "<group>"; };
+		802870A42311267F000FD176 /* AddSeperateTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSeperateTVC.swift; sourceTree = "<group>"; };
+		802870A52311267F000FD176 /* AddSeperateTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSeperateTVC.xib; sourceTree = "<group>"; };
 		8036D63522DCCAA40080775C /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		804F4FC322DB67180083044C /* DatXanhManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatXanhManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		804F4FC622DB67180083044C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +166,17 @@
 			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
+		8028709F23110B10000FD176 /* AddSeperateView */ = {
+			isa = PBXGroup;
+			children = (
+				802870A023110B34000FD176 /* AddSeperateView.swift */,
+				802870A223110B43000FD176 /* AddSeperateView.xib */,
+				802870A42311267F000FD176 /* AddSeperateTVC.swift */,
+				802870A52311267F000FD176 /* AddSeperateTVC.xib */,
+			);
+			path = AddSeperateView;
+			sourceTree = "<group>";
+		};
 		804F4FBA22DB67180083044C = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +240,7 @@
 				A2E770D6230A4410000CF05C /* TeamMenuCVC.swift */,
 				A2E770DC230A53C8000CF05C /* TeamMembersTVC.swift */,
 				A2CF02BC230E461C002CE7FD /* AddMemberView */,
+				8028709F23110B10000FD176 /* AddSeperateView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -364,6 +384,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				804F4FD122DB67190083044C /* LaunchScreen.storyboard in Resources */,
+				802870A72311267F000FD176 /* AddSeperateTVC.xib in Resources */,
+				802870A323110B43000FD176 /* AddSeperateView.xib in Resources */,
 				A2CF02BB230E3912002CE7FD /* AddMemberTVC.xib in Resources */,
 				804F4FCE22DB67190083044C /* Assets.xcassets in Resources */,
 				A2CF02B7230E3496002CE7FD /* AddMemberView.xib in Resources */,
@@ -440,12 +462,14 @@
 				804F4FC922DB67180083044C /* LoginVC.swift in Sources */,
 				804F4FE222DC51700083044C /* UserVC.swift in Sources */,
 				A2E770DB230A53A5000CF05C /* TeamMemberTVController.swift in Sources */,
+				802870A62311267F000FD176 /* AddSeperateTVC.swift in Sources */,
 				A2CF02BA230E3912002CE7FD /* AddMemberTVC.swift in Sources */,
 				A2DF72AE230269C400FA24FB /* TeamSettingTVController.swift in Sources */,
 				A2DF72B223026A6B00FA24FB /* TeamSettingTVC.swift in Sources */,
 				804F4FC722DB67180083044C /* AppDelegate.swift in Sources */,
 				A2E770D5230A43AB000CF05C /* TeamMenuVC.swift in Sources */,
 				804F4FDE22DC34E30083044C /* UrlAddresses.swift in Sources */,
+				802870A123110B34000FD176 /* AddSeperateView.swift in Sources */,
 				A2E770D9230A4FE5000CF05C /* TeamTBC.swift in Sources */,
 				A2CF02B5230E32D1002CE7FD /* AutoLayout.swift in Sources */,
 				8097E728230D900C0014C211 /* UserMember.swift in Sources */,

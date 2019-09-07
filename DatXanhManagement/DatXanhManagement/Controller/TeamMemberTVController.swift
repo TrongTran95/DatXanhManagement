@@ -30,7 +30,8 @@ class TeamMemberTVController: UITableViewController {
 		
         setupData()
     }
-	override func viewDidLayoutSubviews() {
+	
+	override func viewWillAppear(_ animated: Bool) {
 		setupUI()
 	}
     

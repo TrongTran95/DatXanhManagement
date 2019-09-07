@@ -28,7 +28,6 @@ class TeamSettingTVController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-		setupUI()
     }
 	
 	func setupUI(){
@@ -121,7 +120,7 @@ class TeamSettingTVController: UITableViewController {
 		}
 	}
 	
-	override func viewDidLayoutSubviews() {
+	override func viewWillAppear(_ animated: Bool) {
 		setupUI()
 	}
 
