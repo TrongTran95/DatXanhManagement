@@ -19,15 +19,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gtl-dB-0FG">
-                        <rect key="frame" x="10" y="11.5" width="300" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="testEmail@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gtl-dB-0FG">
+                        <rect key="frame" x="10" y="11.5" width="244.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="5 lượt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87X-cF-XKK">
+                        <rect key="frame" x="269.5" y="13" width="40.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Gtl-dB-0FG" secondAttribute="trailing" constant="10" id="Ali-6j-jq8"/>
+                    <constraint firstItem="87X-cF-XKK" firstAttribute="leading" secondItem="Gtl-dB-0FG" secondAttribute="trailing" constant="15" id="2un-KY-4i4"/>
+                    <constraint firstItem="87X-cF-XKK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CsR-9K-nIY"/>
+                    <constraint firstAttribute="trailing" secondItem="87X-cF-XKK" secondAttribute="trailing" constant="10" id="UPB-tR-Yld"/>
                     <constraint firstItem="Gtl-dB-0FG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="tQp-8n-Ze9"/>
                     <constraint firstItem="Gtl-dB-0FG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="yTc-QV-kNY"/>
                 </constraints>
@@ -35,6 +43,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="lblEmailAddress" destination="Gtl-dB-0FG" id="gBI-EI-HwP"/>
+                <outlet property="lblQuantity" destination="87X-cF-XKK" id="bJO-zZ-PKg"/>
             </connections>
             <point key="canvasLocation" x="169.59999999999999" y="90.854572713643179"/>
         </tableViewCell>

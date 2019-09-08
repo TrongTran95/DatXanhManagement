@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toaster
 
 class SeperateVC: UIViewController {
     
@@ -22,10 +23,16 @@ class SeperateVC: UIViewController {
     
     @IBOutlet weak var rightConstraintOfOldSeperatedTableView: NSLayoutConstraint!
 	
+	let blueColor = UIColor(red: 76, green: 139, blue: 246, alpha: 1.0)
+	
+	let grayColor = UIColor(red: 190, green: 190, blue: 190, alpha: 1.0)
+	
 	var addView: AddSeperateView!
 	
 	var emailTeam: String!
 	var projectName: String!
+	
+	var userEmailSeperateListStillNotReceive: [UserEmailSeperate] = []
 	
     @IBAction func tappedButtonOldOrNew(_ sender: UIButton) {
         let currentTitle = sender.currentTitle!
@@ -36,9 +43,9 @@ class SeperateVC: UIViewController {
     func setOldNewTableViewAttribute(title: String){
         UIView.animate(withDuration: 0.2) {
             switch title {
-            case "New":
+            case "Waiting":
                 self.rightConstraintOfOldSeperatedTableView.constant = 0
-            default: //"Old"
+            default: //"Received"
                 self.rightConstraintOfOldSeperatedTableView.constant = -self.tvOldSeperated.frame.size.width
             }
             self.view.layoutIfNeeded()
@@ -48,38 +55,106 @@ class SeperateVC: UIViewController {
     func setOldNewButtonAttribute(title: String){
         UIView.animate(withDuration: 0.2, animations: {
             switch title {
-            case "New":
+            case "Waiting":
 				self.leftConstraintOfMovingView.constant = 0
-            default: //"Old"
+            default: //"Received"
 				self.leftConstraintOfMovingView.constant = self.btnOld.frame.size.width
             }
             self.view.layoutIfNeeded()
-        }, completion: { (complete) in
-            switch title {
-            case "New":
-				self.btnOld.setTitleColor(UIColor.black, for: .normal)
-				self.btnNew.setTitleColor(UIColor.white, for: .normal)
-            default: //"Old"
-				self.btnOld.setTitleColor(UIColor.white, for: .normal)
-				self.btnNew.setTitleColor(UIColor.black, for: .normal)
-            }
         })
-        
-        
     }
+	
+	//Handler for cancel button
+	func turnOffAddView(){
+		addView?.removeFromSuperview()
+		addView = nil
+	}
+	
+	func addNewSeperate(){
+		//Check at least 1 user email detail exist
+		if (addView.userEmailDetailList.count != 0) {
+			//Start Add user email seperate
+			Services.shared.addUserEmailSeperate(emailTeam: emailTeam, userEmailDetailList: addView.userEmailDetailList, projectName: projectName, multiplier: Int(addView.stepperMultiplier.value)) {
+				//Get user email seperate to display
+				Services.shared.getUserEmailSeperateListStillNotReceive(emailTeam: self.emailTeam, projectName: self.projectName, completion: { (userEmailSeperateList) in
+					self.userEmailSeperateListStillNotReceive = userEmailSeperateList
+					DispatchQueue.main.async {
+						//Show UI
+						self.tvNewSeperate.reloadData()
+						//Turn off addView screen and show Toast (main queue)
+						self.turnOffAddView()
+					}
+				})
+			}
+		} else {
+			//Show Toast
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 	}
 	
+	func setupTableView(){
+		tvNewSeperate.delegate = self
+		tvNewSeperate.dataSource = self
+		tvNewSeperate.delegate = self
+		tvOldSeperated.dataSource = self
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		setupUI()
+		setupTableView()
+		setupData()
+	}
+	
+	func setupData(){
+		Services.shared.getUserEmailSeperateListStillNotReceive(emailTeam: self.emailTeam, projectName: self.projectName, completion: { (userEmailSeperateList) in
+			DispatchQueue.main.async {
+				self.userEmailSeperateListStillNotReceive = userEmailSeperateList
+				self.tvNewSeperate.reloadData()
+			}
+		})
 	}
 	
 	func setupUI(){
 		self.tabBarController?.navigationItem.title = "Seperate"
 		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showSeperateView))
-		self.tabBarController?.navigationItem.rightBarButtonItems = [addButton]
+		let removeButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeUserEmailSeperateList))
+		self.tabBarController?.navigationItem.rightBarButtonItems = [addButton, removeButton]
+	}
+	
+	@objc func removeUserEmailSeperateList(){
+		if (leftConstraintOfMovingView.constant == 0){
+			if (userEmailSeperateListStillNotReceive.count != 0) {
+				showAlertRemoveAll()
+			}
+		}
+	}
+	
+	func showAlertRemoveAll(){
+		let alert: UIAlertController = UIAlertController(title: "Remove all", message: "Remove users still not receive customer", preferredStyle: .alert)
+		let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		let removeAction: UIAlertAction = UIAlertAction(title: "Remove", style: .destructive) { (action) in
+			self.removeAll()
+		}
+		alert.addAction(cancelAction)
+		alert.addAction(removeAction)
+		self.present(alert, animated: true, completion: nil)
+	}
+	
+	func removeAll(){
+		Services.shared.removeAllUserEmailSeperateStillNotReceived(emailTeam: emailTeam, projectName: projectName) { (error) in
+			if !error {
+				//Success, remove current data, update UI, show toast
+				self.userEmailSeperateListStillNotReceive = []
+				DispatchQueue.main.async {
+					self.tvNewSeperate.reloadData()
+				}
+			} else {
+				//
+			}
+		}
 	}
 	
 	@objc func showSeperateView(){
@@ -94,11 +169,37 @@ class SeperateVC: UIViewController {
 	func setupAddSeperateView(transfer userEmailDetailList: [UserEmailDetail]){
 		addView = AddSeperateView()
 		addView!.userEmailDetailList = userEmailDetailList
-//		addView?.delegate = self
+		addView?.delegate = self
 		let height = UIApplication.shared.statusBarFrame.height + (self.navigationController?.navigationBar.frame.height)!
 		
 		self.navigationController!.view.insertSubview(addView!, belowSubview: self.navigationController!.navigationBar)
 		self.navigationController!.view.addConstraints(AutoLayout.shared.getTopLeftBottomRightConstraint(currentView: addView!, destinationView: self.navigationController!.view, constant: [height, 0, 0, 0]))
 	}
 
+}
+
+extension SeperateVC: UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		if (tableView == tvNewSeperate) {
+			return userEmailSeperateListStillNotReceive.count
+		} else {
+			return 1
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		if (tableView == tvNewSeperate) {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "newSeperateCell", for: indexPath) as? NewSeperateTVCell
+				let currentUser = userEmailSeperateListStillNotReceive[indexPath.row]
+			cell!.setData(emailPersonal: currentUser.emailPersonal, orderNumber: currentUser.orderNumber)
+			return cell!
+		} else {
+			let cell = tableView.dequeueReusableCell(withIdentifier: "oldSeperatedCell", for: indexPath) as? OldSeperatedTVCell
+			return cell!
+		}
+	}
+	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 60
+	}
 }

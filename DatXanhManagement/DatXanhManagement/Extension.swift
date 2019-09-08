@@ -75,6 +75,36 @@ func getJsonUsingPost(strURL: String, strParams: String, completion: @escaping(D
 	task.resume()
 }
 
+func getJsonUsingGet(strURL: String, completion: @escaping(Dictionary<String, Any>) -> Void){
+	//Create an url
+	let url = URL(string: strURL)
+	//Create a request to server
+	var request = URLRequest(url: url!)
+	//Set requests datas
+	request.httpMethod = "GET"
+	
+	//Create a task to send the post request
+	let session = URLSession.shared
+	let task = session.dataTask(with: request) { (data, res, error) in
+		//If error, print error message and stop app
+		if (error != nil){
+			print ("error is: \(String(describing: error))")
+			return;
+		}
+		
+		//parsing the response
+		do {
+			//Get the json from server
+			let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! Dictionary<String, Any>
+			completion(json)
+			
+		} catch {
+			print(error)
+		}
+	}
+	task.resume()
+}
+
 extension String {
 	func utf8DecodedString()-> String {
 		let data = self.data(using: .utf8)

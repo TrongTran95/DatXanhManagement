@@ -13,6 +13,68 @@ class Services {
     
     private init(){}
 	
+	func removeAllUserEmailSeperateStillNotReceived(emailTeam: String, projectName: String, completion: @escaping (Bool) -> Void){
+		let strParams = "emailTeam=" + emailTeam + "&projectName=" + projectName
+		getJsonUsingPost(strURL: urlRemoveAllUserEmailSeperateStillNotReceived, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
+	func getUserEmailSeperateListStillNotReceive(emailTeam: String, projectName: String, completion: @escaping ([UserEmailSeperate]) -> Void){
+		let strParams = "emailTeam=" + emailTeam + "&projectName=" + projectName
+		getJsonUsingPost(strURL: urlGetUserEmailSeperateListStillNotReceive, strParams: strParams) { (json) in
+			let list = json["userEmailSeperateList"] as! [[String:Any]]
+			var userEmailSeperateList: [UserEmailSeperate] = []
+			for userEmailSeperate in list {
+				let newUserEmailSeperate = UserEmailSeperate()
+				newUserEmailSeperate.setEmailPersonal(emailPersonal: userEmailSeperate["emailPersonal"] as? String ?? "")
+				newUserEmailSeperate.setOrderNumber(orderNumber: Int(userEmailSeperate["orderNumber"] as? String ?? "0")!)
+				userEmailSeperateList.append(newUserEmailSeperate)
+			}
+			userEmailSeperateList.sort(by: {$0.orderNumber < $1.orderNumber})
+			completion(userEmailSeperateList)
+		}
+	}
+	
+	func addUserEmailSeperate(emailTeam: String, userEmailDetailList: [UserEmailDetail], projectName: String, multiplier: Int, completion: @escaping () -> Void){
+		
+		//Get max number first
+		getJsonUsingGet(strURL: urlGetUserEmailSeperateMaxOrder) { (json) in
+			var maxOrder = 0
+			let strMaxOrder = json["maxOrder"] as? String ?? "0"
+			if (strMaxOrder != "0") {
+				maxOrder = Int(strMaxOrder)!
+			}
+
+			let dispatchGroup = DispatchGroup()
+			//Loop times to add seperate list
+			for _ in 0..<multiplier {
+				//Add data to Database process --------
+				for userEmailDetail in userEmailDetailList {
+					//Add user base on receive quantity
+					for _ in 0..<userEmailDetail.receiveQuantity{
+						dispatchGroup.enter()
+						//Increse order number
+						maxOrder += 1
+						//Add data
+						let strParams = "emailTeam=" + emailTeam + "&emailPersonal=" + userEmailDetail.emailPersonal + "&projectName=" + projectName + "&orderNumber=\(maxOrder)"
+						getJsonUsingPost(strURL: urlAddUserEmailSeperate, strParams: strParams) { (json) in
+							print("aaaa")
+							dispatchGroup.leave()
+						}
+					}
+				}
+				//Add data to Database process --------
+			}
+			
+			dispatchGroup.notify(queue: .main) {
+				print("bbbb")
+				completion()
+			}
+		}
+	}
+	
+	
 	func getUserEmailDetailList(emailTeam: String, projectName: String, completion: @escaping ([UserEmailDetail]) -> Void){
 		var userEmailDetailList: [UserEmailDetail] = []
 		let strParams: String = "emailTeam=" + emailTeam + "&projectName=" +  projectName
@@ -32,7 +94,8 @@ class Services {
 			completion(userEmailDetailList)
 		}
 	}
-    
+	
+	//Add user email detail (recursion)
     func addUserEmailDetail(count: Int, emailTeam: String, emailPersonal: [String], projectName: String, completion: @escaping (Bool) -> Void){
         let strParams = "emailTeam=" + emailTeam + "&emailPersonal=" + emailPersonal[count] + "&projectName=" + projectName
         getJsonUsingPost(strURL: urlAddUserEmailDetail, strParams: strParams) { (json) in

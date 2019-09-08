@@ -12,8 +12,11 @@ class AddSeperateTVC: UITableViewCell {
 
 	@IBOutlet weak var lblEmailAddress: UILabel!
 	
-	func setEmailAddress(emailAddress: String) {
+	@IBOutlet weak var lblQuantity: UILabel!
+	
+	func setData(emailAddress: String, quantity: Int) {
 		lblEmailAddress.text = emailAddress
+		lblQuantity.text = 	"\(quantity) lượt"
 	}
 	
 	override func awakeFromNib() {

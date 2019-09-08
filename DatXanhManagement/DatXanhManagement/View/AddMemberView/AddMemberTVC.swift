@@ -16,7 +16,6 @@ class AddMemberTVC: UITableViewCell {
     @IBOutlet weak var switchAdd: UISwitch!
     
     @IBAction func switchTapped(_ sender: UISwitch) {
-        print(sender.tag)
         delegate.dicSwitchValue[sender.tag] = sender.isOn
     }
     

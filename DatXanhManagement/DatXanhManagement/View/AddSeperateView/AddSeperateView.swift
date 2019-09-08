@@ -16,6 +16,22 @@ class AddSeperateView: UIView {
 	
 	@IBOutlet weak var tvUserEmailDetailList: UITableView!
 	
+	@IBOutlet weak var lblMultiplier: UILabel!
+	
+	var delegate: SeperateVC!
+	
+	@IBAction func TappedCancelOrSaveButton(_ sender: UIButton) {
+		if (sender.currentTitle == "Add") {
+			delegate.addNewSeperate()
+		} else {
+			delegate.turnOffAddView()
+		}
+	}
+	
+	@IBAction func ChangeMultiplerValue(_ sender: Any) {
+		lblMultiplier.text = "Multiplier: \(Int(stepperMultiplier.value))"
+	}
+	
 	var userEmailDetailList: [UserEmailDetail]!
 	
 	override init(frame: CGRect) {
@@ -26,6 +42,12 @@ class AddSeperateView: UIView {
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		setup()
+	}
+	
+	func setupStepper(){
+		stepperMultiplier.minimumValue = 1
+		stepperMultiplier.value = 1
+		lblMultiplier.text = "Multiplier: \(Int(stepperMultiplier.value))"
 	}
 	
 	func setupTableView(){
@@ -45,6 +67,7 @@ class AddSeperateView: UIView {
 		setupRegistNib()
 		setupTableView()
 		setupUI()
+		setupStepper()
 	}
 	
 	func setupUI(){
@@ -61,7 +84,7 @@ extension AddSeperateView: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "AddSeperateCell", for: indexPath) as! AddSeperateTVC
-		
+		cell.setData(emailAddress: userEmailDetailList[indexPath.row].emailPersonal, quantity: userEmailDetailList[indexPath.row].receiveQuantity)
 		return cell
 	}
 	

@@ -41,3 +41,11 @@ public let urlAddUserMember: String = "\(urlHostApi)AddUserMember.php"
 public let urlRemoveUserMember: String = "\(urlHostApi)RemoveUserMember.php"
 
 public let urlAddUserEmailDetail: String = "\(urlHostApi)AddUserEmailDetail.php"
+
+public let urlGetUserEmailSeperateMaxOrder: String = "\(urlHostApi)GetUserEmailSeperateMaxOrder.php"
+
+public let urlAddUserEmailSeperate: String = "\(urlHostApi)AddUserEmailSeperate.php"
+
+public let urlGetUserEmailSeperateListStillNotReceive: String = "\(urlHostApi)GetUserEmailSeperateListStillNotReceive.php"
+
+public let urlRemoveAllUserEmailSeperateStillNotReceived: String = "\(urlHostApi)RemoveAllUserEmailSeperateStillNotReceived.php"
