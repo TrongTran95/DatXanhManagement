@@ -10,6 +10,15 @@ import UIKit
 
 class AutoLayout {
     public static let shared = AutoLayout()
+	
+	func getCenterConstraint(currentView: UIView, destinationView: UIView) -> [NSLayoutConstraint] {
+		let attributes: [NSLayoutConstraint.Attribute] = [.centerX, .centerY]
+		var arrConstraint: [NSLayoutConstraint] = []
+		for i in 0..<attributes.count {
+			arrConstraint.append(NSLayoutConstraint(item: currentView, attribute: attributes[i], relatedBy: .equal, toItem: destinationView, attribute: attributes[i], multiplier: 1.0, constant: 0))
+		}
+		return arrConstraint
+	}
     
     func getTopLeftBottomRightConstraint(currentView: UIView, destinationView: UIView, constant: [CGFloat]) -> [NSLayoutConstraint] {
         let attributes: [NSLayoutConstraint.Attribute] = [.top, .left, .bottom, .right]

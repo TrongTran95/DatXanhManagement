@@ -25,18 +25,28 @@ class LoginVC: UIViewController {
 		//Check if the username or password is nil
 		if (userName != "" && password != "") {
 			//Start the login process
-			user.login(userName: userName, password: password) {
+			user.login(userName: userName, password: password, ios_token: ios_device_token) { result in
+				defaults.set(userName, forKey: KEY_USER_EMAIL)
+				defaults.set(password, forKey: KEY_USER_PASSWORD)
+				defaults.set(ios_device_token, forKey: KEY_USER_DEVICE_TOKEN)
+
 				//Login success
-				if(self.user.emailAddress != ""){
+				if result {
 					DispatchQueue.main.async {
-//                        self.performSegue(withIdentifier: "showUserPage", sender: self)
-                        self.performSegue(withIdentifier: "showTeamMenu", sender: self)
+						//0 is team, 1 is personal
+						if (self.user.type == 1){
+							self.performSegue(withIdentifier: "showUserPage", sender: self)
+						}
+						else {
+							self.performSegue(withIdentifier: "showTeamMenu", sender: self)
+						}
 					}
 				}
 				//Wrong username or password
 				else {
 					print("Sai pass")
 				}
+				
 			}
 		}else {
 			//username or password is nil
@@ -54,7 +64,7 @@ class LoginVC: UIViewController {
 		} else if smTestUsername.selectedSegmentIndex == 1{
 			txtUsername.text = "2ProjectsTest@gmail.com"
 		} else {
-			txtUsername.text = "3ProjectsTest@gmail.com"
+			txtUsername.text = "test1@gmail.com"
 		}
 	}
 	

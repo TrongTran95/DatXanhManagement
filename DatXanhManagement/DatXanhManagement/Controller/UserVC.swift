@@ -31,12 +31,22 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 //		self.navigationItem.setHidesBackButton(true, animated:true);
 		
 		//Set up collection view
-		cvProjects.delegate = self
-		cvProjects.dataSource = self
+//		if (cvProjects != nil) {
+			cvProjects.delegate = self
+			cvProjects.dataSource = self
+//		}
 		
 		//Setup project information
 		getUserProjects()
+		print("ssssssssssssss4")
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+//		super.viewWillAppear(animated)
+		print("abbasd-AAA")
+
+		print("ssssssssssssss5")
+	}
 	
 	//Get project list of user
 	func getUserProjects(){
@@ -47,9 +57,9 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 				//Set project code
 				self.projects[i].setName(projectName: projectNames[i])
 				//Get project's customer quantity
-				self.projects[i].getCustomerQuantity(url: urlGetCustomerQuantity, emailTeam: self.user.emailAddress, completion: {
+				self.projects[i].getCustomerQuantity(url: urlGetCustomerQuantity, emailPersonal: self.user.emailAddress, completion: {
 					//Get quantity of customer that still not contact yet
-					self.projects[i].getCustomerQuantity(url: urlGetCustomerStillNotContactQuantity, emailTeam: self.user.emailAddress, completion: {
+					self.projects[i].getCustomerQuantity(url: urlGetCustomerStillNotContactQuantity, emailPersonal: self.user.emailAddress, completion: {
 						//Get project info and set project name
 						self.projects[i].getProjectInfo(completion: {
 							DispatchQueue.main.async {
@@ -146,19 +156,19 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 				*/
 				
 				//Go to customer list page
-                //self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
+                self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
 			}
 		}
-        if (self.user.userEmailDetailList.count != 0) {
-            self.user.resetUserEmailDetailList()
-        }
-		Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projects[indexPath.row].name) { (userEmailDetailList) in
-			self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
-			DispatchQueue.main.async {
-				self.performSegue(withIdentifier: "showTeamSettingPage", sender: self)
-			}
-		}
-        
+//        if (self.user.userEmailDetailList.count != 0) {
+//            self.user.resetUserEmailDetailList()
+//        }
+//		Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projects[indexPath.row].name) { (userEmailDetailList) in
+//			self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
+//			DispatchQueue.main.async {
+//				self.performSegue(withIdentifier: "showTeamSettingPage", sender: self)
+//			}
+//		}
+		
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -168,9 +178,10 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 			//Assign project
 			customerListVC.project = self.projects[chosenProjectIndex]
 			customerListVC.userTeamEmail = self.user.emailAddress
-		} else if segue.identifier == "showTeamSettingPage" {
-            guard let teamSettingTVC = segue.destination as? TeamSettingTVController else {return}
-            teamSettingTVC.user = self.user
-        }
+		}
+//		else if segue.identifier == "showTeamSettingPage" {
+//			guard let teamSettingTVC = segue.destination as? TeamSettingTVController else {return}
+//			teamSettingTVC.user = self.user
+//		}
 	}
 }

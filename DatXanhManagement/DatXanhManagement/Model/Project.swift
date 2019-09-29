@@ -22,7 +22,7 @@ class Project {
 		
 		self.customerQuantity = 0
 		self.customerStillNotContactQuantity = 0
-		self.customerListSeperated = [STILL_NOT:[], ALREADY:[]]
+		self.customerListSeperated = [KEY_STILL_NOT:[], KEY_ALREADY:[]]
 	}
 	
 	//This method will set the value of project name
@@ -32,15 +32,15 @@ class Project {
 	
 	//Check and reset customer list
 	func checkAndResetCustomerList(){
-		if (self.customerListSeperated[STILL_NOT]?.count != 0 || self.customerListSeperated[ALREADY]?.count != 0) {
-			customerListSeperated = [STILL_NOT:[], ALREADY:[]]
+		if (self.customerListSeperated[KEY_STILL_NOT]?.count != 0 || self.customerListSeperated[KEY_ALREADY]?.count != 0) {
+			customerListSeperated = [KEY_STILL_NOT:[], KEY_ALREADY:[]]
 		}
 	}
 	
 	//If url = urlGetCustomerQuantity: This method will get and set customer quantity of project
 	//If url = customerStillNotContactQuantity: This method will get and set the quantity of customer that still not contact yet
-	func getCustomerQuantity(url: String, emailTeam: String, completion: @escaping() -> Void){
-		let strParams: String = "projectName=" + self.name + "&emailTeam=" + emailTeam
+	func getCustomerQuantity(url: String, emailPersonal: String, completion: @escaping() -> Void){
+		let strParams: String = "projectName=" + self.name + "&emailPersonal=" + emailPersonal
 		print("aaaaa\(strParams)")
 		getJsonUsingPost(strURL: url, strParams: strParams) { (json) in
 			let quantity = json["quantity"] as! Int
@@ -55,7 +55,8 @@ class Project {
 	
 	//This method will get all information of customer and return a list of them
 	func getCustomerList(emailAddress: String, completion: @escaping() -> Void){
-		let strParams: String = "projectName=" + self.name + "&emailTeam=" + emailAddress
+		let strParams: String = "projectName=" + self.name + "&emailPersonal=" + emailAddress
+		print(strParams)
 		getJsonUsingPost(strURL: urlGetCustomerList, strParams: strParams) { (json) in
 			let arrCustomer = json["customers"] as! [[String:Any]]
 			//Assign customer list
@@ -133,13 +134,13 @@ class Project {
 				
 				//Add customer to list seperated by calling status
 				if (customer.callStatus == 0) {
-					self.customerListSeperated[STILL_NOT]?.append(customer)
+					self.customerListSeperated[KEY_STILL_NOT]?.append(customer)
 				} else {
-					self.customerListSeperated[ALREADY]?.append(customer)
+					self.customerListSeperated[KEY_ALREADY]?.append(customer)
 				}
 				
 				//After get all calling detail of customer, do completion
-				if (self.customerListSeperated[STILL_NOT]!.count + self.customerListSeperated[ALREADY]!.count == arrCustomer.count) {
+				if (self.customerListSeperated[KEY_STILL_NOT]!.count + self.customerListSeperated[KEY_ALREADY]!.count == arrCustomer.count) {
 					completion()
 				}
 			}

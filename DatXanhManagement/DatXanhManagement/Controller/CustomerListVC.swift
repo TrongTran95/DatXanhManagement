@@ -91,8 +91,8 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	//Set customer quantity information
 	func setupCustomerQuantity(){
-		let quantityStillNot = project.customerListSeperated[STILL_NOT]!.count
-		let quantityAlready = project.customerListSeperated[ALREADY]!.count
+		let quantityStillNot = project.customerListSeperated[KEY_STILL_NOT]!.count
+		let quantityAlready = project.customerListSeperated[KEY_ALREADY]!.count
 		self.lblCustomerQuantity.text = "\(quantityStillNot)/\(quantityStillNot + quantityAlready) khách hàng cần được tư vấn"
 	}
 	
@@ -130,11 +130,11 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		if tableView == tbCustomerList {
 			//Still not contact customer list
 			if section == 0 {
-				return project.customerListSeperated[STILL_NOT]!.count
+				return project.customerListSeperated[KEY_STILL_NOT]!.count
 			}
 			//Already contacted customer list
 			else {
-				return project.customerListSeperated[ALREADY]!.count
+				return project.customerListSeperated[KEY_ALREADY]!.count
 			}
 		}
 		//Table customer detail
@@ -248,15 +248,15 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			let currentCustomer: Customer!
 			//From Still not contact customer list
 			if indexPath.section == 0 {
-				currentCustomer = project.customerListSeperated[STILL_NOT]![indexPath.row]
+				currentCustomer = project.customerListSeperated[KEY_STILL_NOT]![indexPath.row]
 				//Set section
-				cell.section = STILL_NOT
+				cell.section = KEY_STILL_NOT
 			}
 			//From Already contacted customer list
 			else {
-				currentCustomer = project.customerListSeperated[ALREADY]![indexPath.row]
+				currentCustomer = project.customerListSeperated[KEY_ALREADY]![indexPath.row]
 				//Set section
-				cell.section = ALREADY
+				cell.section = KEY_ALREADY
 			}
 			
 			//Set customer name (3 checks)
@@ -360,11 +360,11 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			//Set chosen customser when click to any customer
 			//From Still not contact customer list
 			if indexPath.section == 0 {
-				chosenCustomer = project.customerListSeperated[STILL_NOT]![indexPath.row]
+				chosenCustomer = project.customerListSeperated[KEY_STILL_NOT]![indexPath.row]
 			}
 			//From Already contacted customer list
 			else {
-				chosenCustomer = project.customerListSeperated[ALREADY]![indexPath.row]
+				chosenCustomer = project.customerListSeperated[KEY_ALREADY]![indexPath.row]
 			}
 			
 			//Reset scroll position to 0

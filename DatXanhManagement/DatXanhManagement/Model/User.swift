@@ -51,9 +51,8 @@ class User {
         self.userEmailDetailList = []
     }
 
-	func login(userName: String, password: String, completion: @escaping() -> Void){
-		let strParams: String = "emailAddress=" + userName + "&password=" + password
-		print(strParams)
+	func login(userName: String, password: String, ios_token: String, completion: @escaping(Bool) -> Void){
+		let strParams: String = "emailAddress=" + userName + "&password=" + password + "&ios_token=" + ios_token
 		getJsonUsingPost(strURL: urlLogin, strParams: strParams) { (json) in
 			var errorExist:Bool!
 			//Get the error json
@@ -61,6 +60,7 @@ class User {
 			//Check if any error
 			if errorExist == true{
 				print(json["message"] as! String)
+				completion(false)
 			} else {
 				//Login information is correct
 				let userJson:[String:Any] = json["user"] as! [String : Any]
@@ -69,7 +69,6 @@ class User {
 					self.emailAddress = emailAddress
 				}
                 if let type: Int = userJson["type"] as? Int {
-                    print(type)
                     self.type = type
                 }
 				if let password: String = userJson["password"] as? String {
@@ -84,8 +83,7 @@ class User {
 				if let ios_token: String = userJson["ios_token"] as? String {
 					self.ios_token = ios_token
 				}
-//                self.ios_token = userJson["ios_token"] as? String ?? ""
-				completion()
+				completion(true)
 			}
 		}
 	}

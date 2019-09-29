@@ -44,8 +44,6 @@
 		A2D1DF09230F7CEA00735E13 /* SeperateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D1DF08230F7CEA00735E13 /* SeperateVC.swift */; };
 		A2DF72AE230269C400FA24FB /* TeamSettingTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */; };
 		A2DF72B223026A6B00FA24FB /* TeamSettingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */; };
-		A2E770D5230A43AB000CF05C /* TeamMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E770D4230A43AB000CF05C /* TeamMenuVC.swift */; };
-		A2E770D7230A4410000CF05C /* TeamMenuCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E770D6230A4410000CF05C /* TeamMenuCVC.swift */; };
 		A2E770D9230A4FE5000CF05C /* TeamTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E770D8230A4FE5000CF05C /* TeamTBC.swift */; };
 		A2E770DB230A53A5000CF05C /* TeamMemberTVController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E770DA230A53A5000CF05C /* TeamMemberTVController.swift */; };
 		A2E770DD230A53C8000CF05C /* TeamMembersTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E770DC230A53C8000CF05C /* TeamMembersTVC.swift */; };
@@ -122,8 +120,6 @@
 		A2D1DF08230F7CEA00735E13 /* SeperateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeperateVC.swift; sourceTree = "<group>"; };
 		A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSettingTVController.swift; sourceTree = "<group>"; };
 		A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamSettingTVC.swift; sourceTree = "<group>"; };
-		A2E770D4230A43AB000CF05C /* TeamMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMenuVC.swift; sourceTree = "<group>"; };
-		A2E770D6230A4410000CF05C /* TeamMenuCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMenuCVC.swift; sourceTree = "<group>"; };
 		A2E770D8230A4FE5000CF05C /* TeamTBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTBC.swift; sourceTree = "<group>"; };
 		A2E770DA230A53A5000CF05C /* TeamMemberTVController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTVController.swift; sourceTree = "<group>"; };
 		A2E770DC230A53C8000CF05C /* TeamMembersTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMembersTVC.swift; sourceTree = "<group>"; };
@@ -244,7 +240,6 @@
 				80C3413422DDB700001F77F5 /* CustomerListTVC.swift */,
 				80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */,
 				A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */,
-				A2E770D6230A4410000CF05C /* TeamMenuCVC.swift */,
 				A2E770DC230A53C8000CF05C /* TeamMembersTVC.swift */,
 				A2CF02BC230E461C002CE7FD /* AddMemberView */,
 				8028709F23110B10000FD176 /* AddSeperateView */,
@@ -260,7 +255,6 @@
 				804F4FC822DB67180083044C /* LoginVC.swift */,
 				804F4FE122DC51700083044C /* UserVC.swift */,
 				80C3413222DDA846001F77F5 /* CustomerListVC.swift */,
-				A2E770D4230A43AB000CF05C /* TeamMenuVC.swift */,
 				A2E770D8230A4FE5000CF05C /* TeamTBC.swift */,
 				A2E770DA230A53A5000CF05C /* TeamMemberTVController.swift */,
 				A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */,
@@ -476,7 +470,6 @@
 				A2DF72AE230269C400FA24FB /* TeamSettingTVController.swift in Sources */,
 				A2DF72B223026A6B00FA24FB /* TeamSettingTVC.swift in Sources */,
 				804F4FC722DB67180083044C /* AppDelegate.swift in Sources */,
-				A2E770D5230A43AB000CF05C /* TeamMenuVC.swift in Sources */,
 				804F4FDE22DC34E30083044C /* UrlAddresses.swift in Sources */,
 				802870A123110B34000FD176 /* AddSeperateView.swift in Sources */,
 				A2E770D9230A4FE5000CF05C /* TeamTBC.swift in Sources */,
@@ -490,7 +483,6 @@
 				8036D63622DCCAA40080775C /* Customer.swift in Sources */,
 				A2CF02B3230E2AC9002CE7FD /* AddMemberView.swift in Sources */,
 				80F78B1523252BB600240C86 /* NewSeperateTVCell.swift in Sources */,
-				A2E770D7230A4410000CF05C /* TeamMenuCVC.swift in Sources */,
 				A2E770DD230A53C8000CF05C /* TeamMembersTVC.swift in Sources */,
 				80F78B1323252BA100240C86 /* OldSeperatedTVCell.swift in Sources */,
 				804F4FE422DC5FF40083044C /* Project.swift in Sources */,
@@ -537,6 +529,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WY86QYTGHL;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -545,6 +538,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tdtInc.DatXanhManagement.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -558,6 +552,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WY86QYTGHL;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -566,6 +561,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tdtInc.DatXanhManagement.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -622,12 +618,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -677,11 +674,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -704,6 +702,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tdtInc.DatXanhManagement;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -726,6 +725,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tdtInc.DatXanhManagement;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
