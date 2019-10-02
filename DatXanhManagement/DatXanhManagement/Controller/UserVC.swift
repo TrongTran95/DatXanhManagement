@@ -17,6 +17,7 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 	
 	@IBOutlet weak var cvProjects: UICollectionView!
 	
+	
 	var user = User()
 	var projects = [Project]()
 	var customers = [Project]()
@@ -25,49 +26,54 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 	
 	var checkIfProjectAreSelectedBefore: Bool = false
 	
+	//Information for push notification
+	var projectName = ""
+	var emailPersonal = ""
+	var customerId = 0
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		//Hide back button
 //		self.navigationItem.setHidesBackButton(true, animated:true);
 		
 		//Set up collection view
-//		if (cvProjects != nil) {
-			cvProjects.delegate = self
-			cvProjects.dataSource = self
-//		}
-		
-		//Setup project information
-		getUserProjects()
-		print("ssssssssssssss4")
+		cvProjects.delegate = self
+		cvProjects.dataSource = self
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
-//		super.viewWillAppear(animated)
-		print("abbasd-AAA")
-
-		print("ssssssssssssss5")
+		super.viewWillAppear(animated)
+		//Setup project information
+		getUserProjects()
 	}
 	
 	//Get project list of user
 	func getUserProjects(){
-		Services.shared.getUserProjects(emailTeam: user.emailAddress) { (projectNames) in
-			for i in 0..<projectNames.count{
+		self.projects = []
+		Services.shared.getUserProjects(emailAddress: user.emailAddress) { (userProjects) in
+			for i in 0..<userProjects.count{
 				//Add a new null project
 				self.projects.append(Project())
-				//Set project code
-				self.projects[i].setName(projectName: projectNames[i])
+				//Set project info
+				let currentProject = userProjects[i]
+				self.projects[i].setName(projectName: currentProject["projectName"] as! String)
+				self.projects[i].setEmailTeam(emailTeam: currentProject["emailTeam"] as! String)
 				//Get project's customer quantity
-				self.projects[i].getCustomerQuantity(url: urlGetCustomerQuantity, emailPersonal: self.user.emailAddress, completion: {
+				self.projects[i].getCustomerQuantity(url: urlGetCustomerQuantity, emailPersonal: self.user.emailAddress, emailTeam: self.projects[i].emailTeam, completion: {
 					//Get quantity of customer that still not contact yet
-					self.projects[i].getCustomerQuantity(url: urlGetCustomerStillNotContactQuantity, emailPersonal: self.user.emailAddress, completion: {
+					self.projects[i].getCustomerQuantity(url: urlGetCustomerStillNotContactQuantity, emailPersonal: self.user.emailAddress, emailTeam: self.projects[i].emailTeam, completion: {
 						//Get project info and set project name
 						self.projects[i].getProjectInfo(completion: {
 							DispatchQueue.main.async {
 								//Only reload after got all project
-								if (i == projectNames.count - 1) {
+								if (i == userProjects.count - 1) {
 									self.cvProjects.reloadData()
 									self.lblWelcome.text = "\(self.user.firstName) \(self.user.lastName)"
 									self.lblCurrentProject.text = "Your current project(s): \(self.projects.count)"
+									if (defaults.object(forKey: KEY_ISPUSH) as? Bool) == true {
+//										projects.contains{$0.name == projectName}
+//										self.cvProjects.selectItem(at: <#T##IndexPath?#>, animated: <#T##Bool#>, scrollPosition: <#T##UICollectionView.ScrollPosition#>)
+									}
 								}
 							}
 						})
@@ -130,6 +136,8 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 			}
 			//Change project name
 			cell.projectName.text = projects[currentRow].name
+			
+			cell.lblSupervisor.text = "Quản lý: \(projects[currentRow].emailTeam)"
 			//Change customer quantity
 			cell.numberOfCustomer.text = "Số lượng khách hàng: \(projects[currentRow].customerQuantity)"
 			//Change customer quantity
@@ -179,9 +187,5 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 			customerListVC.project = self.projects[chosenProjectIndex]
 			customerListVC.userTeamEmail = self.user.emailAddress
 		}
-//		else if segue.identifier == "showTeamSettingPage" {
-//			guard let teamSettingTVC = segue.destination as? TeamSettingTVController else {return}
-//			teamSettingTVC.user = self.user
-//		}
 	}
 }

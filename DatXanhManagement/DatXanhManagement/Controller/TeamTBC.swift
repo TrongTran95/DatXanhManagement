@@ -19,8 +19,8 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
 		setupData()
 		
-		Services.shared.getUserProjects(emailTeam: self.user.emailAddress) { (arrProject) in
-			self.projectName = arrProject[0]
+		Services.shared.getUserProjects(emailAddress: self.user.emailAddress) { (arrProject) in
+			self.projectName = arrProject[0]["projectName"] as! String
 			Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projectName) { (userEmailDetailList) in
 				self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
 				//Setup for second screen

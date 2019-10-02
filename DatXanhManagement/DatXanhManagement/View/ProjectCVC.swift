@@ -20,6 +20,8 @@ class ProjectCVC: UICollectionViewCell {
 	
 	@IBOutlet weak var aiLoadingImage: UIActivityIndicatorView!
 	
+	@IBOutlet weak var lblSupervisor: UILabel!
+	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 	}

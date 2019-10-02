@@ -116,10 +116,10 @@ class Services {
         }
     }
 	
-	func getUserProjects(emailTeam: String, completion: @escaping([String]) -> Void){
-		let strParams: String = "emailTeam=" + emailTeam
+	func getUserProjects(emailAddress: String, completion: @escaping([[String:Any]]) -> Void){
+		let strParams: String = "email=" + emailAddress
 		getJsonUsingPost(strURL: urlGetUserProjects, strParams: strParams) { (json) in
-			let projectJson = json["projects"] as! [String]
+			let projectJson = json["userProjects"] as! [[String:Any]]
 			completion(projectJson)
 		}
 	}

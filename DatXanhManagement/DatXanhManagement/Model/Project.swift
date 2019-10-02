@@ -10,6 +10,7 @@ import Foundation
 
 class Project {
 	private(set) public var name:String
+	private(set) public var emailTeam:String
 	private(set) public var thumbnail:String
 	
 	private(set) public var customerQuantity:Int
@@ -19,6 +20,7 @@ class Project {
 	init() {
 		self.name = ""
 		self.thumbnail = ""
+		self.emailTeam = ""
 		
 		self.customerQuantity = 0
 		self.customerStillNotContactQuantity = 0
@@ -30,6 +32,10 @@ class Project {
 		self.name = projectName
 	}
 	
+	func setEmailTeam(emailTeam: String) {
+		self.emailTeam = emailTeam
+	}
+	
 	//Check and reset customer list
 	func checkAndResetCustomerList(){
 		if (self.customerListSeperated[KEY_STILL_NOT]?.count != 0 || self.customerListSeperated[KEY_ALREADY]?.count != 0) {
@@ -39,8 +45,8 @@ class Project {
 	
 	//If url = urlGetCustomerQuantity: This method will get and set customer quantity of project
 	//If url = customerStillNotContactQuantity: This method will get and set the quantity of customer that still not contact yet
-	func getCustomerQuantity(url: String, emailPersonal: String, completion: @escaping() -> Void){
-		let strParams: String = "projectName=" + self.name + "&emailPersonal=" + emailPersonal
+	func getCustomerQuantity(url: String, emailPersonal: String, emailTeam: String, completion: @escaping() -> Void){
+		let strParams: String = "emailTeam=" + emailTeam + "&emailPersonal=" + emailPersonal
 		print("aaaaa\(strParams)")
 		getJsonUsingPost(strURL: url, strParams: strParams) { (json) in
 			let quantity = json["quantity"] as! Int

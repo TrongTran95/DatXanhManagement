@@ -127,35 +127,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					user.login(userName: userEmail, password: userPassword, ios_token: ios_token, completion: { (result) in
 						if (result) {
 							DispatchQueue.main.async {
-								if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-									
-									appDelegate.window?.rootViewController?.dismiss(animated: true, completion: nil)
-									(appDelegate.window?.rootViewController as? UINavigationController)?.popToRootViewController(animated: true)
-								}
 								
-
-//								let nc = UINavigationController()
-//								let userVC = UserVC()
-//								userVC.user = user
-//								nc.viewControllers = [userVC]
-//								UIApplication.shared.wind
-//								self.window?.rootViewController? = nc
-//								self.window?.makeKeyAndVisible()
+								if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+									let nc = appDelegate.window?.rootViewController as! UINavigationController
+									let vc = nc.viewControllers[0] as! UserVC
+									vc.projectName = projectName as! String
+									vc.emailPersonal = emailPersonal as! String
+									vc.customerId = Int((customerId as! NSString).doubleValue)
+//									vc.pushToNext()
+//									appDelegate.window?.rootViewController?.dismiss(animated: false, completion: nil)
+									(appDelegate.window?.rootViewController as? UINavigationController)?.popToViewController(vc, animated: false)
+//									(appDelegate.window?.rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
+								}
 							}
 						} else {
 							
 						}
 					})
-//					if (self.window?.rootViewController is UserVC) {
-//						print("currently user vc")
-//					} else if (self.window?.rootViewController is CustomerListVC) {
-//						print("currently customer list vc")
-//					} else {
-//						print("na ni")
-//					}
-					
-//					fullMessage = fullMessage! + "\nPressed ButtonID: \(additionalData!["foo"]!)"
-//					print(fullMessage!)
 				}
 			}
 		}

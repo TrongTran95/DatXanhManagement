@@ -117,40 +117,41 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TÊN DỰ ÁN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAb-7Y-wsH">
-                                                            <rect key="frame" x="80" y="114.5" width="90" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dự án" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9y-Gh-P0u">
-                                                            <rect key="frame" x="102" y="83.5" width="46" height="21"/>
+                                                            <rect key="frame" x="80" y="83.5" width="90" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Số lượng khách hàng : 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UrO-lw-Yhz">
-                                                            <rect key="frame" x="28.5" y="145.5" width="193" height="21"/>
+                                                            <rect key="frame" x="28.5" y="114.5" width="193" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chưa liên lạc: 5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61G-su-p5t">
-                                                            <rect key="frame" x="66.5" y="176.5" width="117.5" height="21"/>
+                                                            <rect key="frame" x="66.5" y="145.5" width="117.5" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quản lý: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9y-Gh-P0u">
+                                                            <rect key="frame" x="10" y="224" width="230" height="16"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.073342360556125641" green="0.045627467334270477" blue="0.020877249538898468" alpha="0.59915453767123283" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
+                                                        <constraint firstItem="UrO-lw-Yhz" firstAttribute="top" secondItem="WAb-7Y-wsH" secondAttribute="bottom" constant="10" id="26N-bk-5yE"/>
                                                         <constraint firstItem="UrO-lw-Yhz" firstAttribute="centerX" secondItem="WAb-7Y-wsH" secondAttribute="centerX" id="FU1-e1-KW2"/>
-                                                        <constraint firstItem="I9y-Gh-P0u" firstAttribute="centerX" secondItem="WAb-7Y-wsH" secondAttribute="centerX" id="IBI-FW-gpg"/>
                                                         <constraint firstItem="WAb-7Y-wsH" firstAttribute="centerX" secondItem="Kyk-wW-xw3" secondAttribute="centerX" id="IDr-LH-Vka"/>
                                                         <constraint firstItem="61G-su-p5t" firstAttribute="centerX" secondItem="WAb-7Y-wsH" secondAttribute="centerX" id="Otb-1v-1dL"/>
                                                         <constraint firstItem="61G-su-p5t" firstAttribute="top" secondItem="UrO-lw-Yhz" secondAttribute="bottom" constant="10" id="POt-UE-W7m"/>
-                                                        <constraint firstItem="UrO-lw-Yhz" firstAttribute="top" secondItem="WAb-7Y-wsH" secondAttribute="bottom" constant="10" id="Rf8-Bi-M8X"/>
-                                                        <constraint firstItem="WAb-7Y-wsH" firstAttribute="centerY" secondItem="Kyk-wW-xw3" secondAttribute="centerY" id="amg-Jq-E8Z"/>
-                                                        <constraint firstItem="WAb-7Y-wsH" firstAttribute="top" secondItem="I9y-Gh-P0u" secondAttribute="bottom" constant="10" id="grK-Pf-Hgd"/>
+                                                        <constraint firstItem="UrO-lw-Yhz" firstAttribute="centerY" secondItem="Kyk-wW-xw3" secondAttribute="centerY" id="W1F-yi-rRe"/>
+                                                        <constraint firstAttribute="trailing" secondItem="I9y-Gh-P0u" secondAttribute="trailing" constant="10" id="c7L-fD-VpC"/>
+                                                        <constraint firstItem="I9y-Gh-P0u" firstAttribute="leading" secondItem="Kyk-wW-xw3" secondAttribute="leading" constant="10" id="h6n-l6-xq2"/>
+                                                        <constraint firstAttribute="bottom" secondItem="I9y-Gh-P0u" secondAttribute="bottom" constant="10" id="xL6-zr-l2Y"/>
                                                     </constraints>
                                                 </view>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3fI-pJ-1M1">
@@ -174,6 +175,7 @@
                                         <connections>
                                             <outlet property="aiLoadingImage" destination="3fI-pJ-1M1" id="mm8-0z-ILY"/>
                                             <outlet property="imgProjectThumbnail" destination="OqS-pA-eGc" id="kdv-4U-q5u"/>
+                                            <outlet property="lblSupervisor" destination="I9y-Gh-P0u" id="Nfs-bG-tML"/>
                                             <outlet property="numberOfCustomer" destination="UrO-lw-Yhz" id="xI0-6U-evB"/>
                                             <outlet property="numberOfCustomerNeedContact" destination="61G-su-p5t" id="ezi-yc-3Qt"/>
                                             <outlet property="projectName" destination="WAb-7Y-wsH" id="EMi-MP-kZs"/>
