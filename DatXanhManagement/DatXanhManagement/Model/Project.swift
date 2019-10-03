@@ -60,8 +60,8 @@ class Project {
 	}
 	
 	//This method will get all information of customer and return a list of them
-	func getCustomerList(emailAddress: String, completion: @escaping() -> Void){
-		let strParams: String = "projectName=" + self.name + "&emailPersonal=" + emailAddress
+	func getCustomerList(emailTeam: String, emailAddress: String, completion: @escaping() -> Void){
+		let strParams: String = "emailTeam=" + emailTeam + "&emailPersonal=" + emailAddress
 		print(strParams)
 		getJsonUsingPost(strURL: urlGetCustomerList, strParams: strParams) { (json) in
 			let arrCustomer = json["customers"] as! [[String:Any]]

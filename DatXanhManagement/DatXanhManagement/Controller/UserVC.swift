@@ -27,9 +27,10 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 	var checkIfProjectAreSelectedBefore: Bool = false
 	
 	//Information for push notification
-	var projectName = ""
+	var emailTeam = ""
 	var emailPersonal = ""
 	var customerId = 0
+	var pushIndex = 0
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,11 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 				//Set project info
 				let currentProject = userProjects[i]
 				self.projects[i].setName(projectName: currentProject["projectName"] as! String)
-				self.projects[i].setEmailTeam(emailTeam: currentProject["emailTeam"] as! String)
+				let currentEmailTeam = currentProject["emailTeam"] as! String
+				self.projects[i].setEmailTeam(emailTeam: currentEmailTeam)
+				if (self.emailTeam == currentEmailTeam) {
+					self.pushIndex = i
+				}
 				//Get project's customer quantity
 				self.projects[i].getCustomerQuantity(url: urlGetCustomerQuantity, emailPersonal: self.user.emailAddress, emailTeam: self.projects[i].emailTeam, completion: {
 					//Get quantity of customer that still not contact yet
@@ -67,12 +72,12 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 							DispatchQueue.main.async {
 								//Only reload after got all project
 								if (i == userProjects.count - 1) {
+									self.projects.sort(by: { $0.name < $1.name })
 									self.cvProjects.reloadData()
 									self.lblWelcome.text = "\(self.user.firstName) \(self.user.lastName)"
 									self.lblCurrentProject.text = "Your current project(s): \(self.projects.count)"
 									if (defaults.object(forKey: KEY_ISPUSH) as? Bool) == true {
-//										projects.contains{$0.name == projectName}
-//										self.cvProjects.selectItem(at: <#T##IndexPath?#>, animated: <#T##Bool#>, scrollPosition: <#T##UICollectionView.ScrollPosition#>)
+										self.selectProject(At: self.pushIndex)
 									}
 								}
 							}
@@ -108,9 +113,9 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 			guard let data = data, error == nil else { return }
 			print(response?.suggestedFilename ?? url.lastPathComponent)
 			print("Download Finished")
-//			DispatchQueue.main.async() {
+			DispatchQueue.main.async() {
 				completion(data)
-//			}
+			}
 		}
 	}
 	
@@ -148,15 +153,15 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 		return cell
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+	func selectProject(At index: Int){
 		//Check and Reset customer list before get a new one
-		projects[indexPath.row].checkAndResetCustomerList()
+		projects[index].checkAndResetCustomerList()
 		
 		//Save the choosen index
-		self.chosenProjectIndex = indexPath.row
+		self.chosenProjectIndex = index
 		
 		//Get customer list before segue to customer list screen
-		projects[indexPath.row].getCustomerList(emailAddress: user.emailAddress) {
+		projects[index].getCustomerList(emailTeam: projects[index].emailTeam, emailAddress: user.emailAddress) {
 			DispatchQueue.main.async {
 				/*Test customer's all information
 				let cc = self.projects[indexPath.row].customerList[1]
@@ -164,19 +169,22 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 				*/
 				
 				//Go to customer list page
-                self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
+				self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
 			}
 		}
-//        if (self.user.userEmailDetailList.count != 0) {
-//            self.user.resetUserEmailDetailList()
-//        }
-//		Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projects[indexPath.row].name) { (userEmailDetailList) in
-//			self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
-//			DispatchQueue.main.async {
-//				self.performSegue(withIdentifier: "showTeamSettingPage", sender: self)
-//			}
-//		}
-		
+		//        if (self.user.userEmailDetailList.count != 0) {
+		//            self.user.resetUserEmailDetailList()
+		//        }
+		//		Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projects[indexPath.row].name) { (userEmailDetailList) in
+		//			self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
+		//			DispatchQueue.main.async {
+		//				self.performSegue(withIdentifier: "showTeamSettingPage", sender: self)
+		//			}
+		//		}
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		selectProject(At: indexPath.row)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -185,7 +193,11 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 			guard let customerListVC = segue.destination as? CustomerListVC else {return}
 			//Assign project
 			customerListVC.project = self.projects[chosenProjectIndex]
-			customerListVC.userTeamEmail = self.user.emailAddress
+			customerListVC.emailPersonal = self.user.emailAddress
+			if (defaults.object(forKey: KEY_ISPUSH) as? Bool) == true {
+				customerListVC.pushCustomerId = self.customerId
+			}
+
 		}
 	}
 }

@@ -118,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				
 				let data = payload.additionalData
 				
-				if let projectName = data?["projectName"], let emailPersonal = data?["emailPersonal"], let customerId = data?["customerId"] {
+				if let emailTeam = data?["emailTeam"], let emailPersonal = data?["emailPersonal"], let customerId = data?["customerId"] {
 					defaults.set(true, forKey: KEY_ISPUSH)
 					let userEmail = defaults.object(forKey: KEY_USER_EMAIL) as! String
 					let userPassword = defaults.object(forKey: KEY_USER_PASSWORD) as! String
@@ -131,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 								if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 									let nc = appDelegate.window?.rootViewController as! UINavigationController
 									let vc = nc.viewControllers[0] as! UserVC
-									vc.projectName = projectName as! String
+									vc.emailTeam = emailTeam as! String
 									vc.emailPersonal = emailPersonal as! String
 									vc.customerId = Int((customerId as! NSString).doubleValue)
 //									vc.pushToNext()

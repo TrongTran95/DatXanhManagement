@@ -39,8 +39,9 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	var startMoment = DateComponents()
 	var endMoment = DateComponents()
 	
-	var userTeamEmail: String = ""
+	var emailPersonal: String = ""
 	
+	var pushCustomerId: Int = 0
 	
 	//Cancel button, turn off customer detail view, back to customer list
 	@IBAction func backToCustomerListButtonClicked(_ sender: Any) {
@@ -60,9 +61,18 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		//Setup calling manager
 		setupCallingManager()
 		
-		tbCustomerDetail.rowHeight = UITableView.automaticDimension
-		tbCustomerDetail.estimatedRowHeight = 600
-
+		//Setup push (if available)
+		if (defaults.object(forKey: KEY_ISPUSH) as? Bool) == true {
+			let customerList = project.customerListSeperated[KEY_STILL_NOT]!
+			for i in 0..<customerList.count{
+				if customerList[i].idCustomer == pushCustomerId {
+					chosenCustomer = customerList[i]
+					break
+				}
+			}
+			showViewCustomerDetail()
+			defaults.set(false, forKey: KEY_ISPUSH)
+		}
     }
 	
 	//Set up delegate and data source for tableviews
@@ -71,6 +81,9 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		tbCustomerList.dataSource = self
 		tbCustomerDetail.delegate = self
 		tbCustomerDetail.dataSource = self
+		tbCustomerDetail.rowHeight = UITableView.automaticDimension
+		tbCustomerDetail.estimatedRowHeight = 600
+
 	}
 	
 	//Setup data for first time
@@ -366,20 +379,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			else {
 				chosenCustomer = project.customerListSeperated[KEY_ALREADY]![indexPath.row]
 			}
-			
-			//Reset scroll position to 0
-			tbCustomerDetail.contentOffset = CGPoint.zero
-			
-			//Reload table customer detail to update new values
-			DispatchQueue.main.async {
-				self.tbCustomerDetail.reloadData()
-			}
-			
-			//Show Customer detail view
-			viewCustomerDetailContainer.isHidden = false
-			UIView.animate(withDuration: 0.5) {
-				self.viewCustomerDetailContainer.alpha = 1
-			}
+			showViewCustomerDetail()
 		}
 		//Table customer detail
 		else {
@@ -391,7 +391,22 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 				trongs.makeAColl()
 			}
 		}
-
+	}
+	
+	func showViewCustomerDetail(){
+		//Reset scroll position to 0
+		tbCustomerDetail.contentOffset = CGPoint.zero
+		
+		//Reload table customer detail to update new values
+		DispatchQueue.main.async {
+			self.tbCustomerDetail.reloadData()
+		}
+		
+		//Show Customer detail view
+		viewCustomerDetailContainer.isHidden = false
+		UIView.animate(withDuration: 0.5) {
+			self.viewCustomerDetailContainer.alpha = 1
+		}
 	}
 }
 
@@ -421,7 +436,7 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 						self.tbCustomerList.reloadData()
 					}
 					//Get customer list
-					self.project.getCustomerList(emailAddress: self.userTeamEmail) {
+					self.project.getCustomerList(emailTeam: self.project.emailTeam, emailAddress: self.emailPersonal) {
 						//reload table's data
 						DispatchQueue.main.async {
 							self.tbCustomerList.reloadData()
