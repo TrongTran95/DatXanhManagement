@@ -44,6 +44,8 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+		self.navigationController?.viewControllers = [self]
+		appDelegate.window!.rootViewController = self.navigationController
 		//Setup project information
 		getUserProjects()
 	}

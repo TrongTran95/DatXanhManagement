@@ -151,10 +151,11 @@ class Customer {
 	*/
 	
 	//Update customer calling detail after user success contact with customer
-	func updateCustomerCallingDetail(completion:@escaping() -> Void){
+	func updateCustomerCallingDetail(completion:@escaping(Bool) -> Void){
 		let strParams: String = "status=\(self.callStatus)" + "&successTimes=\(self.callSuccessTimes)" + "&successMinutes=\(self.callSuccessMinutes)" + "&idCustomer=\(self.idCustomer)"
+		print(strParams)
 		getJsonUsingPost(strURL: urlUpdateCustomerCallingDetail, strParams: strParams) { (json) in
-			completion()
+			completion(json["error"] as! Bool)
 		}
 	}
 	

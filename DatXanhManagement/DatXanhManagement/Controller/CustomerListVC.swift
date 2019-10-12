@@ -387,8 +387,8 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			if (indexPath.row == 3) {
 				let phoneNumber = chosenCustomer.phoneNumber
 				print(phoneNumber)
-				let trongs = "0783636848"
-				trongs.makeAColl()
+//				let trongs = "0783636848"
+				phoneNumber.makeAColl()
 			}
 		}
 	}
@@ -428,21 +428,23 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 				//Update call's success minutes
 				chosenCustomer.setCallSuccessMinutes(callSuccessMinutes: averageMins)
 				//Update to server
-				chosenCustomer.updateCustomerCallingDetail {
-					//Reset customer list
-					self.project.checkAndResetCustomerList()
-					//reload table's data
-					DispatchQueue.main.async {
-						self.tbCustomerList.reloadData()
-					}
-					//Get customer list
-					self.project.getCustomerList(emailTeam: self.project.emailTeam, emailAddress: self.emailPersonal) {
+				chosenCustomer.updateCustomerCallingDetail { error in
+					if !error {
+						//Reset customer list
+						self.project.checkAndResetCustomerList()
 						//reload table's data
 						DispatchQueue.main.async {
 							self.tbCustomerList.reloadData()
-							self.setupCustomerQuantity()
-							//Set call flag to false to reuse
-							self.connectFlag = false
+						}
+						//Get customer list
+						self.project.getCustomerList(emailTeam: self.project.emailTeam, emailAddress: self.emailPersonal) {
+							//reload table's data
+							DispatchQueue.main.async {
+								self.tbCustomerList.reloadData()
+								self.setupCustomerQuantity()
+								//Set call flag to false to reuse
+								self.connectFlag = false
+							}
 						}
 					}
 				}
@@ -471,7 +473,7 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 	func didPressCallButton(section: String, row: Int) {
 		chosenCustomer = project.customerListSeperated[section]![row]
 //		let phoneNumber = chosenCustomer.phoneNumber
-		let trongs = "0783636848"
+		let trongs = chosenCustomer.phoneNumber
 		trongs.makeAColl()
 	}
 }

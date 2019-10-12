@@ -147,6 +147,10 @@ class Project {
 				
 				//After get all calling detail of customer, do completion
 				if (self.customerListSeperated[KEY_STILL_NOT]!.count + self.customerListSeperated[KEY_ALREADY]!.count == arrCustomer.count) {
+					//Sort
+					self.customerListSeperated[KEY_STILL_NOT] = self.customerListSeperated[KEY_STILL_NOT]?.sorted(by: {$0.idCustomer > $1.idCustomer})
+					//Sort
+					self.customerListSeperated[KEY_ALREADY] = self.customerListSeperated[KEY_ALREADY]?.sorted(by: {$0.idCustomer > $1.idCustomer})
 					completion()
 				}
 			}

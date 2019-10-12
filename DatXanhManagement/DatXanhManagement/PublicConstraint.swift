@@ -20,3 +20,5 @@ let KEY_ISPUSH = "isPush"
 let defaults = UserDefaults.standard
 let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
+let appDelegate = UIApplication.shared.delegate as! AppDelegate
+
