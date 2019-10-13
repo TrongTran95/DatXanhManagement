@@ -8,14 +8,9 @@
 
 import UIKit
 
-class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class UserVC: UIViewController {
 	
-
-	@IBOutlet weak var lblWelcome: UILabel!
-	
-	@IBOutlet weak var lblCurrentProject: UILabel!
-	
-	@IBOutlet weak var cvProjects: UICollectionView!
+	@IBOutlet weak var tbProjects: UITableView!
 	
 	
 	var user = User()
@@ -32,14 +27,16 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 	var customerId = 0
 	var pushIndex = 0
 	
+	var loadingView: UIView!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		//Hide back button
 //		self.navigationItem.setHidesBackButton(true, animated:true);
 		
-		//Set up collection view
-		cvProjects.delegate = self
-		cvProjects.dataSource = self
+		//Set up table view
+		tbProjects.delegate = self
+		tbProjects.dataSource = self
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -48,11 +45,32 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 		appDelegate.window!.rootViewController = self.navigationController
 		//Setup project information
 		getUserProjects()
+		setupUI()
+	}
+	
+	@objc func accountButtonClicked(){
+		
+	}
+	
+	func setupUI(){
+		let accountButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Account"), style: .plain, target: self, action: #selector(accountButtonClicked))
+		self.navigationItem.leftBarButtonItems = [accountButton]
+	}
+	
+	func setupLoadingView(){
+		loadingView = createLoadingView()
+		if (self.projects.count != 0){
+			loadingView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+		}
+		self.view.addSubview(loadingView)
+		let constraints = AutoLayout.shared.getTopLeftBottomRightConstraint(currentView: loadingView, destinationView: self.view, constant: [0,0,0,0])
+		self.view.addConstraints(constraints)
 	}
 	
 	//Get project list of user
 	func getUserProjects(){
-		self.projects = []
+		setupLoadingView()
+		projects = []
 		Services.shared.getUserProjects(emailAddress: user.emailAddress) { (userProjects) in
 			for i in 0..<userProjects.count{
 				//Add a new null project
@@ -75,9 +93,10 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 								//Only reload after got all project
 								if (i == userProjects.count - 1) {
 									self.projects.sort(by: { $0.name < $1.name })
-									self.cvProjects.reloadData()
-									self.lblWelcome.text = "\(self.user.firstName) \(self.user.lastName)"
-									self.lblCurrentProject.text = "Your current project(s): \(self.projects.count)"
+									self.tbProjects.reloadData()
+									self.loadingView.removeFromSuperview()
+//									self.lblWelcome.text = "\(self.user.firstName) \(self.user.lastName)"
+//									self.lblCurrentProject.text = "Your current project(s): \(self.projects.count)"
 									if (defaults.object(forKey: KEY_ISPUSH) as? Bool) == true {
 										self.selectProject(At: self.pushIndex)
 									}
@@ -121,41 +140,8 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 		}
 	}
 	
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return projects.count
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProjectCVC
-		let currentRow: Int = indexPath.row
-		if (projects[currentRow].thumbnail != "") {
-			//Download and upload image
-			print(projects[currentRow].thumbnail)
-			let imgURL:URL = URL(string: projects[currentRow].thumbnail)!
-			downloadImage(from: imgURL) { (data) in
-				DispatchQueue.main.async {
-					
-					//Show image after download from server
-					cell.imgProjectThumbnail.image = UIImage(data: data)
-					//Stop activity indicator
-					cell.aiLoadingImage.stopAnimating()
-				}
-			}
-			//Change project name
-			cell.projectName.text = projects[currentRow].name
-			
-			cell.lblSupervisor.text = "Quản lý: \(projects[currentRow].emailTeam)"
-			//Change customer quantity
-			cell.numberOfCustomer.text = "Số lượng khách hàng: \(projects[currentRow].customerQuantity)"
-			//Change customer quantity
-			cell.numberOfCustomerNeedContact.text = "Chưa liên lạc: \(projects[currentRow].customerStillNotContactQuantity)"
-		}
-		//Start activity indicator
-		cell.aiLoadingImage.startAnimating()
-		return cell
-	}
-	
 	func selectProject(At index: Int){
+		setupLoadingView()
 		//Check and Reset customer list before get a new one
 		projects[index].checkAndResetCustomerList()
 		
@@ -172,21 +158,9 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 				
 				//Go to customer list page
 				self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
+				self.loadingView.removeFromSuperview()
 			}
 		}
-		//        if (self.user.userEmailDetailList.count != 0) {
-		//            self.user.resetUserEmailDetailList()
-		//        }
-		//		Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projects[indexPath.row].name) { (userEmailDetailList) in
-		//			self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
-		//			DispatchQueue.main.async {
-		//				self.performSegue(withIdentifier: "showTeamSettingPage", sender: self)
-		//			}
-		//		}
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		selectProject(At: indexPath.row)
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -201,5 +175,55 @@ class UserVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 			}
 
 		}
+	}
+}
+
+extension UserVC: UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return projects.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = tableView.dequeueReusableCell(withIdentifier: "projectTVC", for: indexPath) as! ProjectTVC
+		
+		let currentRow: Int = indexPath.row
+//		if (projects[currentRow].thumbnail != "") {
+			//Download and upload image
+//			print(projects[currentRow].thumbnail)
+		
+//			let imgURL:URL = URL(string: projects[currentRow].thumbnail)!
+//			downloadImage(from: imgURL) { (data) in
+//				DispatchQueue.main.async {
+//
+//					//Show image after download from server
+//					cell.imgProjectThumbnail.image = UIImage(data: data)
+//					//Stop activity indicator
+////					cell.aiLoadingImage.stopAnimating()
+//				}
+//			}
+			
+			//Change project name
+		cell.projectName.text = projects[currentRow].name
+		
+		cell.lblSupervisor.text = projects[currentRow].emailTeam
+		//Change customer quantity
+		let total = projects[currentRow].customerQuantity
+		let stillNot = projects[currentRow].customerStillNotContactQuantity
+		cell.numberOfCustomer.text = "\(total - stillNot)/\(total)"
+		//Change customer quantity
+		//			cell.numberOfCustomerNeedContact.text = "Chưa liên lạc: \(projects[currentRow].customerStillNotContactQuantity)"
+		//		}
+		//		Start activity indicator
+		//		cell.aiLoadingImage.startAnimating()
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		selectProject(At: indexPath.row)
+		tableView.deselectRow(at: indexPath, animated: true)
+	}
+	
+	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+		return 60
 	}
 }

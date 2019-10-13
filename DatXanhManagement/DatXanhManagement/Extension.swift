@@ -75,6 +75,21 @@ func getJsonUsingPost(strURL: String, strParams: String, completion: @escaping(D
 	task.resume()
 }
 
+
+func createLoadingView() -> UIView{
+	let loadingView = UIView()
+	loadingView.frame = UIScreen.main.bounds
+	let ai = UIActivityIndicatorView(style: .whiteLarge)
+	ai.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+	ai.color = UIColor.red
+	ai.startAnimating()
+	ai.translatesAutoresizingMaskIntoConstraints = false
+	loadingView.addSubview(ai)
+	let constraints = AutoLayout.shared.getCenterConstraint(currentView: ai, destinationView: loadingView)
+	loadingView.addConstraints(constraints)
+	return loadingView
+}
+
 func getJsonUsingGet(strURL: String, completion: @escaping(Dictionary<String, Any>) -> Void){
 	//Create an url
 	let url = URL(string: strURL)

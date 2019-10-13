@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window?.frame = UIScreen.main.bounds
 		if (userEmail == nil) {
 			let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-			nc.viewControllers = [loginVC]
-			window?.rootViewController = nc
+//			nc.viewControllers = [loginVC]
+			window?.rootViewController = loginVC
 			window?.makeKeyAndVisible()
 		} else {
 			let userPassword = defaults.object(forKey: KEY_USER_PASSWORD) as! String
@@ -49,6 +49,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 					//Personal
 					if (user.type == 1) {
 						let userVC = mainStoryboard.instantiateViewController(withIdentifier: "UserVC") as! UserVC
+						
+						DispatchQueue.main.async {
+							if (user.lastName == "" && user.firstName == ""){
+								userVC.navigationItem.title = user.emailAddress
+							} else {
+								if (user.firstName == "" || user.lastName == ""){
+									if (user.firstName == ""){
+										userVC.navigationItem.setTitle(title: user.lastName, subtitle: user.emailAddress)
+									}
+									if (user.lastName == ""){
+										userVC.navigationItem.setTitle(title: user.firstName, subtitle: user.emailAddress)
+									}
+								} else {
+									userVC.navigationItem.setTitle(title: "\(user.firstName) \(user.lastName)", subtitle: user.emailAddress)
+								}
+							}
+						}
 						userVC.user = user
 						nc.viewControllers = [userVC]
 						print("ssssssssssssss1")
@@ -92,6 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window?.rootViewController = tempView
 		window?.makeKeyAndVisible()
 	}
+	
 	
 	func setupOneSignal(launchOptions: [UIApplication.LaunchOptionsKey: Any]?){
 		let notificationReceivedBlock: OSHandleNotificationReceivedBlock = { notification in

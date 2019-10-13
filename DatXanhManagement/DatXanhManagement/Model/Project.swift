@@ -138,6 +138,10 @@ class Project {
                     customer.setStatusNewcomer(statusNewcomer: statusNewcomer)
                 }
 				
+				if let note = currentJsonCustomer["note"] as? String {
+					customer.setNote(note: note)
+				}
+				
 				//Add customer to list seperated by calling status
 				if (customer.callStatus == 0) {
 					self.customerListSeperated[KEY_STILL_NOT]?.append(customer)

@@ -14,6 +14,7 @@
 		802870A323110B43000FD176 /* AddSeperateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802870A223110B43000FD176 /* AddSeperateView.xib */; };
 		802870A62311267F000FD176 /* AddSeperateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802870A42311267F000FD176 /* AddSeperateTVC.swift */; };
 		802870A72311267F000FD176 /* AddSeperateTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802870A52311267F000FD176 /* AddSeperateTVC.xib */; };
+		802DC7D22352105200169BB3 /* DesignableUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802DC7D12352105200169BB3 /* DesignableUI.swift */; };
 		8036D63622DCCAA40080775C /* Customer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8036D63522DCCAA40080775C /* Customer.swift */; };
 		804F4FC722DB67180083044C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FC622DB67180083044C /* AppDelegate.swift */; };
 		804F4FC922DB67180083044C /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FC822DB67180083044C /* LoginVC.swift */; };
@@ -24,7 +25,7 @@
 		804F4FDE22DC34E30083044C /* UrlAddresses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FDD22DC34E30083044C /* UrlAddresses.swift */; };
 		804F4FE222DC51700083044C /* UserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE122DC51700083044C /* UserVC.swift */; };
 		804F4FE422DC5FF40083044C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE322DC5FF40083044C /* Project.swift */; };
-		804F4FE622DCAB120083044C /* ProjectCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE522DCAB120083044C /* ProjectCVC.swift */; };
+		804F4FE622DCAB120083044C /* ProjectTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE522DCAB120083044C /* ProjectTVC.swift */; };
 		804F4FE822DCACD80083044C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE722DCACD80083044C /* Extension.swift */; };
 		805209B022E849780085EA2D /* PublicConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805209AF22E849780085EA2D /* PublicConstraint.swift */; };
 		8097E728230D900C0014C211 /* UserMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097E727230D900C0014C211 /* UserMember.swift */; };
@@ -85,6 +86,7 @@
 		802870A223110B43000FD176 /* AddSeperateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSeperateView.xib; sourceTree = "<group>"; };
 		802870A42311267F000FD176 /* AddSeperateTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSeperateTVC.swift; sourceTree = "<group>"; };
 		802870A52311267F000FD176 /* AddSeperateTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSeperateTVC.xib; sourceTree = "<group>"; };
+		802DC7D12352105200169BB3 /* DesignableUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableUI.swift; sourceTree = "<group>"; };
 		8036D63522DCCAA40080775C /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
 		804F4FC322DB67180083044C /* DatXanhManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatXanhManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		804F4FC622DB67180083044C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,7 +99,7 @@
 		804F4FDD22DC34E30083044C /* UrlAddresses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlAddresses.swift; sourceTree = "<group>"; };
 		804F4FE122DC51700083044C /* UserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVC.swift; sourceTree = "<group>"; };
 		804F4FE322DC5FF40083044C /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		804F4FE522DCAB120083044C /* ProjectCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCVC.swift; sourceTree = "<group>"; };
+		804F4FE522DCAB120083044C /* ProjectTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTVC.swift; sourceTree = "<group>"; };
 		804F4FE722DCACD80083044C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		805209AF22E849780085EA2D /* PublicConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicConstraint.swift; sourceTree = "<group>"; };
 		8086BDE522F52C2A00E94F08 /* DatXanhManagement.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatXanhManagement.entitlements; sourceTree = "<group>"; };
@@ -236,7 +238,7 @@
 		804F4FD922DC32C50083044C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				804F4FE522DCAB120083044C /* ProjectCVC.swift */,
+				804F4FE522DCAB120083044C /* ProjectTVC.swift */,
 				80C3413422DDB700001F77F5 /* CustomerListTVC.swift */,
 				80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */,
 				A2DF72B123026A6B00FA24FB /* TeamSettingTVC.swift */,
@@ -245,6 +247,7 @@
 				8028709F23110B10000FD176 /* AddSeperateView */,
 				80F78B1223252BA100240C86 /* OldSeperatedTVCell.swift */,
 				80F78B1423252BB600240C86 /* NewSeperateTVCell.swift */,
+				802DC7D12352105200169BB3 /* DesignableUI.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -459,6 +462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80C3413722DDC81C001F77F5 /* CustomerDetailTVC.swift in Sources */,
+				802DC7D22352105200169BB3 /* DesignableUI.swift in Sources */,
 				80C3413322DDA846001F77F5 /* CustomerListVC.swift in Sources */,
 				80C3413522DDB700001F77F5 /* CustomerListTVC.swift in Sources */,
 				A201D99C230A663E001F2872 /* Services.swift in Sources */,
@@ -476,7 +480,7 @@
 				A2CF02B5230E32D1002CE7FD /* AutoLayout.swift in Sources */,
 				8097E728230D900C0014C211 /* UserMember.swift in Sources */,
 				80F78B1723253A9F00240C86 /* UserEmailSeperate.swift in Sources */,
-				804F4FE622DCAB120083044C /* ProjectCVC.swift in Sources */,
+				804F4FE622DCAB120083044C /* ProjectTVC.swift in Sources */,
 				A2D1DF09230F7CEA00735E13 /* SeperateVC.swift in Sources */,
 				A24B8C1023026FC800252718 /* UserEmailDetail.swift in Sources */,
 				804F4FDC22DC33130083044C /* User.swift in Sources */,

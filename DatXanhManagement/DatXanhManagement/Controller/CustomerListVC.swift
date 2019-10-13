@@ -13,7 +13,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	var project = Project()
 
-	@IBOutlet weak var lblCustomerQuantity: UILabel!
+//	@IBOutlet weak var lblCustomerQuantity: UILabel!
 	
 	@IBOutlet weak var tbCustomerList: UITableView!
 	
@@ -22,6 +22,11 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	@IBOutlet weak var tbCustomerDetail: UITableView!
 	
 	@IBOutlet weak var viewCustomerDetailContainer: UIView!
+	
+	@IBOutlet weak var txtvNote: UITextView!
+	@IBOutlet weak var csBottomOfDetailCustomerView: NSLayoutConstraint!
+	var lblPlaceHolderNote : UILabel!
+
 	
 	var chosenCustomer = Customer()
 	
@@ -43,6 +48,16 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	var pushCustomerId: Int = 0
 	
+	@IBOutlet weak var btnInfoEdit: UIButton!
+	
+	@IBAction func editOrInfoButtonClicked(_ sender: UIButton) {
+		if sender.currentImage == #imageLiteral(resourceName: "edit") {
+			btnInfoEdit.imageView?.image = #imageLiteral(resourceName: "info")
+		} else {
+			btnInfoEdit.imageView?.image = #imageLiteral(resourceName: "edit")
+		}
+	}
+	
 	//Cancel button, turn off customer detail view, back to customer list
 	@IBAction func backToCustomerListButtonClicked(_ sender: Any) {
 		//Hide Customer detail view
@@ -54,6 +69,8 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		//Setup UI
+		setupUI()
 		//Setup table view
 		setupTableView()
 		//Setup data for page
@@ -75,6 +92,52 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		}
     }
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification , object: nil)
+	}
+	
+	
+	@objc func keyboardWillAppear(notification: NSNotification?) {
+		
+		guard let keyboardFrame = notification?.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+			return
+		}
+		
+		let keyboardHeight: CGFloat
+		if #available(iOS 11.0, *) {
+			keyboardHeight = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+		} else {
+			keyboardHeight = keyboardFrame.cgRectValue.height
+		}
+		
+		csBottomOfDetailCustomerView.constant = keyboardHeight + 30.0
+	}
+	
+	@objc
+	func keyboardWillDisappear(notification: NSNotification?) {
+		csBottomOfDetailCustomerView.constant = 0.0
+	}
+	
+	func setupUI(){
+		txtvNote.delegate = self
+		if chosenCustomer.note == "" {
+			txtvNote.text = NOTE_PLACE_HOLDER
+			txtvNote.textColor = UIColor.lightGray
+		} else {
+			txtvNote.text = chosenCustomer.note
+			txtvNote.textColor = UIColor.black
+		}
+	}
+	
 	//Set up delegate and data source for tableviews
 	func setupTableView(){
 		tbCustomerList.delegate = self
@@ -93,7 +156,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		//Set page's title (name of project)
 		self.title = self.project.name
 		//Set customer quantity information
-		setupCustomerQuantity()
+//		setupCustomerQuantity()
 	}
 	
 	//Setup call management
@@ -103,11 +166,11 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	}
 	
 	//Set customer quantity information
-	func setupCustomerQuantity(){
-		let quantityStillNot = project.customerListSeperated[KEY_STILL_NOT]!.count
-		let quantityAlready = project.customerListSeperated[KEY_ALREADY]!.count
-		self.lblCustomerQuantity.text = "\(quantityStillNot)/\(quantityStillNot + quantityAlready) khách hàng cần được tư vấn"
-	}
+//	func setupCustomerQuantity(){
+//		let quantityStillNot = project.customerListSeperated[KEY_STILL_NOT]!.count
+//		let quantityAlready = project.customerListSeperated[KEY_ALREADY]!.count
+//		self.lblCustomerQuantity.text = "\(quantityStillNot)/\(quantityStillNot + quantityAlready) khách hàng cần được tư vấn"
+//	}
 	
 	//Number of section of table view
 	func numberOfSections(in tableView: UITableView) -> Int {
@@ -275,7 +338,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			//Set customer name (3 checks)
 			var displayName: String = ""
 			//Check if customer don't have first name (access facebook)
-			if (currentCustomer.firstName.contains("facebook.com")){
+ 			if (currentCustomer.firstName.contains("facebook.com")){
 				displayName = "Truy cập FB khách"
 			} else {
 				//Check if customer don't have last name
@@ -319,6 +382,12 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			let cell = tbCustomerDetail.dequeueReusableCell(withIdentifier: "customerCell", for: indexPath) as! CustomerDetailTVC
 			let currentRow = indexPath.row
 			
+			//Check if customer name too long
+			let displayName = "\(chosenCustomer.lastName) \(chosenCustomer.firstName)"
+			let limitLength = 18
+			if (displayName.count > limitLength){
+				self.lblCustomerName.text = "..\(displayName.maxLengthFromRightToLeft(length: limitLength))"
+			}
 			//Set customer name
 			self.lblCustomerName.text = "\(chosenCustomer.lastName) \(chosenCustomer.firstName)"
 			//Set title thumbnail
@@ -410,6 +479,22 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	}
 }
 
+extension CustomerListVC: UITextViewDelegate {
+	func textViewDidBeginEditing(_ textView: UITextView) {
+		if textView.textColor == UIColor.lightGray {
+			textView.text = nil
+			textView.textColor = UIColor.black
+		}
+	}
+	
+	func textViewDidEndEditing(_ textView: UITextView) {
+		if textView.text.isEmpty {
+			textView.text = NOTE_PLACE_HOLDER
+			textView.textColor = UIColor.lightGray
+		}
+	}
+}
+
 extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 	func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall) {
 		
@@ -441,7 +526,7 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 							//reload table's data
 							DispatchQueue.main.async {
 								self.tbCustomerList.reloadData()
-								self.setupCustomerQuantity()
+//								self.setupCustomerQuantity()
 								//Set call flag to false to reuse
 								self.connectFlag = false
 							}

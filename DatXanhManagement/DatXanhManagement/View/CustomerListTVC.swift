@@ -15,6 +15,7 @@ class CustomerListTVC: UITableViewCell {
 	@IBOutlet weak var lblCustomerName: UILabel!
 	@IBOutlet weak var lblPhoneNumber: UILabel!
 	@IBOutlet weak var btnPhoneCall: UIButton!
+	@IBOutlet weak var viewPhoneCall: UIView!
 	
 	var delegate: CustomerListTVCDelegate?
 	var section = ""
@@ -26,7 +27,7 @@ class CustomerListTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 		viewOrder.layer.cornerRadius = 10
-		
+		viewPhoneCall.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -32,6 +32,8 @@ class Customer {
     
     private(set) public var statusNewcomer:Int
 	
+	private(set) public var note:String
+	
 	init() {
 		self.idCustomer = 0
 		self.messageCode = ""
@@ -55,6 +57,11 @@ class Customer {
         self.callSuccessMinutes = 0
         
         self.statusNewcomer = 0
+		self.note = ""
+	}
+	
+	func setNote(note: String){
+		self.note = note
 	}
     
     func setStatusNewcomer(statusNewcomer: Int) {

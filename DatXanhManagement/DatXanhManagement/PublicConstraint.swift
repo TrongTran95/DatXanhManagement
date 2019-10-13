@@ -22,3 +22,4 @@ let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
+let NOTE_PLACE_HOLDER = "Nhập ghi chú..."

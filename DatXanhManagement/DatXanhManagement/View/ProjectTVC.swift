@@ -1,5 +1,5 @@
 //
-//  ProjectCVC.swift
+//  ProjectTVC.swift
 //  DatXanhManagement
 //
 //  Created by Trong Tran on 7/15/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProjectCVC: UICollectionViewCell {
+class ProjectTVC: UITableViewCell {
     
 	@IBOutlet weak var imgProjectThumbnail: UIImageView!
 	
@@ -16,18 +16,19 @@ class ProjectCVC: UICollectionViewCell {
 	
 	@IBOutlet weak var numberOfCustomer: UILabel!
 	
-	@IBOutlet weak var numberOfCustomerNeedContact: UILabel!
-	
-	@IBOutlet weak var aiLoadingImage: UIActivityIndicatorView!
+//	@IBOutlet weak var aiLoadingImage: UIActivityIndicatorView!
 	
 	@IBOutlet weak var lblSupervisor: UILabel!
 	
-	override init(frame: CGRect) {
-		super.init(frame: frame)
+	
+	
+	override func awakeFromNib() {
+		super.awakeFromNib()
+		
 	}
 	
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
+	override func setSelected(_ selected: Bool, animated: Bool) {
+		super.setSelected(selected, animated: animated)
 	}
 	
 }
