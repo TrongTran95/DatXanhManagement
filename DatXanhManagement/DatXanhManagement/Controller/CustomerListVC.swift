@@ -8,6 +8,7 @@
 
 import UIKit
 import CallKit
+import Cosmos
 
 class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 	
@@ -24,9 +25,29 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	@IBOutlet weak var viewCustomerDetailContainer: UIView!
 	
 	@IBOutlet weak var txtvNote: UITextView!
+	
 	@IBOutlet weak var csBottomOfDetailCustomerView: NSLayoutConstraint!
+	
+	@IBOutlet weak var viewNoteContainer: UIView!
+	
+	@IBOutlet weak var viewRating: UIView!
+	
+	@IBOutlet weak var btnInfoEdit: UIButton!
+	
+	lazy var cosmosView: CosmosView = {
+		let view = CosmosView()
+		view.settings.filledImage = #imageLiteral(resourceName: "star_yellow").withRenderingMode(.alwaysOriginal)
+		view.settings.emptyImage = #imageLiteral(resourceName: "star_gray").withRenderingMode(.alwaysOriginal)
+		view.settings.totalStars = 5
+		view.settings.starSize = 30
+		view.settings.starMargin = 5
+		view.settings.fillMode = .full
+		view.translatesAutoresizingMaskIntoConstraints = false
+		//https://www.youtube.com/watch?v=Y4A_y29cy7Q
+		return view
+	}()
+	
 	var lblPlaceHolderNote : UILabel!
-
 	
 	var chosenCustomer = Customer()
 	
@@ -48,14 +69,15 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	var pushCustomerId: Int = 0
 	
-	@IBOutlet weak var btnInfoEdit: UIButton!
-	
 	@IBAction func editOrInfoButtonClicked(_ sender: UIButton) {
 		if sender.currentImage == #imageLiteral(resourceName: "edit") {
-			btnInfoEdit.imageView?.image = #imageLiteral(resourceName: "info")
+			viewNoteContainer.isHidden = false
+			btnInfoEdit.setImage(#imageLiteral(resourceName: "info"), for: .normal)
 		} else {
-			btnInfoEdit.imageView?.image = #imageLiteral(resourceName: "edit")
+			viewNoteContainer.isHidden = true
+			btnInfoEdit.setImage(#imageLiteral(resourceName: "edit"), for: .normal)
 		}
+		txtvNote.resignFirstResponder()
 	}
 	
 	//Cancel button, turn off customer detail view, back to customer list
@@ -65,6 +87,9 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		UIView.animate(withDuration: 0.5) {
 			self.viewCustomerDetailContainer.alpha = 0
 		}
+		txtvNote.resignFirstResponder()
+		viewNoteContainer.isHidden = false
+		btnInfoEdit.setImage(#imageLiteral(resourceName: "info"), for: .normal)
 	}
 	
 	override func viewDidLoad() {
@@ -119,15 +144,32 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			keyboardHeight = keyboardFrame.cgRectValue.height
 		}
 		
-		csBottomOfDetailCustomerView.constant = keyboardHeight + 30.0
+		self.csBottomOfDetailCustomerView.constant = keyboardHeight + 30.0
+		UIView.animate(withDuration: 0.5) {
+			self.view.layoutIfNeeded()
+		}
+	}
+	// Hide Keyboard when tapped somewhere on screen
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		view.endEditing(true)
 	}
 	
-	@objc
-	func keyboardWillDisappear(notification: NSNotification?) {
-		csBottomOfDetailCustomerView.constant = 0.0
+	@objc func keyboardWillDisappear(notification: NSNotification?) {
+		self.csBottomOfDetailCustomerView.constant = 30.0
+		UIView.animate(withDuration: 0.5) {
+			self.view.layoutIfNeeded()
+		}
 	}
 	
 	func setupUI(){
+		viewRating.addSubview(cosmosView)
+		let contraints = AutoLayout.shared.getCenterConstraint(currentView: cosmosView, destinationView: viewRating)
+		
+		viewRating.addConstraints(contraints)
+//		cosmosView.center = viewRating.center
+		cosmosView.didTouchCosmos = { rating in
+			print("abcxyz")
+		}
 		txtvNote.delegate = self
 		if chosenCustomer.note == "" {
 			txtvNote.text = NOTE_PLACE_HOLDER
@@ -480,6 +522,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 }
 
 extension CustomerListVC: UITextViewDelegate {
+	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		if textView.textColor == UIColor.lightGray {
 			textView.text = nil

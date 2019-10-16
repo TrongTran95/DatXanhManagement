@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "20E506BA53E9955CF2642737C8827E6E"
-               BuildableName = "OneSignal-iOS12.1"
-               BlueprintName = "OneSignal-iOS12.1"
+               BlueprintIdentifier = "00F31BD5217A20974B5E9AAC6256D98E"
+               BuildableName = "libCosmos.a"
+               BlueprintName = "Cosmos"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

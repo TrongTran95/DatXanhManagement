@@ -53,7 +53,7 @@ class UserVC: UIViewController {
 	}
 	
 	func setupUI(){
-		let accountButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Account"), style: .plain, target: self, action: #selector(accountButtonClicked))
+		let accountButton = UIBarButtonItem(image: #imageLiteral(resourceName: "sign-out"), style: .plain, target: self, action: #selector(accountButtonClicked))
 		self.navigationItem.leftBarButtonItems = [accountButton]
 	}
 	

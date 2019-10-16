@@ -6,6 +6,7 @@ target 'DatXanhManagement' do
   # use_frameworks!
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
   pod 'Toaster'
+  pod 'Cosmos'
 
   # Pods for DatXanhManagement
 

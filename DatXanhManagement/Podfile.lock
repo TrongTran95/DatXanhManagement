@@ -1,20 +1,25 @@
 PODS:
+  - Cosmos (20.0.1)
   - OneSignal (2.10.0)
   - Toaster (2.2.0)
 
 DEPENDENCIES:
+  - Cosmos
   - OneSignal (< 3.0, >= 2.6.2)
   - Toaster
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - OneSignal
     - Toaster
+  trunk:
+    - Cosmos
 
 SPEC CHECKSUMS:
+  Cosmos: b47fddf2102bb48580cd3025d9ce0a5c658a65da
   OneSignal: 0f5ff711d9f25da54885e4ab06ef0abc221a46ef
   Toaster: c1a81b376edcc2470157b4d1ee1e9341d3b96455
 
-PODFILE CHECKSUM: ef0ee96ab25f5b6cbf3d950389a91a69c4f56810
+PODFILE CHECKSUM: df353ee55e95bf8d3f9a840168c36bd8c80e7f60
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.3
