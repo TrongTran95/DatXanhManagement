@@ -37,6 +37,19 @@ func createCancelAlert(title: String, message: String, cancelTitle: String) -> U
     return alert
 }
 
+func create1ActionAlert(title: String, message: String, actionTitle: String, cancelTitle: String, cancelCompletion:(() -> Void)?, actionCompletion:@escaping() -> Void) -> UIAlertController {
+	let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+	let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { (action) in
+		cancelCompletion!()
+	}
+	let action = UIAlertAction(title: actionTitle, style: .default) { (action) in
+		actionCompletion()
+	}
+	alert.addAction(action)
+	alert.addAction(cancelAction)
+	return alert
+}
+
 func getJsonUsingPost(strURL: String, strParams: String, completion: @escaping(Dictionary<String, Any>) -> Void){
 	//Create an url
 	let url = URL(string: strURL)

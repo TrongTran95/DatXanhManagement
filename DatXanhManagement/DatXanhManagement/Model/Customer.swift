@@ -33,6 +33,7 @@ class Customer {
     private(set) public var statusNewcomer:Int
 	
 	private(set) public var note:String
+	private(set) public var star:Int
 	
 	init() {
 		self.idCustomer = 0
@@ -58,6 +59,11 @@ class Customer {
         
         self.statusNewcomer = 0
 		self.note = ""
+		self.star = 0
+	}
+	
+	func setStar(star: Int){
+		self.star = star
 	}
 	
 	func setNote(note: String){

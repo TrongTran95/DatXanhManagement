@@ -23,3 +23,5 @@ let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
 let NOTE_PLACE_HOLDER = "Nhập ghi chú..."
+let ALERT_DATA_CHANGED = "Data changed"
+let ALERT_ASK_FOR_SAVE = "Do you want to save new data ?"

@@ -10,7 +10,7 @@ import UIKit
 import CallKit
 import Cosmos
 
-class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CustomerListVC: UIViewController {
 	
 	var project = Project()
 
@@ -69,6 +69,9 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	var pushCustomerId: Int = 0
 	
+	var flagStar: Bool = false
+	var flagNote: Bool = false
+	
 	@IBAction func editOrInfoButtonClicked(_ sender: UIButton) {
 		if sender.currentImage == #imageLiteral(resourceName: "edit") {
 			viewNoteContainer.isHidden = false
@@ -82,6 +85,41 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 	
 	//Cancel button, turn off customer detail view, back to customer list
 	@IBAction func backToCustomerListButtonClicked(_ sender: Any) {
+		flagStar = true
+		if (flagStar == true || flagNote == true){
+			let alert = create1ActionAlert(title: ALERT_DATA_CHANGED, message: ALERT_ASK_FOR_SAVE, actionTitle: "Save", cancelTitle: "Cancel", cancelCompletion: {
+				//Handle for cancel action
+				self.handleCancelingAfterChooseInAlert()
+			}) {
+				//self.handleCancelingAfterChooseInAlert()
+				//Handle for save action
+				//Change in both rating star and note
+				if (self.flagStar == true && self.flagNote == true) {
+					//Check 400 characters
+					if self.txtvNote.text.count > 400 {
+						
+					} else {
+						self.flagNote = false
+					}
+					
+					self.flagStar = false
+					
+				}
+				//Change in rating star
+				else if (self.flagStar == true && self.flagNote == false){
+					self.flagStar = false
+				}
+				//Change in and note
+				else {
+					self.flagNote = false
+				}
+			}
+			self.present(alert, animated: true, completion: nil)
+		}
+		
+	}
+	
+	func handleCancelingAfterChooseInAlert(){
 		//Hide Customer detail view
 		viewCustomerDetailContainer.isHidden = true
 		UIView.animate(withDuration: 0.5) {
@@ -121,7 +159,6 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		super.viewWillAppear(animated)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
@@ -130,46 +167,17 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification , object: nil)
 	}
 	
-	
-	@objc func keyboardWillAppear(notification: NSNotification?) {
-		
-		guard let keyboardFrame = notification?.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
-			return
-		}
-		
-		let keyboardHeight: CGFloat
-		if #available(iOS 11.0, *) {
-			keyboardHeight = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
-		} else {
-			keyboardHeight = keyboardFrame.cgRectValue.height
-		}
-		
-		self.csBottomOfDetailCustomerView.constant = keyboardHeight + 30.0
-		UIView.animate(withDuration: 0.5) {
-			self.view.layoutIfNeeded()
-		}
-	}
-	// Hide Keyboard when tapped somewhere on screen
-	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-		view.endEditing(true)
-	}
-	
-	@objc func keyboardWillDisappear(notification: NSNotification?) {
-		self.csBottomOfDetailCustomerView.constant = 30.0
-		UIView.animate(withDuration: 0.5) {
-			self.view.layoutIfNeeded()
-		}
-	}
-	
-	func setupUI(){
+	func setupUI() {
 		viewRating.addSubview(cosmosView)
-		let contraints = AutoLayout.shared.getCenterConstraint(currentView: cosmosView, destinationView: viewRating)
+		viewRating.layer.cornerRadius = 20
 		
+		let contraints = AutoLayout.shared.getCenterConstraint(currentView: cosmosView, destinationView: viewRating)
 		viewRating.addConstraints(contraints)
-//		cosmosView.center = viewRating.center
+		
 		cosmosView.didTouchCosmos = { rating in
-			print("abcxyz")
+
 		}
+		
 		txtvNote.delegate = self
 		if chosenCustomer.note == "" {
 			txtvNote.text = NOTE_PLACE_HOLDER
@@ -188,7 +196,6 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		tbCustomerDetail.dataSource = self
 		tbCustomerDetail.rowHeight = UITableView.automaticDimension
 		tbCustomerDetail.estimatedRowHeight = 600
-
 	}
 	
 	//Setup data for first time
@@ -198,75 +205,21 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		//Set page's title (name of project)
 		self.title = self.project.name
 		//Set customer quantity information
-//		setupCustomerQuantity()
+		//setupCustomerQuantity()
 	}
 	
-	//Setup call management
-	func setupCallingManager(){
-		callObserver = CXCallObserver()
-		callObserver.setDelegate(self, queue: nil) // nil queue means main thread
-	}
-	
-	//Set customer quantity information
-//	func setupCustomerQuantity(){
+//	Set customer quantity information
+//	func setupCustomerQuantity() {
 //		let quantityStillNot = project.customerListSeperated[KEY_STILL_NOT]!.count
 //		let quantityAlready = project.customerListSeperated[KEY_ALREADY]!.count
 //		self.lblCustomerQuantity.text = "\(quantityStillNot)/\(quantityStillNot + quantityAlready) khách hàng cần được tư vấn"
 //	}
-	
-	//Number of section of table view
-	func numberOfSections(in tableView: UITableView) -> Int {
-		//Table customer list
-		if tableView == tbCustomerList {
-			return 2
-		}
-		//Table customer detail
-		else {
-			return 1
-		}
-	}
-	
-	//Set title for section
-	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		//Table customer list
-		if tableView == tbCustomerList {
-			if section == 0 {
-				return "Chưa liên lạc"
-			} else {
-				return "Đã liên lạc"
-			}
-		}
-		//Table customer detail
-		else {
-			return ""
-		}
-	}
-	
-	//Number of row in section
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		//Table customer list
-		if tableView == tbCustomerList {
-			//Still not contact customer list
-			if section == 0 {
-				return project.customerListSeperated[KEY_STILL_NOT]!.count
-			}
-			//Already contacted customer list
-			else {
-				return project.customerListSeperated[KEY_ALREADY]!.count
-			}
-		}
-		//Table customer detail
-		else {
-			return arrTitle.count
-		}
-	}
 	
 	func getCurrentMoment() -> DateComponents {
 		let date = Date()
 		let calendar = Calendar.current
 		return calendar.dateComponents([.hour, .minute, .second], from: date)
 	}
-	
 	
 	func calculateCalllMinutes() -> Float{
 		endMoment = getCurrentMoment()
@@ -356,6 +309,72 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 		return averageMins
 	}
 	
+	func showViewCustomerDetail(){
+		//Reset scroll position to 0
+		tbCustomerDetail.contentOffset = CGPoint.zero
+		
+		//Reload table customer detail to update new values
+		DispatchQueue.main.async {
+			self.tbCustomerDetail.reloadData()
+		}
+		
+		//Show Customer detail view
+		viewCustomerDetailContainer.isHidden = false
+		UIView.animate(withDuration: 0.5) {
+			self.viewCustomerDetailContainer.alpha = 1
+		}
+	}
+}
+
+// MARK: Table view
+extension CustomerListVC: UITableViewDelegate, UITableViewDataSource {
+	//Number of section of table view
+	func numberOfSections(in tableView: UITableView) -> Int {
+		//Table customer list
+		if tableView == tbCustomerList {
+			return 2
+		}
+			//Table customer detail
+		else {
+			return 1
+		}
+	}
+	
+	//Set title for section
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		//Table customer list
+		if tableView == tbCustomerList {
+			if section == 0 {
+				return "Chưa liên lạc"
+			} else {
+				return "Đã liên lạc"
+			}
+		}
+			//Table customer detail
+		else {
+			return ""
+		}
+	}
+	
+	//Number of row in section
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		//Table customer list
+		if tableView == tbCustomerList {
+			//Still not contact customer list
+			if section == 0 {
+				return project.customerListSeperated[KEY_STILL_NOT]!.count
+			}
+				//Already contacted customer list
+			else {
+				return project.customerListSeperated[KEY_ALREADY]!.count
+			}
+		}
+		//Table customer detail
+		else {
+			return arrTitle.count
+		}
+	}
+	
 	//Appearance of every cell of table
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		//Table customer list
@@ -370,7 +389,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 				//Set section
 				cell.section = KEY_STILL_NOT
 			}
-			//From Already contacted customer list
+				//From Already contacted customer list
 			else {
 				currentCustomer = project.customerListSeperated[KEY_ALREADY]![indexPath.row]
 				//Set section
@@ -380,7 +399,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			//Set customer name (3 checks)
 			var displayName: String = ""
 			//Check if customer don't have first name (access facebook)
- 			if (currentCustomer.firstName.contains("facebook.com")){
+			if (currentCustomer.firstName.contains("facebook.com")){
 				displayName = "Truy cập FB khách"
 			} else {
 				//Check if customer don't have last name
@@ -396,8 +415,6 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 				}
 			}
 			cell.lblCustomerName.text = displayName
-			
-			
 			
 			//Set customer phone number
 			cell.lblPhoneNumber.text = currentCustomer.phoneNumber
@@ -419,7 +436,7 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			return cell
 		}
 			
-		//Table customer detail
+			//Table customer detail
 		else {
 			let cell = tbCustomerDetail.dequeueReusableCell(withIdentifier: "customerCell", for: indexPath) as! CustomerDetailTVC
 			let currentRow = indexPath.row
@@ -486,42 +503,57 @@ class CustomerListVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 			if indexPath.section == 0 {
 				chosenCustomer = project.customerListSeperated[KEY_STILL_NOT]![indexPath.row]
 			}
-			//From Already contacted customer list
+				//From Already contacted customer list
 			else {
 				chosenCustomer = project.customerListSeperated[KEY_ALREADY]![indexPath.row]
 			}
 			showViewCustomerDetail()
 		}
-		//Table customer detail
+			//Table customer detail
 		else {
 			//Phone call row
 			if (indexPath.row == 3) {
 				let phoneNumber = chosenCustomer.phoneNumber
 				print(phoneNumber)
-//				let trongs = "0783636848"
+				//				let trongs = "0783636848"
 				phoneNumber.makeAColl()
 			}
 		}
 	}
-	
-	func showViewCustomerDetail(){
-		//Reset scroll position to 0
-		tbCustomerDetail.contentOffset = CGPoint.zero
-		
-		//Reload table customer detail to update new values
-		DispatchQueue.main.async {
-			self.tbCustomerDetail.reloadData()
-		}
-		
-		//Show Customer detail view
-		viewCustomerDetailContainer.isHidden = false
-		UIView.animate(withDuration: 0.5) {
-			self.viewCustomerDetailContainer.alpha = 1
-		}
-	}
 }
 
+// MARK: Text view delegate
 extension CustomerListVC: UITextViewDelegate {
+	@objc func keyboardWillAppear(notification: NSNotification?) {
+		
+		guard let keyboardFrame = notification?.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+			return
+		}
+		
+		let keyboardHeight: CGFloat
+		if #available(iOS 11.0, *) {
+			keyboardHeight = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+		} else {
+			keyboardHeight = keyboardFrame.cgRectValue.height
+		}
+		
+		self.csBottomOfDetailCustomerView.constant = keyboardHeight + 30.0
+		UIView.animate(withDuration: 0.5) {
+			self.view.layoutIfNeeded()
+		}
+	}
+	
+	// Hide Keyboard when tapped somewhere on screen
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		view.endEditing(true)
+	}
+	
+	@objc func keyboardWillDisappear(notification: NSNotification?) {
+		self.csBottomOfDetailCustomerView.constant = 30.0
+		UIView.animate(withDuration: 0.5) {
+			self.view.layoutIfNeeded()
+		}
+	}
 	
 	func textViewDidBeginEditing(_ textView: UITextView) {
 		if textView.textColor == UIColor.lightGray {
@@ -538,9 +570,9 @@ extension CustomerListVC: UITextViewDelegate {
 	}
 }
 
+// MARK: Calling
 extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 	func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall) {
-		
 		//End the phone call
 		if call.hasEnded == true {
 			print("Disconnected")
@@ -569,7 +601,7 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 							//reload table's data
 							DispatchQueue.main.async {
 								self.tbCustomerList.reloadData()
-//								self.setupCustomerQuantity()
+								//self.setupCustomerQuantity()
 								//Set call flag to false to reuse
 								self.connectFlag = false
 							}
@@ -600,8 +632,14 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 	
 	func didPressCallButton(section: String, row: Int) {
 		chosenCustomer = project.customerListSeperated[section]![row]
-//		let phoneNumber = chosenCustomer.phoneNumber
-		let trongs = chosenCustomer.phoneNumber
-		trongs.makeAColl()
+		//let phoneNumber = chosenCustomer.phoneNumber
+		let phoneNumber = chosenCustomer.phoneNumber
+		phoneNumber.makeAColl()
+	}
+	
+	//Setup call management
+	func setupCallingManager(){
+		callObserver = CXCallObserver()
+		callObserver.setDelegate(self, queue: nil) // nil queue means main thread
 	}
 }

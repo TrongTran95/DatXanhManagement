@@ -73,18 +73,16 @@ class TeamMemberTVController: UITableViewController {
     }
 	
 	func showAlert(){
-		let alert = UIAlertController(title: "Data changed", message: "Do you want to save new data ?", preferredStyle: .alert)
-		//Handler for cancel button
-		let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
+		let alert = create1ActionAlert(title: ALERT_DATA_CHANGED, message: ALERT_ASK_FOR_SAVE, actionTitle: "Save", cancelTitle: "Cancel", cancelCompletion: {
+			//Handler for cancel button
 			//Get data back from temporary user email detail list
 			self.userMembers = self.tempUserMembers
 			//Update new data of table view
 			self.tableView.reloadData()
 			//Release data
 			self.resetData()
-		}
-		//Handler for save button
-		let saveAction = UIAlertAction(title: "Save", style: .default) { (action) in
+		}) {
+			//Handler for save button
 			//Nothing in the UI change because we've made change every time we do something in an editing process
 			//Update new data to server
 			//Remove user email detail from server
@@ -95,8 +93,6 @@ class TeamMemberTVController: UITableViewController {
 			//Release data
 			self.resetData()
 		}
-		alert.addAction(cancelAction)
-		alert.addAction(saveAction)
 		self.present(alert, animated: true, completion: nil)
 	}
 	
