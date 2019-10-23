@@ -29,9 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func setupRootView(){
 		let nc = UINavigationController()
 //		window?.frame = UIScreen.main.bounds
-		let userEmail = defaults.object(forKey: KEY_USER_EMAIL) as? String
+		let userEmail = defaults.object(forKey: KEY_USER_EMAIL) as? String ?? ""
 		window?.frame = UIScreen.main.bounds
-		if (userEmail == nil) {
+		if (userEmail == "") {
 			let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
 //			nc.viewControllers = [loginVC]
 			window?.rootViewController = loginVC
@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			//Loading screen
 			setupTempView()
 
-			user.login(userName: userEmail!, password: userPassword, ios_token: ios_token) { (result) in
+			user.login(userName: userEmail, password: userPassword, ios_token: ios_token) { (result) in
 				if (result) {
 					//Personal
 					if (user.type == 1) {

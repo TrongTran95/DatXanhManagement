@@ -29,6 +29,32 @@ class UserVC: UIViewController {
 	
 	var loadingView: UIView!
 	
+	@IBOutlet weak var lblEmail: UILabel!
+	
+	@IBOutlet weak var userDetailView: UIView!
+	
+	@IBAction func ActionClickedButton(_ sender: UIButton) {
+		switch sender.currentTitle {
+		case "Change password":
+			self.performSegue(withIdentifier: "showChangePasswordView", sender: self)
+		case "Sign out":
+			let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+//			
+			defaults.set("", forKey: KEY_USER_EMAIL)
+			defaults.set("", forKey: KEY_USER_PASSWORD)
+			defaults.set("", forKey: KEY_USER_DEVICE_TOKEN)
+			
+			appDelegate.window?.rootViewController = loginVC
+			appDelegate.window?.makeKeyAndVisible()
+			self.present(loginVC, animated: true, completion: nil)
+		default:
+			UIView.animate(withDuration: 0.3) {
+				self.userDetailView.alpha = 0
+			}
+		}
+	}
+	
+	
     override func viewDidLoad() {
         super.viewDidLoad()
 		//Hide back button
@@ -49,12 +75,23 @@ class UserVC: UIViewController {
 	}
 	
 	@objc func accountButtonClicked(){
-		
+		if (userDetailView.alpha == 0) {
+			UIView.animate(withDuration: 0.3) {
+				self.userDetailView.alpha = 1
+			}
+		} else {
+			UIView.animate(withDuration: 0.3) {
+				self.userDetailView.alpha = 0
+			}
+		}
 	}
 	
 	func setupUI(){
-		let accountButton = UIBarButtonItem(image: #imageLiteral(resourceName: "sign-out"), style: .plain, target: self, action: #selector(accountButtonClicked))
+		let accountButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Account"), style: .plain, target: self, action: #selector(accountButtonClicked))
 		self.navigationItem.leftBarButtonItems = [accountButton]
+		
+//		lblEmail.sizeToFit()
+		lblEmail.adjustsFontSizeToFitWidth = true
 	}
 	
 	func setupLoadingView(){
@@ -71,6 +108,7 @@ class UserVC: UIViewController {
 	func getUserProjects(){
 		setupLoadingView()
 		projects = []
+		//Chua có user email address
 		Services.shared.getUserProjects(emailAddress: user.emailAddress) { (userProjects) in
 			for i in 0..<userProjects.count{
 				//Add a new null project
