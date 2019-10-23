@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DatXanhManagement/AppDelegate.swift"
-            timestampString = "593523837.109334"
+            timestampString = "593538654.048808"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "123"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DatXanhManagement/AppDelegate.swift"
-            timestampString = "593523837.1099809"
+            timestampString = "593538654.048907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "139"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DatXanhManagement/AppDelegate.swift"
-            timestampString = "593523837.110147"
+            timestampString = "593538654.048969"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "149"
@@ -122,13 +122,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DatXanhManagement/Controller/UserVC.swift"
-            timestampString = "593523837.110297"
+            timestampString = "593538318.571449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
             endingLineNumber = "133"
             landmarkName = "getUserProjects()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 (Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; () in DatXanhManagement.UserVC.getUserProjects() -&gt; ()"
+                  moduleName = "DatXanhManagement"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trongtran/Document/Github/DatXanhManagement/DatXanhManagement/DatXanhManagement/Controller/UserVC.swift"
+                  timestampString = "593538320.324121"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "133"
+                  endingLineNumber = "133"
+                  offsetFromSymbolStart = "197">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (DatXanhManagement.Project, DatXanhManagement.Project) -&gt; Swift.Bool in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in closure #1 (Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; () in DatXanhManagement.UserVC.getUserProjects() -&gt; ()"
+                  moduleName = "DatXanhManagement"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trongtran/Document/Github/DatXanhManagement/DatXanhManagement/DatXanhManagement/Controller/UserVC.swift"
+                  timestampString = "593538320.328717"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "133"
+                  endingLineNumber = "133"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -138,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DatXanhManagement/Controller/UserVC.swift"
-            timestampString = "593523837.111681"
+            timestampString = "593538318.573312"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
@@ -154,11 +186,11 @@
                   moduleName = "DatXanhManagement"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/trongtran/Document/Github/DatXanhManagement/DatXanhManagement/DatXanhManagement/Controller/UserVC.swift"
-                  timestampString = "593523837.3380001"
+                  timestampString = "593538320.338343"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "111"
-                  endingLineNumber = "111"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
                   offsetFromSymbolStart = "169">
                </Location>
                <Location
@@ -169,11 +201,11 @@
                   moduleName = "DatXanhManagement"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/trongtran/Document/Github/DatXanhManagement/DatXanhManagement/DatXanhManagement/Controller/UserVC.swift"
-                  timestampString = "593523837.347103"
+                  timestampString = "593538320.342048"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "112"
-                  endingLineNumber = "112"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
                   offsetFromSymbolStart = "63">
                </Location>
             </Locations>
@@ -186,13 +218,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DatXanhManagement/Controller/UserVC.swift"
-            timestampString = "593523837.112493"
+            timestampString = "593538318.574066"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "112"
             endingLineNumber = "112"
             landmarkName = "getUserProjects()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DatXanhManagement.UserVC.getUserProjects() -&gt; ()"
+                  moduleName = "DatXanhManagement"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trongtran/Document/Github/DatXanhManagement/DatXanhManagement/DatXanhManagement/Controller/UserVC.swift"
+                  timestampString = "593538320.352257"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "112"
+                  endingLineNumber = "112"
+                  offsetFromSymbolStart = "169">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; () in DatXanhManagement.UserVC.getUserProjects() -&gt; ()"
+                  moduleName = "DatXanhManagement"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trongtran/Document/Github/DatXanhManagement/DatXanhManagement/DatXanhManagement/Controller/UserVC.swift"
+                  timestampString = "593538320.354809"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "63">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -202,7 +266,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DatXanhManagement/Controller/UserVC.swift"
-            timestampString = "593523837.113239"
+            timestampString = "593538318.5747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "114"

@@ -38,13 +38,13 @@ class LoginVC: UIViewController {
 						//0 is team, 1 is personal
 						if (self.user.type == 1){
 							let userVC = mainStoryboard.instantiateViewController(withIdentifier: "UserVC") as! UserVC
+							userVC.user = self.user
 							//			nc.viewControllers = [loginVC]
 							let nc = UINavigationController()
 							nc.viewControllers = [userVC]
 							appDelegate.window?.rootViewController = nc
 							appDelegate.window?.makeKeyAndVisible()
-
-							self.performSegue(withIdentifier: "showUserPage", sender: self)
+							self.present(nc, animated: true, completion: nil)
 						}
 						else {
 							self.performSegue(withIdentifier: "showTeamMenu", sender: self)
