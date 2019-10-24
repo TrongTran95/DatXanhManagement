@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	}
 	
 	func setupRootView(){
-		let nc = UINavigationController()
 //		window?.frame = UIScreen.main.bounds
 		let userEmail = defaults.object(forKey: KEY_USER_EMAIL) as? String ?? ""
 		window?.frame = UIScreen.main.bounds
@@ -46,45 +45,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 			user.login(userName: userEmail, password: userPassword, ios_token: ios_token) { (result) in
 				if (result) {
-					//Personal
-					if (user.type == 1) {
-						let userVC = mainStoryboard.instantiateViewController(withIdentifier: "UserVC") as! UserVC
-						
+					if user.type == 2 {
+						let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
 						DispatchQueue.main.async {
-							if (user.lastName == "" && user.firstName == ""){
-								userVC.navigationItem.title = user.emailAddress
-							} else {
-								if (user.firstName == "" || user.lastName == ""){
-									if (user.firstName == ""){
-										userVC.navigationItem.setTitle(title: user.lastName, subtitle: user.emailAddress)
-									}
-									if (user.lastName == ""){
-										userVC.navigationItem.setTitle(title: user.firstName, subtitle: user.emailAddress)
-									}
+							self.window?.rootViewController = loginVC
+							self.window?.makeKeyAndVisible()
+						}
+					} else {
+						let nc = UINavigationController()
+						//Personal
+						if (user.type == 1) {
+							let userVC = mainStoryboard.instantiateViewController(withIdentifier: "UserVC") as! UserVC
+							
+							DispatchQueue.main.async {
+								if (user.lastName == "" && user.firstName == ""){
+									userVC.navigationItem.title = user.emailAddress
 								} else {
-									userVC.navigationItem.setTitle(title: "\(user.firstName) \(user.lastName)", subtitle: user.emailAddress)
+									if (user.firstName == "" || user.lastName == ""){
+										if (user.firstName == ""){
+											userVC.navigationItem.setTitle(title: user.lastName, subtitle: user.emailAddress)
+										}
+										if (user.lastName == ""){
+											userVC.navigationItem.setTitle(title: user.firstName, subtitle: user.emailAddress)
+										}
+									} else {
+										userVC.navigationItem.setTitle(title: "\(user.firstName) \(user.lastName)", subtitle: user.emailAddress)
+									}
 								}
 							}
+							userVC.user = user
+							nc.viewControllers = [userVC]
+							print("ssssssssssssss1")
 						}
-						userVC.user = user
-						nc.viewControllers = [userVC]
-						print("ssssssssssssss1")
-					}
-					//Team
-					else {
-						let teamTBC = mainStoryboard.instantiateViewController(withIdentifier: "TeamTBC") as! TeamTBC
-//						let teamVC = TeamTBC()
-						teamTBC.user = user
-						nc.viewControllers = [teamTBC]
+							//Team
+						else {
+							let teamTBC = mainStoryboard.instantiateViewController(withIdentifier: "TeamTBC") as! TeamTBC
+							teamTBC.user = user
+							nc.viewControllers = [teamTBC]
+							
+							//UITabBar.appearance().barTintColor = .black
+							UITabBar.appearance().tintColor = .red
+						}
 						
-						//UITabBar.appearance().barTintColor = .black
-						UITabBar.appearance().tintColor = .red
-					}
-					DispatchQueue.main.async {
-						print("ssssssssssssss2")
-						self.window?.rootViewController = nc
-						self.window?.makeKeyAndVisible()
-						print("ssssssssssssss3")
+						DispatchQueue.main.async {
+							self.window?.rootViewController = nc
+							self.window?.makeKeyAndVisible()
+						}
 					}
 				} else {
 					print("Check access to internet")

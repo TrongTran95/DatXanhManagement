@@ -39,9 +39,35 @@ class LoginVC: UIViewController {
 						if (self.user.type == 1){
 							let userVC = mainStoryboard.instantiateViewController(withIdentifier: "UserVC") as! UserVC
 							userVC.user = self.user
-							//			nc.viewControllers = [loginVC]
+							
+							DispatchQueue.main.async {
+								if (self.user.lastName == "" && self.user.firstName == ""){
+									userVC.navigationItem.title = self.user.emailAddress
+								} else {
+									if (self.user.firstName == "" || self.user.lastName == ""){
+										if (self.user.firstName == ""){
+											userVC.navigationItem.setTitle(title: self.user.lastName, subtitle: self.user.emailAddress)
+										}
+										if (self.user.lastName == ""){
+											userVC.navigationItem.setTitle(title: self.user.firstName, subtitle: self.user.emailAddress)
+										}
+									} else {
+										userVC.navigationItem.setTitle(title: "\(self.user.firstName) \(self.user.lastName)", subtitle: self.user.emailAddress)
+									}
+								}
+							}
 							let nc = UINavigationController()
 							nc.viewControllers = [userVC]
+							appDelegate.window?.rootViewController = nc
+							appDelegate.window?.makeKeyAndVisible()
+							self.present(nc, animated: true, completion: nil)
+							
+						}
+						else if (self.user.type == 2) {
+							let adminVC = mainStoryboard.instantiateViewController(withIdentifier: "AdminVC") as! AdminVC
+							adminVC.title = "Admin"
+							let nc = UINavigationController()
+							nc.viewControllers = [adminVC]
 							appDelegate.window?.rootViewController = nc
 							appDelegate.window?.makeKeyAndVisible()
 							self.present(nc, animated: true, completion: nil)
@@ -55,7 +81,6 @@ class LoginVC: UIViewController {
 				else {
 					print("Sai pass")
 				}
-				
 			}
 		}else {
 			//username or password is nil
@@ -66,18 +91,7 @@ class LoginVC: UIViewController {
 		super.viewDidLoad()
         setupUI()
 	}
-	override func viewWillAppear(_ animated: Bool) {
-//		self.navigationItem.titleView = setTitle(title: "abc", subtitle: "xyz")
-
-	}
-	override func viewDidAppear(_ animated: Bool) {
-//		self.navigationItem.titleView = setTitle(title: "abc", subtitle: "xyz")
-
-	}
 	
-	override func viewDidLayoutSubviews() {
-
-	}
 	func setupUI(){
 		btnLogin.layer.cornerRadius = 5
 		let grayNum:CGFloat = 161/255
@@ -85,41 +99,6 @@ class LoginVC: UIViewController {
 		txtPassword.layer.borderColor = grayColor
 		txtUsername.layer.borderColor = grayColor
 	}
-	
-//	func setTitle(title:String, subtitle:String) -> UIView {
-//		let titleLabel = UILabel(frame: CGRect(x: 0, y: -2, width: 0, height: 0))
-//
-//		titleLabel.backgroundColor = UIColor.clear
-//		titleLabel.textColor = UIColor.gray
-//		titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
-//		titleLabel.text = title
-//		titleLabel.sizeToFit()
-//
-//		let subtitleLabel = UILabel(frame: CGRect(x: 0, y: 18, width: 0, height: 0))
-//		subtitleLabel.backgroundColor = UIColor.clear
-//		subtitleLabel.textColor = UIColor.black
-//		subtitleLabel.font = UIFont.systemFont(ofSize: 12)
-//		subtitleLabel.text = subtitle
-//		subtitleLabel.sizeToFit()
-//
-//		let titleView = UIView(frame: CGRect(x: 0, y: 0, width: max(titleLabel.frame.size.width, subtitleLabel.frame.size.width), height: 30))
-//		titleView.addSubview(titleLabel)
-//		titleView.addSubview(subtitleLabel)
-//
-//		let widthDiff = subtitleLabel.frame.size.width - titleLabel.frame.size.width
-//
-//		if widthDiff < 0 {
-//			let newX = widthDiff / 2
-//			subtitleLabel.frame.origin.x = abs(newX)
-//		} else {
-//			let newX = widthDiff / 2
-//			titleLabel.frame.origin.x = newX
-//		}
-//
-//		return titleView
-//	}
-
-	
 	
 	@IBAction func changeUsername(_ sender: Any) {
 		if smTestUsername.selectedSegmentIndex == 0{
@@ -140,38 +119,5 @@ class LoginVC: UIViewController {
             guard let teamTBC = segue.destination as? TeamTBC else { return }
             teamTBC.user = self.user
         }
-	}
-}
-
-extension UINavigationItem {
-	func setTitle(title:String, subtitle:String) {
-		
-		let one = UILabel()
-		one.text = title
-		one.font = UIFont.systemFont(ofSize: 17)
-		one.sizeToFit()
-		
-		let two = UILabel()
-		two.text = subtitle
-		two.font = UIFont.systemFont(ofSize: 12)
-		two.textAlignment = .center
-		two.sizeToFit()
-		
-		
-		
-		let stackView = UIStackView(arrangedSubviews: [one, two])
-		stackView.distribution = .equalCentering
-		stackView.axis = .vertical
-		stackView.alignment = .center
-		
-		let width = max(one.frame.size.width, two.frame.size.width)
-		stackView.frame = CGRect(x: 0, y: 0, width: width, height: 35)
-		
-		one.sizeToFit()
-		two.sizeToFit()
-		
-		
-		
-		self.titleView = stackView
 	}
 }

@@ -151,4 +151,21 @@ class Services {
 			completion(json["error"] as! Bool)
 		}
 	}
+	
+	func getAllUser(completion: @escaping ([User]) -> ()){
+		getJsonUsingGet(strURL: urlGetAllUser) { (json) in
+			let usersJson = json["users"] as! [[String:Any]]
+			var users: [User] = []
+			for user in usersJson {
+				let newUser = User()
+				newUser.setEmailAddress(emailAddress: user["emailAddress"] as? String ?? "")
+				newUser.setType(type: user["type"] as? Int ?? 0)
+				newUser.setLastName(lastName: user["lastName"] as? String ?? "")
+				newUser.setFirstName(firstName: user["firstName"] as? String ?? "")
+				users.append(newUser)
+			}
+			users = users.sorted(by: {$0.type > $1.type})
+			completion(users)
+		}
+	}
 }

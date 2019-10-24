@@ -28,6 +28,21 @@ class User {
         self.userEmailDetailList = []
 	}
 	
+	func setType(type: Int) {
+		self.type = type
+	}
+	func setFirstName(firstName: String) {
+		self.firstName = firstName
+	}
+	
+	func setLastName(lastName: String) {
+		self.lastName = lastName
+	}
+	
+	func setEmailAddress(emailAddress: String) {
+		self.emailAddress = emailAddress
+	}
+	
 	//Use this function to copy a new user email detail list
 	func setUserEmailDetailList(userEmailDetailList: [UserEmailDetail]){
 		self.userEmailDetailList = []

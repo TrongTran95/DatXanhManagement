@@ -10,8 +10,6 @@ import UIKit
 import Toaster
 
 class TeamSettingTVController: UITableViewController {
-    
-    
     var user:User!
     var tempUser: User = User()
 	var arrRemovedID: [Int] = []
@@ -22,10 +20,7 @@ class TeamSettingTVController: UITableViewController {
     
     var addView: AddMemberView? = nil
     var projectName: String!
-    
-    
-    
-    
+	
     override func viewDidLoad() {
         super.viewDidLoad()
     }
