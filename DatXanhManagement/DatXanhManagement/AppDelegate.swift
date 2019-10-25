@@ -41,8 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			let user = User()
 			
 			//Loading screen
-			setupTempView()
-
+			if (userEmail != "admin") {
+				setupTempView()
+			}
+			
 			user.login(userName: userEmail, password: userPassword, ios_token: ios_token) { (result) in
 				if (result) {
 					if user.type == 2 {

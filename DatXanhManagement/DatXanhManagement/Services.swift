@@ -116,6 +116,16 @@ class Services {
         }
     }
 	
+	
+	
+	//Add user
+	func addUser(emailAddress: String, type: Int, password: String, firstName: String, lastName: String, completion: @escaping (Bool) -> Void) {
+		let strParams = "emailAddress=" + emailAddress + "&type=" + "\(type)" + "&password=" + password + "&firstName=" + firstName + "&lastName=" + lastName
+		getJsonUsingPost(strURL: urlAddUser, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
 	func getUserProjects(emailAddress: String, completion: @escaping([[String:Any]]) -> Void){
 		let strParams: String = "email=" + emailAddress
 		getJsonUsingPost(strURL: urlGetUserProjects, strParams: strParams) { (json) in
@@ -166,6 +176,13 @@ class Services {
 			}
 			users = users.sorted(by: {$0.type > $1.type})
 			completion(users)
+		}
+	}
+	
+	func checkAccountExist(emailAddress: String, completion: @escaping (Bool) -> ()) {
+		let strParams = "emailAddress=" + emailAddress
+		getJsonUsingPost(strURL: urlCheckAccountExist, strParams: strParams) { (json) in
+			completion(json["exist"] as! Bool)
 		}
 	}
 }

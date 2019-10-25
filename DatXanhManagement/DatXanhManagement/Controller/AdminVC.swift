@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toaster
 
 enum UserType: Int {
 	case Team = 0
@@ -46,6 +47,52 @@ class AdminVC: UIViewController {
 	}
 	
 	@IBAction func actAddUser(_ sender: Any) {
+		let userName = txtUsername.text ?? ""
+		let password = txtPassword.text ?? ""
+		let type = smType.selectedSegmentIndex
+		let firstName = txtFirstName.text ?? ""
+		let lastName = txtLastName.text ?? ""
+		if (userName == "" || password == "" || firstName == "" || lastName == "") {
+			let alert = createCancelAlert(title: "Blank found", message: "", cancelTitle: "OK")
+			DispatchQueue.main.async {
+				self.present(alert, animated: true, completion: nil)
+			}
+			
+			
+			return
+		}
+		Services.shared.checkAccountExist(emailAddress: userName) { (exist) in
+			if (exist == true) {
+				let alert = createCancelAlert(title: "Existed user name", message: "", cancelTitle: "OK")
+				DispatchQueue.main.async {
+					self.present(alert, animated: true, completion: nil)
+				}
+				return
+			}
+			Services.shared.addUser(emailAddress: userName, type: type, password: password, firstName: firstName, lastName: lastName) { (error) in
+				if (error == true) {
+					let alert = createCancelAlert(title: "Can't add user", message: "Something wrong happened", cancelTitle: "OK")
+					DispatchQueue.main.async {
+						self.present(alert, animated: true, completion: nil)
+					}
+					return
+				}
+				DispatchQueue.main.async {
+					Toast(text: "Add successed", duration: Delay.short).show()
+					Services.shared.getAllUser(completion: { (users) in
+						self.users = users
+						DispatchQueue.main.async {
+							self.tvUserList.reloadData()
+							self.smType.selectedSegmentIndex = 0
+							self.txtUsername.text = ""
+							self.txtPassword.text = ""
+							self.txtFirstName.text = ""
+							self.txtLastName.text = ""
+						}
+					})
+				}
+			}
+		}
 		
 	}
 	

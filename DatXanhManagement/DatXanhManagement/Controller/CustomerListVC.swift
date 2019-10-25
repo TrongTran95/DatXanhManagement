@@ -8,7 +8,7 @@
 
 import UIKit
 import CallKit
-import Cosmos
+//import Cosmos
 
 class CustomerListVC: UIViewController {
 	
@@ -34,18 +34,23 @@ class CustomerListVC: UIViewController {
 	
 	@IBOutlet weak var btnInfoEdit: UIButton!
 	
-	lazy var cosmosView: CosmosView = {
-		let view = CosmosView()
-		view.settings.filledImage = #imageLiteral(resourceName: "star_yellow").withRenderingMode(.alwaysOriginal)
-		view.settings.emptyImage = #imageLiteral(resourceName: "star_gray").withRenderingMode(.alwaysOriginal)
-		view.settings.totalStars = 5
-		view.settings.starSize = 30
-		view.settings.starMargin = 5
-		view.settings.fillMode = .full
-		view.translatesAutoresizingMaskIntoConstraints = false
-		//https://www.youtube.com/watch?v=Y4A_y29cy7Q
+	lazy var cosmosView: UIView = {
+				let view = UIView()
 		return view
+
 	}()
+//	lazy var cosmosView: CosmosView = {
+//		let view = CosmosView()
+//		view.settings.filledImage = #imageLiteral(resourceName: "star_yellow").withRenderingMode(.alwaysOriginal)
+//		view.settings.emptyImage = #imageLiteral(resourceName: "star_gray").withRenderingMode(.alwaysOriginal)
+//		view.settings.totalStars = 5
+//		view.settings.starSize = 30
+//		view.settings.starMargin = 5
+//		view.settings.fillMode = .full
+//		view.translatesAutoresizingMaskIntoConstraints = false
+//		//https://www.youtube.com/watch?v=Y4A_y29cy7Q
+//		return view
+//	}()
 	
 	var lblPlaceHolderNote : UILabel!
 	
@@ -174,9 +179,9 @@ class CustomerListVC: UIViewController {
 		let contraints = AutoLayout.shared.getCenterConstraint(currentView: cosmosView, destinationView: viewRating)
 		viewRating.addConstraints(contraints)
 		
-		cosmosView.didTouchCosmos = { rating in
-
-		}
+//		cosmosView.didTouchCosmos = { rating in
+//
+//		}
 		
 		txtvNote.delegate = self
 		if chosenCustomer.note == "" {
