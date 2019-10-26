@@ -17,7 +17,7 @@ class LoginVC: UIViewController {
 	
 	@IBOutlet weak var btnLogin: UIButton!
 	
-	@IBOutlet weak var smTestUsername: UISegmentedControl!
+	@IBOutlet weak var csCenterYOfLoginView: NSLayoutConstraint!
 	
 	let user = User()
 	
@@ -92,6 +92,17 @@ class LoginVC: UIViewController {
         setupUI()
 	}
 	
+	override func viewWillAppear(_ animated: Bool) {
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification , object: nil)
+	}
+	
 	func setupUI(){
 		btnLogin.layer.cornerRadius = 5
 		let grayNum:CGFloat = 161/255
@@ -99,17 +110,6 @@ class LoginVC: UIViewController {
 		txtPassword.layer.borderColor = grayColor
 		txtUsername.layer.borderColor = grayColor
 	}
-	
-	@IBAction func changeUsername(_ sender: Any) {
-		if smTestUsername.selectedSegmentIndex == 0{
-			txtUsername.text = "1ProjectsTest@gmail.com"
-		} else if smTestUsername.selectedSegmentIndex == 1{
-			txtUsername.text = "2ProjectsTest@gmail.com"
-		} else {
-			txtUsername.text = "test1@gmail.com"
-		}
-	}
-	
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "showUserPage") {
@@ -119,5 +119,30 @@ class LoginVC: UIViewController {
             guard let teamTBC = segue.destination as? TeamTBC else { return }
             teamTBC.user = self.user
         }
+	}
+}
+
+
+
+// MARK: Text view delegate
+extension LoginVC {
+	@objc func keyboardWillAppear(notification: NSNotification?) {
+		self.csCenterYOfLoginView.constant = -50
+		
+		UIView.animate(withDuration: 0.3) {
+			self.view.layoutIfNeeded()
+		}
+	}
+	
+	// Hide Keyboard when tapped somewhere on screen
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		view.endEditing(true)
+	}
+	
+	@objc func keyboardWillDisappear(notification: NSNotification?) {
+		self.csCenterYOfLoginView.constant = 0
+		UIView.animate(withDuration: 0.3) {
+			self.view.layoutIfNeeded()
+		}
 	}
 }

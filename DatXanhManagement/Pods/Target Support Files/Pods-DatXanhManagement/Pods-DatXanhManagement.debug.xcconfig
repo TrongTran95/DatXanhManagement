@@ -4,7 +4,7 @@ GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Toaster"
 LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/Cosmos" "${PODS_CONFIGURATION_BUILD_DIR}/Toaster"
 OTHER_CFLAGS = $(inherited) -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/Cosmos/Cosmos.modulemap" -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/Toaster/Toaster.modulemap"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Cosmos" -l"Toaster" -framework "Foundation" -framework "OneSignal" -framework "QuartzCore" -framework "SystemConfiguration" -framework "UIKit" -framework "UserNotifications"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Cosmos" -l"Toaster" -framework "CoreGraphics" -framework "Foundation" -framework "OneSignal" -framework "QuartzCore" -framework "SystemConfiguration" -framework "UIKit" -framework "UserNotifications" -framework "WebKit"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS -Xcc -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/Cosmos/Cosmos.modulemap" -Xcc -fmodule-map-file="${PODS_CONFIGURATION_BUILD_DIR}/Toaster/Toaster.modulemap"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)

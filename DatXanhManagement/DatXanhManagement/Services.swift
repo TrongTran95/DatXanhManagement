@@ -13,6 +13,20 @@ class Services {
     
     private init(){}
 	
+	func changePassword(emailAddress: String, password: String, completion: @escaping (Bool) -> ()) {
+		let strParams = "emailAddress=" + emailAddress + "&password=" + password
+		getJsonUsingPost(strURL: urlChangePassword, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
+	func checkPassword(emailAddress: String, password: String, completion: @escaping (Bool) -> ()) {
+		let strParams = "emailAddress=" + emailAddress + "&password=" + password
+		getJsonUsingPost(strURL: urlCheckPassword, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
 	func removeAllUserEmailSeperateStillNotReceived(emailTeam: String, projectName: String, completion: @escaping (Bool) -> Void){
 		let strParams = "emailTeam=" + emailTeam + "&projectName=" + projectName
 		getJsonUsingPost(strURL: urlRemoveAllUserEmailSeperateStillNotReceived, strParams: strParams) { (json) in

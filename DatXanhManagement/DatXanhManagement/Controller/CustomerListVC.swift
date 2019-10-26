@@ -8,7 +8,7 @@
 
 import UIKit
 import CallKit
-//import Cosmos
+import Cosmos
 
 class CustomerListVC: UIViewController {
 	
@@ -34,23 +34,18 @@ class CustomerListVC: UIViewController {
 	
 	@IBOutlet weak var btnInfoEdit: UIButton!
 	
-	lazy var cosmosView: UIView = {
-				let view = UIView()
+	lazy var cosmosView: CosmosView = {
+		let view = CosmosView()
+		view.settings.filledImage = #imageLiteral(resourceName: "star_yellow").withRenderingMode(.alwaysOriginal)
+		view.settings.emptyImage = #imageLiteral(resourceName: "star_gray").withRenderingMode(.alwaysOriginal)
+		view.settings.totalStars = 5
+		view.settings.starSize = 30
+		view.settings.starMargin = 5
+		view.settings.fillMode = .full
+		view.translatesAutoresizingMaskIntoConstraints = false
+		//https://www.youtube.com/watch?v=Y4A_y29cy7Q
 		return view
-
 	}()
-//	lazy var cosmosView: CosmosView = {
-//		let view = CosmosView()
-//		view.settings.filledImage = #imageLiteral(resourceName: "star_yellow").withRenderingMode(.alwaysOriginal)
-//		view.settings.emptyImage = #imageLiteral(resourceName: "star_gray").withRenderingMode(.alwaysOriginal)
-//		view.settings.totalStars = 5
-//		view.settings.starSize = 30
-//		view.settings.starMargin = 5
-//		view.settings.fillMode = .full
-//		view.translatesAutoresizingMaskIntoConstraints = false
-//		//https://www.youtube.com/watch?v=Y4A_y29cy7Q
-//		return view
-//	}()
 	
 	var lblPlaceHolderNote : UILabel!
 	
@@ -543,7 +538,7 @@ extension CustomerListVC: UITextViewDelegate {
 		}
 		
 		self.csBottomOfDetailCustomerView.constant = keyboardHeight + 30.0
-		UIView.animate(withDuration: 0.5) {
+		UIView.animate(withDuration: 0.3) {
 			self.view.layoutIfNeeded()
 		}
 	}
@@ -555,7 +550,7 @@ extension CustomerListVC: UITextViewDelegate {
 	
 	@objc func keyboardWillDisappear(notification: NSNotification?) {
 		self.csBottomOfDetailCustomerView.constant = 30.0
-		UIView.animate(withDuration: 0.5) {
+		UIView.animate(withDuration: 0.3) {
 			self.view.layoutIfNeeded()
 		}
 	}

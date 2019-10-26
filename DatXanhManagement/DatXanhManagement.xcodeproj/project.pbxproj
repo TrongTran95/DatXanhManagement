@@ -29,6 +29,7 @@
 		804F4FE822DCACD80083044C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 804F4FE722DCACD80083044C /* Extension.swift */; };
 		805209B022E849780085EA2D /* PublicConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805209AF22E849780085EA2D /* PublicConstraint.swift */; };
 		8075C45623612F0F00C115AF /* AdminVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8075C45523612F0F00C115AF /* AdminVC.swift */; };
+		8084E9792364224300A13BE8 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8084E9782364224300A13BE8 /* ChangePasswordVC.swift */; };
 		8097E728230D900C0014C211 /* UserMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097E727230D900C0014C211 /* UserMember.swift */; };
 		80B9C2DB23620C8F009D0623 /* UserListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B9C2DA23620C8F009D0623 /* UserListTVC.swift */; };
 		80C3413322DDA846001F77F5 /* CustomerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413222DDA846001F77F5 /* CustomerListVC.swift */; };
@@ -105,6 +106,7 @@
 		804F4FE722DCACD80083044C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		805209AF22E849780085EA2D /* PublicConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicConstraint.swift; sourceTree = "<group>"; };
 		8075C45523612F0F00C115AF /* AdminVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminVC.swift; sourceTree = "<group>"; };
+		8084E9782364224300A13BE8 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		8086BDE522F52C2A00E94F08 /* DatXanhManagement.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatXanhManagement.entitlements; sourceTree = "<group>"; };
 		8086BDE622F52D2F00E94F08 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		8097E727230D900C0014C211 /* UserMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMember.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */,
 				A2D1DF08230F7CEA00735E13 /* SeperateVC.swift */,
 				80B9C2DA23620C8F009D0623 /* UserListTVC.swift */,
+				8084E9782364224300A13BE8 /* ChangePasswordVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				8097E728230D900C0014C211 /* UserMember.swift in Sources */,
 				80F78B1723253A9F00240C86 /* UserEmailSeperate.swift in Sources */,
 				804F4FE622DCAB120083044C /* ProjectTVC.swift in Sources */,
+				8084E9792364224300A13BE8 /* ChangePasswordVC.swift in Sources */,
 				A2D1DF09230F7CEA00735E13 /* SeperateVC.swift in Sources */,
 				A24B8C1023026FC800252718 /* UserEmailDetail.swift in Sources */,
 				80B9C2DB23620C8F009D0623 /* UserListTVC.swift in Sources */,
@@ -716,7 +720,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -739,7 +743,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

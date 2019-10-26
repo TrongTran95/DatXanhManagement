@@ -55,3 +55,7 @@ public let urlGetAllUser: String = "\(urlHostApi)GetAllUser.php"
 public let urlAddUser: String = "\(urlHostApi)AddUser.php"
 
 public let urlCheckAccountExist: String = "\(urlHostApi)CheckAccountExist.php"
+
+public let urlCheckPassword: String = "\(urlHostApi)CheckPassword.php"
+
+public let urlChangePassword: String = "\(urlHostApi)ChangePassword.php"

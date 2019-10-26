@@ -36,24 +36,25 @@ class UserVC: UIViewController {
 	@IBAction func ActionClickedButton(_ sender: UIButton) {
 		switch sender.currentTitle {
 		case "Change password":
-			self.performSegue(withIdentifier: "showChangePasswordView", sender: self)
+			self.performSegue(withIdentifier: "showChangePassword", sender: self)
 		case "Sign out":
-			let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-//			
-			defaults.set("", forKey: KEY_USER_EMAIL)
-			defaults.set("", forKey: KEY_USER_PASSWORD)
-			defaults.set("", forKey: KEY_USER_DEVICE_TOKEN)
-			
-			appDelegate.window?.rootViewController = loginVC
-			appDelegate.window?.makeKeyAndVisible()
-			self.present(loginVC, animated: true, completion: nil)
+			let alert = create1ActionAlert(title: "Signout", message: "You won't receive new customer notification when signed out", actionTitle: "Ok", cancelTitle: "Cancel", cancelCompletion: nil) {
+				let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+				defaults.set("", forKey: KEY_USER_EMAIL)
+				defaults.set("", forKey: KEY_USER_PASSWORD)
+				defaults.set("", forKey: KEY_USER_DEVICE_TOKEN)
+				
+				appDelegate.window?.rootViewController = loginVC
+				appDelegate.window?.makeKeyAndVisible()
+				self.present(loginVC, animated: true, completion: nil)
+			}
+			self.present(alert, animated: true, completion: nil)
 		default:
 			UIView.animate(withDuration: 0.3) {
 				self.userDetailView.alpha = 0
 			}
 		}
 	}
-	
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,7 +212,9 @@ class UserVC: UIViewController {
 			if (defaults.object(forKey: KEY_ISPUSH) as? Bool) == true {
 				customerListVC.pushCustomerId = self.customerId
 			}
-
+		} else if segue.identifier == "showChangePassword" {
+			guard let changePasswordVC = segue.destination as? ChangePasswordVC else {return}
+			changePasswordVC.emailAddress = self.user.emailAddress
 		}
 	}
 }

@@ -70,6 +70,14 @@ func createCancelAlert(title: String, message: String, cancelTitle: String) -> U
     alert.addAction(cancelAction)
     return alert
 }
+func createCancelAlertWithAction(title: String, message: String, cancelTitle: String, cancelCompletion:@escaping (() -> Void)) -> UIAlertController {
+	let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+	let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel) { (action) in
+		cancelCompletion()
+	}
+	alert.addAction(cancelAction)
+	return alert
+}
 
 func create1ActionAlert(title: String, message: String, actionTitle: String, cancelTitle: String, cancelCompletion:(() -> Void)?, actionCompletion:@escaping() -> Void) -> UIAlertController {
 	let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
