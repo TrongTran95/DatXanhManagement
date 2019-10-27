@@ -37,10 +37,31 @@ class AdminVC: UIViewController {
 	
 	@IBOutlet weak var btnShowAddView: UIButton!
 	
+	@IBOutlet weak var pvProject: UIPickerView!
+	
 	var userType = UserType(rawValue: 0)!
 	
-	var activeTextField = UITextField()
 	var keyboardHeight: CGFloat = 0.0
+	var viewAddUserHeight: CGFloat!
+	var screenHeight: CGFloat!
+	var topBarHeight: CGFloat!
+	var spaceBetweenViewAddAndMainScreen:CGFloat!
+	
+	var users:[User] = []
+	
+	var projects: [Project] = []
+	var chosenProject: String = ""
+	
+	@IBAction func DidChangeValueUserType(_ sender: UISegmentedControl) {
+		switch sender.selectedSegmentIndex {
+		case 0:
+			pvProject.alpha = 1
+			pvProject.isUserInteractionEnabled = true
+		default:
+			pvProject.alpha = 0.5
+			pvProject.isUserInteractionEnabled = false
+		}
+	}
 	
 	@IBAction func DidSelectUserType(_ sender: UISegmentedControl) {
 		userType = UserType(rawValue: sender.selectedSegmentIndex)!
@@ -57,8 +78,6 @@ class AdminVC: UIViewController {
 			DispatchQueue.main.async {
 				self.present(alert, animated: true, completion: nil)
 			}
-			
-			
 			return
 		}
 		Services.shared.checkAccountExist(emailAddress: userName) { (exist) in
@@ -77,19 +96,22 @@ class AdminVC: UIViewController {
 					}
 					return
 				}
-				DispatchQueue.main.async {
-					Toast(text: "Add successed", duration: Delay.short).show()
-					Services.shared.getAllUser(completion: { (users) in
-						self.users = users
-						DispatchQueue.main.async {
-							self.tvUserList.reloadData()
-							self.smType.selectedSegmentIndex = 0
-							self.txtUsername.text = ""
-							self.txtPassword.text = ""
-							self.txtFirstName.text = ""
-							self.txtLastName.text = ""
+				if (type == 0) {
+					if (self.chosenProject == "") {
+						self.chosenProject = self.projects[0].name
+					}
+					Services.shared.addUserProject(email: userName, projectName: self.chosenProject, completion: { (error) in
+						if (error == true) {
+							let alert = createCancelAlert(title: "Can't add user", message: "Something wrong happened", cancelTitle: "OK")
+							DispatchQueue.main.async {
+								self.present(alert, animated: true, completion: nil)
+							}
+							return
 						}
+						self.HandleAddUserSuccess()
 					})
+				} else {
+					self.HandleAddUserSuccess()
 				}
 			}
 		}
@@ -110,21 +132,9 @@ class AdminVC: UIViewController {
 		}
 	}
 	
-	var viewAddUserHeight: CGFloat!
-	var screenHeight: CGFloat!
-	var topBarHeight: CGFloat!
-	var spaceBetweenViewAddAndMainScreen:CGFloat!
-	
-	var users:[User] = []
-	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		viewRealAddUser.translatesAutoresizingMaskIntoConstraints = false
-		txtLastName.delegate = self
-		txtPassword.delegate = self
-		txtUsername.delegate = self
-		txtFirstName.delegate = self
-		activeTextField.delegate = self
 		
 		viewAddUserHeight = viewRealAddUser.frame.size.height
 		screenHeight = UIScreen.main.bounds.size.height
@@ -133,6 +143,9 @@ class AdminVC: UIViewController {
 		spaceBetweenViewAddAndMainScreen = (screenHeight - topBarHeight - viewAddUserHeight)/2
 		
 		btnShowAddView.layer.cornerRadius = btnShowAddView.frame.size.height / 2
+		
+		pvProject.delegate = self
+		pvProject.dataSource = self
 		
 		Services.shared.getAllUser { (users) in
 			self.users = users
@@ -145,12 +158,52 @@ class AdminVC: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+		
+		Services.shared.getAllProject { (projects) in
+			self.projects = projects
+			DispatchQueue.main.async {
+				self.pvProject.reloadAllComponents()
+			}
+		}
+		
+		let signoutButton = UIBarButtonItem(image: #imageLiteral(resourceName: "sign-out"), style: .plain, target: self, action: #selector(signOut))
+		self.navigationItem.leftBarButtonItem = signoutButton
+
+	}
+	
+	@objc func signOut(){
+		let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+		defaults.set("", forKey: KEY_USER_EMAIL)
+		defaults.set("", forKey: KEY_USER_PASSWORD)
+		defaults.set("", forKey: KEY_USER_DEVICE_TOKEN)
+		
+		appDelegate.window?.rootViewController = loginVC
+		appDelegate.window?.makeKeyAndVisible()
+		self.present(loginVC, animated: true, completion: nil)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
 		NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification , object: nil)
+	}
+	
+	func HandleAddUserSuccess(){
+		DispatchQueue.main.async {
+			Toast(text: "Add successed", duration: Delay.short).show()
+			Services.shared.getAllUser(completion: { (users) in
+				self.users = users
+				DispatchQueue.main.async {
+					self.tvUserList.reloadData()
+					self.smType.selectedSegmentIndex = 0
+					self.pvProject.selectRow(0, inComponent: 0, animated: false)
+					self.txtUsername.text = ""
+					self.txtPassword.text = ""
+					self.txtFirstName.text = ""
+					self.txtLastName.text = ""
+				}
+			})
+		}
 	}
 }
 
@@ -171,7 +224,7 @@ extension AdminVC: UITableViewDelegate, UITableViewDataSource {
 	}
 }
 
-extension AdminVC: UITextFieldDelegate {
+extension AdminVC {
 	@objc func keyboardWillAppear(notification: NSNotification?) {
 		guard let keyboardFrame = notification?.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
 			return
@@ -182,21 +235,26 @@ extension AdminVC: UITextFieldDelegate {
 			keyboardHeight = keyboardFrame.cgRectValue.height
 		}
 		
-		if (viewAddUser.selectedTextField == txtLastName) {
-			if (keyboardHeight > spaceBetweenViewAddAndMainScreen + 60) {
-				self.csCenterYOfViewAddUser.constant = -(keyboardHeight - 60 - spaceBetweenViewAddAndMainScreen)
-			}
-		} else if (viewAddUser.selectedTextField == txtFirstName) {
-			if (keyboardHeight > spaceBetweenViewAddAndMainScreen + 60 + 53) {
-				let newSpace:CGFloat = 60 + 53 + 10
-				self.csCenterYOfViewAddUser.constant = -keyboardHeight + newSpace + spaceBetweenViewAddAndMainScreen
-			}
-		} else if (viewAddUser.selectedTextField == txtPassword) {
-			if (keyboardHeight > spaceBetweenViewAddAndMainScreen + 70 + 106) {
-				let newSpace:CGFloat = 60 + 106 + 20
-				self.csCenterYOfViewAddUser.constant = -keyboardHeight + newSpace + spaceBetweenViewAddAndMainScreen
-			}
+		if (keyboardHeight > spaceBetweenViewAddAndMainScreen + 170) {
+			let move = keyboardHeight - spaceBetweenViewAddAndMainScreen - 165
+			self.csCenterYOfViewAddUser.constant = -move
 		}
+		
+//		if (viewAddUser.selectedTextField == txtLastName) {
+//			if (keyboardHeight > spaceBetweenViewAddAndMainScreen + 60) {
+//				self.csCenterYOfViewAddUser.constant = -(keyboardHeight - 60 - spaceBetweenViewAddAndMainScreen)
+//			}
+//		} else if (viewAddUser.selectedTextField == txtFirstName) {
+//			if (keyboardHeight > spaceBetweenViewAddAndMainScreen + 60 + 53) {
+//				let newSpace:CGFloat = 60 + 53 + 10
+//				self.csCenterYOfViewAddUser.constant = -keyboardHeight + newSpace + spaceBetweenViewAddAndMainScreen
+//			}
+//		} else if (viewAddUser.selectedTextField == txtPassword) {
+//			if (keyboardHeight > spaceBetweenViewAddAndMainScreen + 70 + 106) {
+//				let newSpace:CGFloat = 60 + 106 + 20
+//				self.csCenterYOfViewAddUser.constant = -keyboardHeight + newSpace + spaceBetweenViewAddAndMainScreen
+//			}
+//		}
 		UIView.animate(withDuration: 0.3) {
 			self.view.layoutIfNeeded()
 		}
@@ -215,15 +273,29 @@ extension AdminVC: UITextFieldDelegate {
 	}
 }
 
-extension UIView {
-	var textFieldsInView: [UITextField] {
-		return subviews
-			.filter ({ !($0 is UITextField) })
-			.reduce (( subviews.compactMap { $0 as? UITextField }), { summ, current in
-				return summ + current.textFieldsInView
-			})
+extension AdminVC: UIPickerViewDelegate, UIPickerViewDataSource {
+	func numberOfComponents(in pickerView: UIPickerView) -> Int {
+		return 1
 	}
-	var selectedTextField: UITextField? {
-		return textFieldsInView.filter { $0.isFirstResponder }.first
+	
+	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+		return projects.count
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+		let label = (view as? UILabel) ?? UILabel()
+		
+		label.textColor = .black
+		label.textAlignment = .center
+		label.font = UIFont(name: "SanFranciscoText-Light", size: 18)
+		
+		// where data is an Array of String
+		label.text = projects[row].name
+		
+		return label
+	}
+	
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		chosenProject = projects[row].name
 	}
 }

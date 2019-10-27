@@ -38,7 +38,7 @@ class UserVC: UIViewController {
 		case "Change password":
 			self.performSegue(withIdentifier: "showChangePassword", sender: self)
 		case "Sign out":
-			let alert = create1ActionAlert(title: "Signout", message: "You won't receive new customer notification when signed out", actionTitle: "Ok", cancelTitle: "Cancel", cancelCompletion: nil) {
+			let alert = create1ActionAlert(title: "Sign out", message: "You won't receive new customer notification after signed out", actionTitle: "Ok", cancelTitle: "Cancel", cancelCompletion: nil) {
 				let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
 				defaults.set("", forKey: KEY_USER_EMAIL)
 				defaults.set("", forKey: KEY_USER_PASSWORD)
@@ -111,6 +111,12 @@ class UserVC: UIViewController {
 		projects = []
 		//Chua có user email address
 		Services.shared.getUserProjects(emailAddress: user.emailAddress) { (userProjects) in
+			if (userProjects.count == 0) {
+				DispatchQueue.main.async {
+					self.loadingView.removeFromSuperview()
+				}
+				return
+			}
 			for i in 0..<userProjects.count{
 				//Add a new null project
 				self.projects.append(Project())
@@ -134,8 +140,6 @@ class UserVC: UIViewController {
 									self.projects.sort(by: { $0.name < $1.name })
 									self.tbProjects.reloadData()
 									self.loadingView.removeFromSuperview()
-//									self.lblWelcome.text = "\(self.user.firstName) \(self.user.lastName)"
-//									self.lblCurrentProject.text = "Your current project(s): \(self.projects.count)"
 									if (defaults.object(forKey: KEY_ISPUSH) as? Bool) == true {
 										self.selectProject(At: self.pushIndex)
 									}
@@ -144,21 +148,6 @@ class UserVC: UIViewController {
 						})
 					})
 				})
-				/*
-				//Get quantity of customer that still not contact yet
-				self.projects[i].getCustomerStillNotContactQuantity(emailTeam: self.user.emailTeam)
-				//Get and set project name
-				self.projects[i].getProjectInfo(completion: {
-				DispatchQueue.main.async {
-				//Only reload after got all project
-				if (i == projectNames.count - 1) {
-				self.cvProjects.reloadData()
-				self.lblWelcome.text = "\(self.user.firstName) \(self.user.lastName)"
-				self.lblCurrentProject.text = "Your current project(s): \(self.projects.count)"
-				}
-				}
-				})
-				*/
 			}
 		}
 	}

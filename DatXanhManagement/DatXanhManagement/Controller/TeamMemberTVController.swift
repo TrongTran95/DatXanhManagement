@@ -37,8 +37,9 @@ class TeamMemberTVController: UITableViewController {
     
     func setupUI(){
         self.tabBarController?.navigationItem.title = "Team members"
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonClicked))
-        self.tabBarController?.navigationItem.rightBarButtonItems = [addButton, self.editButtonItem]
+		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonClicked))
+		self.tabBarController?.navigationItem.rightBarButtonItems = [addButton, self.editButtonItem]
+		
     }
     
     func setupData(){

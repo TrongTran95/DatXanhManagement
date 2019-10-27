@@ -34,7 +34,7 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 				self.thirdTab.projectName = self.projectName
 			}
 		}
-    }
+	}
 	
 	func setupData(){
 		firstTab = self.viewControllers![0] as? TeamMemberTVController
@@ -50,6 +50,35 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 		forthTab.title = "Chart"
 		
 		UITabBar.appearance().tintColor = .red
+		
+		let accountButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Account"), style: .plain, target: self, action: #selector(showActionSheet))
+		self.navigationItem.leftBarButtonItem = accountButton
+	}
+	
+	@objc func showActionSheet() {
+		let alert = UIAlertController(title: user.emailAddress, message: "", preferredStyle: .actionSheet)
+		let actionChangePassword = UIAlertAction(title: "Change password", style: .default) { (action) in
+			self.performSegue(withIdentifier: "showChangePassword", sender: self)
+		}
+		let actionSignOut = UIAlertAction(title: "Sign out", style: .destructive) { (action) in
+			let alert = create1ActionAlert(title: "Sign out", message: "Are you sure you want to sign out", actionTitle: "Yes", cancelTitle: "No", cancelCompletion: nil) {
+				let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+				defaults.set("", forKey: KEY_USER_EMAIL)
+				defaults.set("", forKey: KEY_USER_PASSWORD)
+				defaults.set("", forKey: KEY_USER_DEVICE_TOKEN)
+				
+				appDelegate.window?.rootViewController = loginVC
+				appDelegate.window?.makeKeyAndVisible()
+				self.present(loginVC, animated: true, completion: nil)
+			}
+			self.present(alert, animated: true, completion: nil)
+
+		}
+		let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+		alert.addAction(actionChangePassword)
+		alert.addAction(actionSignOut)
+		alert.addAction(actionCancel)
+		self.present(alert, animated: true, completion: nil)
 	}
     
     func resetEditingMode(){
@@ -70,5 +99,12 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 	
 	func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 		
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "showChangePassword" {
+			guard let changePasswordVC = segue.destination as? ChangePasswordVC else {return}
+			changePasswordVC.emailAddress = self.user.emailAddress
+		}
 	}
 }

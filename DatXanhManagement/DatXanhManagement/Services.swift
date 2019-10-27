@@ -199,4 +199,25 @@ class Services {
 			completion(json["exist"] as! Bool)
 		}
 	}
+	
+	func getAllProject(completion: @escaping ([Project]) -> ()) {
+		getJsonUsingGet(strURL: urlGetAllProject) { (json) in
+			let projectJson = json["projects"] as! [[String:Any]]
+			var projects: [Project] = []
+			for project in projectJson {
+				let newProject = Project()
+				newProject.setName(projectName: project["name"] as? String ?? "")
+				projects.append(newProject)
+			}
+			projects = projects.sorted(by: {$0.name < $1.name})
+			completion(projects)
+		}
+	}
+	
+	func addUserProject(email: String, projectName: String, completion: @escaping(Bool) -> Void){
+		let strParams:String = "email=" + email + "&projectName=" + projectName
+		getJsonUsingPost(strURL: urlAddUserProject, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
 }
