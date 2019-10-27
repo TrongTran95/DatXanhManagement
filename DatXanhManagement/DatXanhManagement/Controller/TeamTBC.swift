@@ -12,6 +12,8 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 	var firstTab: TeamMemberTVController!
 	var secondTab: TeamSettingTVController!
 	var thirdTab: SeperateVC!
+	var forthTab: ChartVC!
+
     var user: User!
 	var projectName: String = ""
 
@@ -38,8 +40,16 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 		firstTab = self.viewControllers![0] as? TeamMemberTVController
 		secondTab = self.viewControllers![1] as? TeamSettingTVController
 		thirdTab = self.viewControllers![2] as? SeperateVC
+		forthTab = self.viewControllers![3] as? ChartVC
 		
 		firstTab.emailTeam = self.user.emailAddress
+		
+		firstTab.title = "Team members"
+		secondTab.title = "Order Samle"
+		thirdTab.tabBarItem.title = "Seperate"
+		forthTab.title = "Chart"
+		
+		UITabBar.appearance().tintColor = .red
 	}
     
     func resetEditingMode(){

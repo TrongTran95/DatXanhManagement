@@ -83,6 +83,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 						else {
 							let teamTBC = mainStoryboard.instantiateViewController(withIdentifier: "TeamTBC") as! TeamTBC
 							teamTBC.user = user
+							//Fix bug not showing tab bar item title
+							teamTBC.tabBar.items![0].title = ""
+							teamTBC.tabBar.items![1].title = ""
+							teamTBC.tabBar.items![2].title = ""
+							teamTBC.tabBar.items![3].title = ""
 							nc.viewControllers = [teamTBC]
 							
 							//UITabBar.appearance().barTintColor = .black

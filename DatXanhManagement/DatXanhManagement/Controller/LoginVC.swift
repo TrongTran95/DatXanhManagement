@@ -73,7 +73,13 @@ class LoginVC: UIViewController {
 							self.present(nc, animated: true, completion: nil)
 						}
 						else {
-							self.performSegue(withIdentifier: "showTeamMenu", sender: self)
+							let teamTBC = mainStoryboard.instantiateViewController(withIdentifier: "TeamTBC") as! TeamTBC
+							teamTBC.user = self.user
+							let nc = UINavigationController()
+							nc.viewControllers = [teamTBC]
+							appDelegate.window?.rootViewController = nc
+							appDelegate.window?.makeKeyAndVisible()
+							self.present(nc, animated: true, completion: nil)
 						}
 					}
 				}

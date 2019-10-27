@@ -42,7 +42,7 @@ class Services {
 			for userEmailSeperate in list {
 				let newUserEmailSeperate = UserEmailSeperate()
 				newUserEmailSeperate.setEmailPersonal(emailPersonal: userEmailSeperate["emailPersonal"] as? String ?? "")
-				newUserEmailSeperate.setOrderNumber(orderNumber: Int(userEmailSeperate["orderNumber"] as? String ?? "0")!)
+				newUserEmailSeperate.setOrderNumber(orderNumber: userEmailSeperate["orderNumber"] as? Int ?? 0)
 				userEmailSeperateList.append(newUserEmailSeperate)
 			}
 			userEmailSeperateList.sort(by: {$0.orderNumber < $1.orderNumber})
@@ -51,14 +51,14 @@ class Services {
 	}
 	
 	func addUserEmailSeperate(emailTeam: String, userEmailDetailList: [UserEmailDetail], projectName: String, multiplier: Int, completion: @escaping () -> Void){
-		
+		let strParams = "emailTeam=" + emailTeam
 		//Get max number first
-		getJsonUsingGet(strURL: urlGetUserEmailSeperateMaxOrder) { (json) in
-			var maxOrder = 0
-			let strMaxOrder = json["maxOrder"] as? String ?? "0"
-			if (strMaxOrder != "0") {
-				maxOrder = Int(strMaxOrder)!
-			}
+		getJsonUsingPost(strURL: urlGetUserEmailSeperateMaxOrder, strParams: strParams) { (json) in
+//			var maxOrder = 0
+			var maxOrder = json["maxOrder"] as? Int ?? 0
+//			if (strMaxOrder != 0) {
+//				maxOrder = Int(strMaxOrder)!
+//			}
 
 			let dispatchGroup = DispatchGroup()
 			//Loop times to add seperate list
