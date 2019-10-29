@@ -50,6 +50,8 @@ public let urlAddUserEmailSeperate: String = "\(urlHostApi)AddUserEmailSeperate.
 
 public let urlGetUserEmailSeperateListStillNotReceive: String = "\(urlHostApi)GetUserEmailSeperateListStillNotReceive.php"
 
+public let urlGetUserEmailSeperateListReceived: String = "\(urlHostApi)GetUserEmailSeperateListReceived.php"
+
 public let urlRemoveAllUserEmailSeperateStillNotReceived: String = "\(urlHostApi)RemoveAllUserEmailSeperateStillNotReceived.php"
 
 public let urlGetAllUser: String = "\(urlHostApi)GetAllUser.php"
@@ -69,3 +71,5 @@ public let urlAddUserProject: String = "\(urlHostApi)AddUserProject.php"
 public let urlGetUserType: String = "\(urlHostApi)GetUserType.php"
 
 public let urlUpdateIOSToken: String = "\(urlHostApi)UpdateIOSToken.php"
+
+public let urlGetBriefInfoOfCustomer: String = "\(urlHostApi)GetBriefInfoOfCustomer.php"

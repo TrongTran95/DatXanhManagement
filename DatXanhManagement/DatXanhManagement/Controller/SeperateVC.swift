@@ -33,12 +33,41 @@ class SeperateVC: UIViewController {
 	var projectName: String!
 	
 	var userEmailSeperateListStillNotReceive: [UserEmailSeperate] = []
+	var userEmailSeperateListReceived: [UserEmailSeperate] = []
+	
+	var addButton: UIBarButtonItem!
+	var removeButton: UIBarButtonItem!
+	
 	
     @IBAction func tappedButtonOldOrNew(_ sender: UIButton) {
         let currentTitle = sender.currentTitle!
         setOldNewButtonAttribute(title: currentTitle)
         setOldNewTableViewAttribute(title: currentTitle)
+		setDataForTableView(title: currentTitle)
+		setBarButtonUI(title: currentTitle)
     }
+	
+	func setBarButtonUI(title: String) {
+		switch title {
+		case "Waiting":
+			self.addButton.isEnabled = true
+			self.removeButton.isEnabled = true
+		default: //"Received"
+			self.addButton.isEnabled = false
+			self.removeButton.isEnabled = false
+		}
+	}
+	
+	func setDataForTableView(title: String) {
+		switch title {
+		case "Waiting":
+			self.userEmailSeperateListReceived = []
+			self.setupData()
+		default: //"Received"
+			self.userEmailSeperateListStillNotReceive = []
+			self.getReceivedUserListAndBriefCustomerInfo()
+		}
+	}
     
     func setOldNewTableViewAttribute(title: String){
         UIView.animate(withDuration: 0.2) {
@@ -63,6 +92,26 @@ class SeperateVC: UIViewController {
             self.view.layoutIfNeeded()
         })
     }
+	
+	func getReceivedUserListAndBriefCustomerInfo(){
+		Services.shared.getUserEmailSeperateListReceived(emailTeam: self.emailTeam, projectName: self.projectName) { (userEmailSeperateList) in
+			let dispatchGroup = DispatchGroup()
+			self.userEmailSeperateListReceived = userEmailSeperateList
+			for i in 0..<self.userEmailSeperateListReceived.count {
+				dispatchGroup.enter()
+				Services.shared.getBriefInfoOfCustomer(idCustomer: self.userEmailSeperateListReceived[i].customerID, completion: { (briefCustomer) in
+					self.userEmailSeperateListReceived[i].setBriefCustomer(briefCustomer: briefCustomer)
+					dispatchGroup.leave()
+				})
+			}
+			dispatchGroup.notify(queue: .main) {
+				DispatchQueue.main.async {
+					//Show UI
+					self.tvOldSeperated.reloadData()
+				}
+			}
+		}
+	}
 	
 	//Handler for cancel button
 	func turnOffAddView(){
@@ -98,7 +147,7 @@ class SeperateVC: UIViewController {
 	func setupTableView(){
 		tvNewSeperate.delegate = self
 		tvNewSeperate.dataSource = self
-		tvNewSeperate.delegate = self
+		tvOldSeperated.delegate = self
 		tvOldSeperated.dataSource = self
 	}
 	
@@ -119,8 +168,8 @@ class SeperateVC: UIViewController {
 	
 	func setupUI(){
 		self.tabBarController?.navigationItem.title = "Seperate"
-		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showSeperateView))
-		let removeButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeUserEmailSeperateList))
+		addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showSeperateView))
+		removeButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeUserEmailSeperateList))
 		self.tabBarController?.navigationItem.rightBarButtonItems = [addButton, removeButton]
 	}
 	
@@ -183,18 +232,20 @@ extension SeperateVC: UITableViewDelegate, UITableViewDataSource {
 		if (tableView == tvNewSeperate) {
 			return userEmailSeperateListStillNotReceive.count
 		} else {
-			return 1
+			return userEmailSeperateListReceived.count
 		}
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		if (tableView == tvNewSeperate) {
 			let cell = tableView.dequeueReusableCell(withIdentifier: "newSeperateCell", for: indexPath) as? NewSeperateTVCell
-				let currentUser = userEmailSeperateListStillNotReceive[indexPath.row]
+			let currentUser = userEmailSeperateListStillNotReceive[indexPath.row]
 			cell!.setData(emailPersonal: currentUser.emailPersonal, orderNumber: currentUser.orderNumber)
 			return cell!
 		} else {
 			let cell = tableView.dequeueReusableCell(withIdentifier: "oldSeperatedCell", for: indexPath) as? OldSeperatedTVCell
+			let currentUser = userEmailSeperateListReceived[indexPath.row]
+			cell?.setData(userEmail: currentUser.emailPersonal, orderNumber: indexPath.row + 1, customer: currentUser.briefCustomer)
 			return cell!
 		}
 	}

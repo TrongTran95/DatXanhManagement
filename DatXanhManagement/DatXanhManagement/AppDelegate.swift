@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		if (userEmail == "") {
 			let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
 //			nc.viewControllers = [loginVC]
-			window?.rootViewController = loginVC
-			window?.makeKeyAndVisible()
+			self.window?.rootViewController = loginVC
+			self.window?.makeKeyAndVisible()
 		} else {
 			let userPassword = defaults.object(forKey: KEY_USER_PASSWORD) as! String
 			let ios_token = defaults.object(forKey: KEY_USER_DEVICE_TOKEN) as! String
@@ -42,14 +42,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			
 			//Loading screen
 			if (userEmail != "admin") {
-				setupTempView()
+				self.setupTempView()
 			}
 			
 			user.login(userName: userEmail, password: userPassword, ios_token: ios_token) { (result) in
 				if (result) {
 					if user.type == 2 {
-						let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
 						DispatchQueue.main.async {
+							let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
 							self.window?.rootViewController = loginVC
 							self.window?.makeKeyAndVisible()
 						}
@@ -57,9 +57,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 						let nc = UINavigationController()
 						//Personal
 						if (user.type == 1) {
-							let userVC = mainStoryboard.instantiateViewController(withIdentifier: "UserVC") as! UserVC
-							
 							DispatchQueue.main.async {
+								let userVC = mainStoryboard.instantiateViewController(withIdentifier: "UserVC") as! UserVC
+							
 								if (user.lastName == "" && user.firstName == ""){
 									userVC.navigationItem.title = user.emailAddress
 								} else {
@@ -74,24 +74,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 										userVC.navigationItem.setTitle(title: "\(user.firstName) \(user.lastName)", subtitle: user.emailAddress)
 									}
 								}
+								userVC.user = user
+								nc.viewControllers = [userVC]
+								print("ssssssssssssss1")
 							}
-							userVC.user = user
-							nc.viewControllers = [userVC]
-							print("ssssssssssssss1")
 						}
-							//Team
+						//Team
 						else {
-							let teamTBC = mainStoryboard.instantiateViewController(withIdentifier: "TeamTBC") as! TeamTBC
-							teamTBC.user = user
+							DispatchQueue.main.async {
+								let teamTBC = mainStoryboard.instantiateViewController(withIdentifier: "TeamTBC") as! TeamTBC
+								teamTBC.user = user
 							//Fix bug not showing tab bar item title
-							teamTBC.tabBar.items![0].title = ""
-							teamTBC.tabBar.items![1].title = ""
-							teamTBC.tabBar.items![2].title = ""
-							teamTBC.tabBar.items![3].title = ""
-							nc.viewControllers = [teamTBC]
+								
+								teamTBC.tabBar.items![0].title = ""
+								teamTBC.tabBar.items![1].title = ""
+								teamTBC.tabBar.items![2].title = ""
+								teamTBC.tabBar.items![3].title = ""
+								UITabBar.appearance().tintColor = barButtonColor
+								nc.viewControllers = [teamTBC]
+							}
 							
 							//UITabBar.appearance().barTintColor = .black
-							UITabBar.appearance().tintColor = barButtonColor
 						}
 						
 						DispatchQueue.main.async {

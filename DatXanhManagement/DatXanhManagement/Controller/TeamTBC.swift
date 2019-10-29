@@ -45,12 +45,14 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 		
 		firstTab.emailTeam = self.user.emailAddress
 		
-		firstTab.title = "Team"
-		secondTab.title = "Order"
-		thirdTab.tabBarItem.title = "Seperate"
-		forthTab.title = "Chart"
-		
-		UITabBar.appearance().tintColor = barButtonColor
+		DispatchQueue.main.async {
+			self.firstTab.title = "Team"
+			self.secondTab.title = "Order"
+			self.thirdTab.tabBarItem.title = "Seperate"
+			self.forthTab.title = "Chart"
+			
+			UITabBar.appearance().tintColor = barButtonColor
+		}
 		
 		let accountButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Account"), style: .plain, target: self, action: #selector(showActionSheet))
 		self.navigationItem.leftBarButtonItem = accountButton

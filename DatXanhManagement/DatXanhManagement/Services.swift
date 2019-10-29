@@ -13,6 +13,18 @@ class Services {
     
     private init(){}
 	
+	func getBriefInfoOfCustomer(idCustomer: Int, completion: @escaping (BriefCustomer) -> ()){
+		let strParams = "idCustomer=" + "\(idCustomer)"
+		getJsonUsingPost(strURL: urlGetBriefInfoOfCustomer, strParams: strParams) { (json) in
+			let customerJson = json["customer"] as! [String:Any]
+			let briefCustomer = BriefCustomer()
+			briefCustomer.setLastName(lastName: customerJson["lastName"] as? String ?? "")
+			briefCustomer.setFirstName(firstName: customerJson["firstName"] as? String ?? "")
+			briefCustomer.setPhoneNumber(phoneNumber: customerJson["phoneNumber"] as? String ?? "")
+			completion(briefCustomer)
+		}
+	}
+	
 	func updateIOSToken(emailAddress: String, completion: @escaping (Bool) -> ()){
 		let strParams = "emailAddress=" + emailAddress
 		getJsonUsingPost(strURL: urlUpdateIOSToken, strParams: strParams) { (json) in
@@ -53,6 +65,24 @@ class Services {
 				userEmailSeperateList.append(newUserEmailSeperate)
 			}
 			userEmailSeperateList.sort(by: {$0.orderNumber < $1.orderNumber})
+			completion(userEmailSeperateList)
+		}
+	}
+	
+	func getUserEmailSeperateListReceived(emailTeam: String, projectName: String, completion: @escaping ([UserEmailSeperate]) -> Void){
+		let strParams = "emailTeam=" + emailTeam + "&projectName=" + projectName
+		getJsonUsingPost(strURL: urlGetUserEmailSeperateListReceived, strParams: strParams) { (json) in
+			let list = json["userEmailSeperateList"] as! [[String:Any]]
+			var userEmailSeperateList: [UserEmailSeperate] = []
+			for userEmailSeperate in list {
+				let newUserEmailSeperate = UserEmailSeperate()
+				newUserEmailSeperate.setEmailPersonal(emailPersonal: userEmailSeperate["emailPersonal"] as? String ?? "")
+				newUserEmailSeperate.setOrderNumber(orderNumber: userEmailSeperate["orderNumber"] as? Int ?? 0)
+				newUserEmailSeperate.setReceivedDate(receivedDate: userEmailSeperate["receivedDate"] as? String ?? "")
+				newUserEmailSeperate.setCustomerID(customerID: userEmailSeperate["customerID"] as? Int ?? 0)
+				userEmailSeperateList.append(newUserEmailSeperate)
+			}
+			userEmailSeperateList.sort(by: {$0.receivedDate > $1.receivedDate})
 			completion(userEmailSeperateList)
 		}
 	}

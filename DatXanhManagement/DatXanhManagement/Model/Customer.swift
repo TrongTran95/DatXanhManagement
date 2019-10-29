@@ -150,19 +150,6 @@ class Customer {
 		self.callSuccessMinutes += callSuccessMinutes
 	}
 	
-	/* Không còn dùng nữa vì customer đã chứa luôn thông tin cuộc gọi
-	func getCallingDetail(email: String, completion: @escaping() -> Void) {
-		let strParams: String = "idCustomer=\(self.idCustomer)"  + "&userPersonalEmail=" + email
-		getJsonUsingPost(strURL: urlGetCustomerCallingDetail, strParams: strParams) { (json) in
-			let callingDetailJson = json["callingDetail"]! as! Dictionary<String, Any>
-			self.callStatus = callingDetailJson["status"] as! Int
-			self.callSuccessTimes = callingDetailJson["successTimes"] as! Int
-			self.callSuccessMinutes = ((callingDetailJson["successMinutes"] as? NSNumber)?.floatValue)!
-			completion()
-		}
-	}
-	*/
-	
 	//Update customer calling detail after user success contact with customer
 	func updateCustomerCallingDetail(completion:@escaping(Bool) -> Void){
 		let strParams: String = "status=\(self.callStatus)" + "&successTimes=\(self.callSuccessTimes)" + "&successMinutes=\(self.callSuccessMinutes)" + "&idCustomer=\(self.idCustomer)"
@@ -173,3 +160,28 @@ class Customer {
 	}
 	
 }
+
+class BriefCustomer {
+	private(set) public var lastName:String
+	private(set) public var firstName:String
+	private(set) public var phoneNumber:String
+	
+	init() {
+		self.lastName = ""
+		self.firstName = ""
+		self.phoneNumber = ""
+	}
+	
+	func setFirstName(firstName: String) {
+		self.firstName = firstName
+	}
+	
+	func setLastName(lastName: String) {
+		self.lastName = lastName
+	}
+	
+	func setPhoneNumber(phoneNumber: String) {
+		self.phoneNumber = phoneNumber
+	}
+}
+
