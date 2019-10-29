@@ -40,6 +40,8 @@ public let urlAddUserMember: String = "\(urlHostApi)AddUserMember.php"
 
 public let urlRemoveUserMember: String = "\(urlHostApi)RemoveUserMember.php"
 
+public let urlRemoveUserProject: String = "\(urlHostApi)RemoveUserProject.php"
+
 public let urlAddUserEmailDetail: String = "\(urlHostApi)AddUserEmailDetail.php"
 
 public let urlGetUserEmailSeperateMaxOrder: String = "\(urlHostApi)GetUserEmailSeperateMaxOrder.php"
@@ -63,3 +65,7 @@ public let urlChangePassword: String = "\(urlHostApi)ChangePassword.php"
 public let urlGetAllProject: String = "\(urlHostApi)GetAllProject.php"
 
 public let urlAddUserProject: String = "\(urlHostApi)AddUserProject.php"
+
+public let urlGetUserType: String = "\(urlHostApi)GetUserType.php"
+
+public let urlUpdateIOSToken: String = "\(urlHostApi)UpdateIOSToken.php"

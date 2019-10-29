@@ -252,6 +252,13 @@ class TeamSettingTVController: UITableViewController {
 		cell.delegate = self
         return cell
     }
+	
+	override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+		if tableView.isEditing {
+			return .delete
+		}
+		return .none
+	}
     
     //Height of table view cell
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

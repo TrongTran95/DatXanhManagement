@@ -24,6 +24,10 @@ class TeamMemberTVController: UITableViewController {
     var flagRemove: Bool = false
     
     var arrRemoveIndex:[Int] = []
+	
+	var arrRemoveEmail:[String] = []
+	
+	var projectName: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +57,7 @@ class TeamMemberTVController: UITableViewController {
             }
         })
     }
-    
+	
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         // Toggles the actual editing actions appearing on a table view
@@ -87,8 +91,8 @@ class TeamMemberTVController: UITableViewController {
 			//Nothing in the UI change because we've made change every time we do something in an editing process
 			//Update new data to server
 			//Remove user email detail from server
-			for index in self.arrRemoveIndex {
-				self.removeUserMember(emailAddress: self.tempUserMembers[index].emailPersonal)
+			for i in 0..<self.arrRemoveIndex.count {
+				self.removeUserMemberAndUserProject(id: self.arrRemoveIndex[i], email: self.arrRemoveEmail[i])
 			}
 			
 			//Release data
@@ -101,20 +105,29 @@ class TeamMemberTVController: UITableViewController {
 		//Turn off flag remove
 		flagRemove = false
 		arrRemoveIndex = []
+		arrRemoveEmail = []
 		tempUserMembers = []
 	}
 	
-	func removeUserMember(emailAddress: String){
-		Services.shared.removeUserMember(emailTeam: self.emailTeam, emailPersonal: emailAddress) { (error) in
-			if !error {
+	func removeUserMemberAndUserProject(id: Int, email: String){
+		Services.shared.removeUserMember(id: id) { (error) in
+			if error {
+				DispatchQueue.main.async {
+					Toast(text: "Failed", duration: Delay.short).show()
+					return
+				}
+			}
+			Services.shared.removeUserProject(email: email, emailTeam: self.emailTeam, completion: { (error) in
+				if (error) {
+					DispatchQueue.main.async {
+						Toast(text: "Failed", duration: Delay.short).show()
+						return
+					}
+				}
 				DispatchQueue.main.async {
 					Toast(text: "Successed", duration: Delay.short).show()
 				}
-			} else {
-				DispatchQueue.main.async {
-					Toast(text: "Failed", duration: Delay.short).show()
-				}
-			}
+			})
 		}
 	}
     
@@ -132,10 +145,10 @@ class TeamMemberTVController: UITableViewController {
             
             let newMemberEmailAdress: String = textField.text!
 			//Check if user existing in table view
-			if self.tempUserMembers.contains(where: {$0.emailPersonal == newMemberEmailAdress}) {
-				self.present(createCancelAlert(title: "User existed", message: "This user already existed in member list", cancelTitle: "Cancel"), animated: true, completion: nil)
-				return
-			}
+//			if self.tempUserMembers.contains(where: {$0.emailPersonal == newMemberEmailAdress}) {
+//				self.present(createCancelAlert(title: "User existed", message: "This user already existed in member list", cancelTitle: "Cancel"), animated: true, completion: nil)
+//				return
+//			}
             //Check if user existing in database, if not then add new member
             self.checkAndAddUserMember(newMemberEmailAdress)
         }
@@ -146,44 +159,68 @@ class TeamMemberTVController: UITableViewController {
     }
     
     func checkAndAddUserMember(_ newMemberEmailAdress: String){
-        Services.shared.checkUserExist(emailTeam: self.emailTeam, emailPersonal: newMemberEmailAdress, completion: { (error) in
-            //User is not existing in database
-            if (!error) {
-                //Add new member to database
-                self.addUserMember(newMemberEmailAdress)
-            }
-                //Add to database failed
-            else {
-                self.present(createCancelAlert(title: "User existed", message: "This user already existed in member list", cancelTitle: "Cancel"), animated: true, completion: nil)
-                return
-            }
-        })
+		self.checkUserMember(newMemberEmailAdress) {
+			self.addUserMemberAndUserProject(newMemberEmailAdress) {
+				//Update UI
+				DispatchQueue.main.async {
+					//Add new member to user array
+					var newUserMember = UserMember()
+					newUserMember.emailPersonal = newMemberEmailAdress
+					self.userMembers.append(newUserMember)
+					//Reload UI
+					self.tableView.reloadData()
+					//Show annoucement
+					Toast(text: "Successed", duration: Delay.short).show()
+				}
+			}
+		}
     }
+	
+	func checkUserMember(_ newMemberEmailAdress: String, completionHandler: @escaping() -> ()) {
+		Services.shared.checkAccountExist(emailAddress: newMemberEmailAdress) { (exist) in
+			if (!exist) {
+				self.present(createCancelAlert(title: "This user is not exist", message: "Please type in correctly member's email", cancelTitle: "Cancel"), animated: true, completion: nil)
+				return
+			}
+			Services.shared.checkUserExist(emailTeam: self.emailTeam, emailPersonal: newMemberEmailAdress, completion: { (exist) in
+				//User existing in database
+				if (exist) {
+					self.present(createCancelAlert(title: "User existed", message: "This user already existed in member list", cancelTitle: "Cancel"), animated: true, completion: nil)
+					return
+				}
+				Services.shared.getUserType(emailAddress: newMemberEmailAdress, completion: { (type) in
+					if (type != 1) {
+						self.present(createCancelAlert(title: "Invalid user", message: "", cancelTitle: "Cancel"), animated: true, completion: nil)
+						return
+					}
+					//Add new user member to database
+					completionHandler()
+				})
+			})
+		}
+	}
     
-    func addUserMember(_ newMemberEmailAdress: String){
+	func addUserMemberAndUserProject(_ newMemberEmailAdress: String, completionHandler: @escaping() -> ()){
         Services.shared.addNewUserMember(emailTeam: self.emailTeam, emailPersonal: newMemberEmailAdress, completion: { (error) in
             //Add successed
             if (!error) {
-                //Update UI
-                DispatchQueue.main.async {
-                    //Add new member to user array
-					var newUserMember = UserMember()
-					newUserMember.emailPersonal = newMemberEmailAdress
-                    self.userMembers.append(newUserMember)
-                    //Reload UI
-                    self.tableView.reloadData()
-                    //Show annoucement
-                    Toast(text: "Successed", duration: Delay.short).show()
-                }
+				Services.shared.addUserProject(email: newMemberEmailAdress, projectName: self.projectName, emailTeam: self.emailTeam, completion: { (error) in
+					if (error) {
+						Toast(text: "Failed", duration: Delay.short).show()
+						return
+					}
+					completionHandler()
+				})
             }
-                //Add failed
+			//Add failed
             else {
                 Toast(text: "Failed", duration: Delay.short).show()
                 return
             }
         })
     }
-    
+	
+	
     func configurationTextField(textField: UITextField) {
         textField.placeholder = "Please input new member's email"
     }
@@ -210,11 +247,19 @@ class TeamMemberTVController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
-    
+	
+	override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+		if tableView.isEditing {
+			return .delete
+		}
+		return .none
+	}
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             //Save id of row need to remove
-            arrRemoveIndex.append(indexPath.row)
+			arrRemoveIndex.append(userMembers[indexPath.row].id)
+			arrRemoveEmail.append(userMembers[indexPath.row].emailPersonal)
             
             //Delete from the array
             userMembers.remove(at: indexPath.row)

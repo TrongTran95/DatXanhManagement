@@ -38,16 +38,27 @@ class UserVC: UIViewController {
 		case "Change password":
 			self.performSegue(withIdentifier: "showChangePassword", sender: self)
 		case "Sign out":
-			let alert = create1ActionAlert(title: "Sign out", message: "You won't receive new customer notification after signed out", actionTitle: "Ok", cancelTitle: "Cancel", cancelCompletion: nil) {
-				let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-				defaults.set("", forKey: KEY_USER_EMAIL)
-				defaults.set("", forKey: KEY_USER_PASSWORD)
-				defaults.set("", forKey: KEY_USER_DEVICE_TOKEN)
+			let alert = create1ActionAlert(title: "Sign out", message: "You won't receive new customer notification after signed out", actionTitle: "Yes", cancelTitle: "No", cancelCompletion: {
 				
-				appDelegate.window?.rootViewController = loginVC
-				appDelegate.window?.makeKeyAndVisible()
-				self.present(loginVC, animated: true, completion: nil)
-			}
+			}, actionCompletion: {
+				//Remove iOS token
+				Services.shared.updateIOSToken(emailAddress: self.user.emailAddress, completion: { (error) in
+					if (error) {
+						self.present(createCancelAlert(title: "Can't sign out", message: "Something wrong happend", cancelTitle: "Cancel"), animated: true, completion: nil)
+						return
+					}
+					DispatchQueue.main.async {
+						let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+						defaults.set("", forKey: KEY_USER_EMAIL)
+						defaults.set("", forKey: KEY_USER_PASSWORD)
+						defaults.set("", forKey: KEY_USER_DEVICE_TOKEN)
+						
+						appDelegate.window?.rootViewController = loginVC
+						appDelegate.window?.makeKeyAndVisible()
+						self.present(loginVC, animated: true, completion: nil)
+					}
+				})
+			})
 			self.present(alert, animated: true, completion: nil)
 		default:
 			UIView.animate(withDuration: 0.3) {
@@ -91,8 +102,8 @@ class UserVC: UIViewController {
 		let accountButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Account"), style: .plain, target: self, action: #selector(accountButtonClicked))
 		self.navigationItem.leftBarButtonItems = [accountButton]
 		
-//		lblEmail.sizeToFit()
 		lblEmail.adjustsFontSizeToFitWidth = true
+		lblEmail.text = user.emailAddress
 	}
 	
 	func setupLoadingView(){

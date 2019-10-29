@@ -14,8 +14,10 @@ class TeamMemberTVC: UITableViewCell {
     
     @IBOutlet weak var lblNumber: UILabel!
     
-    override func awakeFromNib() {
+	@IBOutlet weak var imgNumber: UIImageView!
+	override func awakeFromNib() {
         super.awakeFromNib()
+		imgNumber.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -31,6 +31,8 @@
 		8075C45623612F0F00C115AF /* AdminVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8075C45523612F0F00C115AF /* AdminVC.swift */; };
 		8084E9792364224300A13BE8 /* ChangePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8084E9782364224300A13BE8 /* ChangePasswordVC.swift */; };
 		8084E97B2364ACF600A13BE8 /* ChartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8084E97A2364ACF600A13BE8 /* ChartVC.swift */; };
+		80957D382365D4A00028541C /* ProjectListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80957D372365D4A00028541C /* ProjectListTVC.swift */; };
+		80957D3A2365D4B30028541C /* ProjectListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80957D392365D4B30028541C /* ProjectListVC.swift */; };
 		8097E728230D900C0014C211 /* UserMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097E727230D900C0014C211 /* UserMember.swift */; };
 		80B9C2DB23620C8F009D0623 /* UserListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B9C2DA23620C8F009D0623 /* UserListTVC.swift */; };
 		80C3413322DDA846001F77F5 /* CustomerListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C3413222DDA846001F77F5 /* CustomerListVC.swift */; };
@@ -111,6 +113,8 @@
 		8084E97A2364ACF600A13BE8 /* ChartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartVC.swift; sourceTree = "<group>"; };
 		8086BDE522F52C2A00E94F08 /* DatXanhManagement.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DatXanhManagement.entitlements; sourceTree = "<group>"; };
 		8086BDE622F52D2F00E94F08 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		80957D372365D4A00028541C /* ProjectListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListTVC.swift; sourceTree = "<group>"; };
+		80957D392365D4B30028541C /* ProjectListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListVC.swift; sourceTree = "<group>"; };
 		8097E727230D900C0014C211 /* UserMember.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMember.swift; sourceTree = "<group>"; };
 		80B9C2DA23620C8F009D0623 /* UserListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListTVC.swift; sourceTree = "<group>"; };
 		80C3413222DDA846001F77F5 /* CustomerListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerListVC.swift; sourceTree = "<group>"; };
@@ -274,6 +278,8 @@
 				A2D1DF08230F7CEA00735E13 /* SeperateVC.swift */,
 				80B9C2DA23620C8F009D0623 /* UserListTVC.swift */,
 				8084E9782364224300A13BE8 /* ChangePasswordVC.swift */,
+				80957D372365D4A00028541C /* ProjectListTVC.swift */,
+				80957D392365D4B30028541C /* ProjectListVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -489,6 +495,7 @@
 				804F4FC722DB67180083044C /* AppDelegate.swift in Sources */,
 				804F4FDE22DC34E30083044C /* UrlAddresses.swift in Sources */,
 				802870A123110B34000FD176 /* AddSeperateView.swift in Sources */,
+				80957D3A2365D4B30028541C /* ProjectListVC.swift in Sources */,
 				A2E770D9230A4FE5000CF05C /* TeamTBC.swift in Sources */,
 				A2CF02B5230E32D1002CE7FD /* AutoLayout.swift in Sources */,
 				8097E728230D900C0014C211 /* UserMember.swift in Sources */,
@@ -500,6 +507,7 @@
 				8084E97B2364ACF600A13BE8 /* ChartVC.swift in Sources */,
 				80B9C2DB23620C8F009D0623 /* UserListTVC.swift in Sources */,
 				804F4FDC22DC33130083044C /* User.swift in Sources */,
+				80957D382365D4A00028541C /* ProjectListTVC.swift in Sources */,
 				8036D63622DCCAA40080775C /* Customer.swift in Sources */,
 				A2CF02B3230E2AC9002CE7FD /* AddMemberView.swift in Sources */,
 				80F78B1523252BB600240C86 /* NewSeperateTVCell.swift in Sources */,

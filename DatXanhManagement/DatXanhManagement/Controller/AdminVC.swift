@@ -100,7 +100,7 @@ class AdminVC: UIViewController {
 					if (self.chosenProject == "") {
 						self.chosenProject = self.projects[0].name
 					}
-					Services.shared.addUserProject(email: userName, projectName: self.chosenProject, completion: { (error) in
+					Services.shared.addUserProject(email: userName, projectName: self.chosenProject, emailTeam: "", completion: { (error) in
 						if (error == true) {
 							let alert = createCancelAlert(title: "Can't add user", message: "Something wrong happened", cancelTitle: "OK")
 							DispatchQueue.main.async {

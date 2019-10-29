@@ -91,7 +91,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 							nc.viewControllers = [teamTBC]
 							
 							//UITabBar.appearance().barTintColor = .black
-							UITabBar.appearance().tintColor = .red
+							UITabBar.appearance().tintColor = barButtonColor
 						}
 						
 						DispatchQueue.main.async {

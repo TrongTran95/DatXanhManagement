@@ -25,3 +25,5 @@ let appDelegate = UIApplication.shared.delegate as! AppDelegate
 let NOTE_PLACE_HOLDER = "Nhập ghi chú..."
 let ALERT_DATA_CHANGED = "Data changed"
 let ALERT_ASK_FOR_SAVE = "Do you want to save new data ?"
+
+let barButtonColor = UIColor(red: 255.0/255.0, green: 173.0/255.0, blue: 59.0/255.0, alpha: 1)

@@ -23,6 +23,7 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 		
 		Services.shared.getUserProjects(emailAddress: self.user.emailAddress) { (arrProject) in
 			self.projectName = arrProject[0]["projectName"] as! String
+			self.firstTab.projectName = self.projectName
 			Services.shared.getUserEmailDetailList(emailTeam: self.user.emailAddress, projectName: self.projectName) { (userEmailDetailList) in
 				self.user.setUserEmailDetailList(userEmailDetailList: userEmailDetailList)
 				//Setup for second screen
@@ -44,12 +45,12 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 		
 		firstTab.emailTeam = self.user.emailAddress
 		
-		firstTab.title = "Team members"
-		secondTab.title = "Order Samle"
+		firstTab.title = "Team"
+		secondTab.title = "Order"
 		thirdTab.tabBarItem.title = "Seperate"
 		forthTab.title = "Chart"
 		
-		UITabBar.appearance().tintColor = .red
+		UITabBar.appearance().tintColor = barButtonColor
 		
 		let accountButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Account"), style: .plain, target: self, action: #selector(showActionSheet))
 		self.navigationItem.leftBarButtonItem = accountButton
@@ -61,7 +62,9 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 			self.performSegue(withIdentifier: "showChangePassword", sender: self)
 		}
 		let actionSignOut = UIAlertAction(title: "Sign out", style: .destructive) { (action) in
-			let alert = create1ActionAlert(title: "Sign out", message: "Are you sure you want to sign out", actionTitle: "Yes", cancelTitle: "No", cancelCompletion: nil) {
+			let alert = create1ActionAlert(title: "Sign out", message: "Are you sure you want to sign out", actionTitle: "Yes", cancelTitle: "No", cancelCompletion: {
+				
+			}, actionCompletion: {
 				let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
 				defaults.set("", forKey: KEY_USER_EMAIL)
 				defaults.set("", forKey: KEY_USER_PASSWORD)
@@ -70,7 +73,7 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 				appDelegate.window?.rootViewController = loginVC
 				appDelegate.window?.makeKeyAndVisible()
 				self.present(loginVC, animated: true, completion: nil)
-			}
+			})
 			self.present(alert, animated: true, completion: nil)
 
 		}

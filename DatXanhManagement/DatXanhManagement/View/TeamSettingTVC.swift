@@ -23,7 +23,7 @@ class TeamSettingTVC: UITableViewCell {
     
     @IBAction func ReceiveNumberChange(_ sender: UIStepper) {
 		//Update UI
-        lblReceiveNumber.text = "Còn \(Int(sender.value).description) lượt"
+		lblReceiveNumber.text = "\(Int(sender.value).description) lượt"
 		//Update data
 		delegate.user.userEmailDetailList[sender.tag].setReceiveQuantity(receiveQuantity: Int(sender.value))
 		//Turn on changes flag
@@ -45,7 +45,7 @@ class TeamSettingTVC: UITableViewCell {
     }
     
     func setReceiveNumber(receiveNumber: Int){
-        lblReceiveNumber.text = "Còn: \(receiveNumber) lượt"
+        lblReceiveNumber.text = "\(receiveNumber) lượt"
     }
     
     func setOrder(orderNumber: Int){

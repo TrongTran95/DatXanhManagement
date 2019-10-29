@@ -13,6 +13,13 @@ class Services {
     
     private init(){}
 	
+	func updateIOSToken(emailAddress: String, completion: @escaping (Bool) -> ()){
+		let strParams = "emailAddress=" + emailAddress
+		getJsonUsingPost(strURL: urlUpdateIOSToken, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
 	func changePassword(emailAddress: String, password: String, completion: @escaping (Bool) -> ()) {
 		let strParams = "emailAddress=" + emailAddress + "&password=" + password
 		getJsonUsingPost(strURL: urlChangePassword, strParams: strParams) { (json) in
@@ -169,9 +176,23 @@ class Services {
 		}
 	}
 	
-	func removeUserMember(emailTeam: String, emailPersonal: String, completion: @escaping (Bool) -> Void){
-		let strParams = "emailTeam=" + emailTeam + "&emailPersonal=" + emailPersonal
+	func getUserType(emailAddress: String, completion: @escaping (Int) -> Void){
+		let strParams = "emailAddress=" + emailAddress
+		getJsonUsingPost(strURL: urlGetUserType, strParams: strParams) { (json) in
+			completion(json["type"] as? Int ?? 0)
+		}
+	}
+	
+	func removeUserMember(id: Int, completion: @escaping (Bool) -> Void){
+		let strParams = "id=" + "\(id)"
 		getJsonUsingPost(strURL: urlRemoveUserMember, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
+	func removeUserProject(email: String, emailTeam: String, completion: @escaping (Bool) -> Void){
+		let strParams = "email=" + email + "&emailTeam=" + emailTeam
+		getJsonUsingPost(strURL: urlRemoveUserProject, strParams: strParams) { (json) in
 			completion(json["error"] as! Bool)
 		}
 	}
@@ -214,8 +235,8 @@ class Services {
 		}
 	}
 	
-	func addUserProject(email: String, projectName: String, completion: @escaping(Bool) -> Void){
-		let strParams:String = "email=" + email + "&projectName=" + projectName
+	func addUserProject(email: String, projectName: String, emailTeam: String, completion: @escaping(Bool) -> Void){
+		let strParams:String = "email=" + email + "&projectName=" + projectName + "&emailTeam=" + emailTeam
 		getJsonUsingPost(strURL: urlAddUserProject, strParams: strParams) { (json) in
 			completion(json["error"] as! Bool)
 		}

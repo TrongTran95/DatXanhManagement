@@ -628,7 +628,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.7650770589" green="0.80522286070000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="h9T-CD-yfi" firstAttribute="top" secondItem="qXa-sx-LCN" secondAttribute="top" id="1Vk-QG-dAw"/>
                             <constraint firstItem="h9T-CD-yfi" firstAttribute="trailing" secondItem="qXa-sx-LCN" secondAttribute="trailing" id="8eY-uR-gle"/>
@@ -640,7 +640,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qXa-sx-LCN"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Seperate" image="Seperate" id="Bs3-MJ-Osg"/>
+                    <tabBarItem key="tabBarItem" title="Seperate" image="Separate" id="Bs3-MJ-Osg"/>
                     <connections>
                         <outlet property="btnNew" destination="XPa-pr-xzn" id="Lo6-3i-ATj"/>
                         <outlet property="btnOld" destination="wXL-m1-miP" id="7Qc-9z-odP"/>
@@ -654,11 +654,11 @@
             </objects>
             <point key="canvasLocation" x="1662" y="1766"/>
         </scene>
-        <!--Team Members-->
+        <!--Team-->
         <scene sceneID="Don-i7-HgG">
             <objects>
                 <tableViewController id="HCe-aR-7Kf" customClass="TeamMemberTVController" customModule="DatXanhManagement" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FUw-ph-VHm">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FUw-ph-VHm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -702,6 +702,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="imgNumber" destination="sdF-W6-lvV" id="IWj-VB-OkU"/>
                                     <outlet property="lblEmail" destination="TNy-Jd-bal" id="mvE-hd-iQ9"/>
                                     <outlet property="lblNumber" destination="Wyp-jE-8c6" id="4Bn-m0-uF4"/>
                                 </connections>
@@ -712,7 +713,7 @@
                             <outlet property="delegate" destination="HCe-aR-7Kf" id="6TJ-ju-4fd"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Team Members" image="TeamMembers" id="LB0-C8-Amu"/>
+                    <tabBarItem key="tabBarItem" title="Team" image="Team" id="LB0-C8-Amu"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5TU-Ug-j1h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -739,7 +740,7 @@
             </objects>
             <point key="canvasLocation" x="2076" y="904"/>
         </scene>
-        <!--Order Sample-->
+        <!--Order-->
         <scene sceneID="zFe-nn-paN">
             <objects>
                 <tableViewController id="xLb-Gi-fje" customClass="TeamSettingTVController" customModule="DatXanhManagement" customModuleProvider="target" sceneMemberID="viewController">
@@ -772,8 +773,8 @@
                                                 <constraint firstAttribute="width" secondItem="3at-Qv-vJO" secondAttribute="height" multiplier="1:1" id="t4V-1I-3xf"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Còn: 1 lượt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1O-QF-iwD">
-                                            <rect key="frame" x="276" y="11" width="74" height="18"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 lượt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1O-QF-iwD">
+                                            <rect key="frame" x="294" y="11" width="38" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -819,7 +820,7 @@
                             <outlet property="delegate" destination="xLb-Gi-fje" id="Ebx-mU-1gZ"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Order Sample" image="OrderSample" id="Zq7-hY-g1P"/>
+                    <tabBarItem key="tabBarItem" title="Order" image="Order" id="Zq7-hY-g1P"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49C-iZ-5iS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1590,21 +1591,84 @@
                         <outlet property="txtUsername" destination="yau-ag-miZ" id="JT0-3q-jSE"/>
                         <outlet property="viewAddUser" destination="DBA-n5-5MW" id="ggw-BS-QVA"/>
                         <outlet property="viewRealAddUser" destination="gJj-cf-FGi" id="RJo-TI-Oag"/>
+                        <segue destination="wTl-tT-vk9" kind="show" identifier="showProjects" id="40j-p3-pks"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vcu-vH-0LH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3048.8000000000002" y="-655.32233883058473"/>
         </scene>
+        <!--Projects-->
+        <scene sceneID="JtA-qD-KQN">
+            <objects>
+                <viewController id="wTl-tT-vk9" customClass="ProjectListVC" customModule="DatXanhManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Iow-e2-vMd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kOg-xB-1hv">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="wgu-VI-YSo" customClass="ProjectListTVC" customModule="DatXanhManagement" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wgu-VI-YSo" id="Lsb-jp-GKb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="wTl-tT-vk9" id="ybg-c9-KeG"/>
+                                    <outlet property="delegate" destination="wTl-tT-vk9" id="qb1-xU-3oQ"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mn-dL-6dI">
+                                <rect key="frame" x="295" y="587" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.1414324045" green="0.63264912370000004" blue="0.37034380439999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="2se-SH-43I"/>
+                                    <constraint firstAttribute="width" constant="50" id="dtt-B5-JJS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="40"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="actAddProject:" destination="wTl-tT-vk9" eventType="touchUpInside" id="Pxf-0G-6im"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kOg-xB-1hv" firstAttribute="leading" secondItem="8Vs-iS-Ngf" secondAttribute="leading" id="16z-Ox-uF8"/>
+                            <constraint firstItem="8Vs-iS-Ngf" firstAttribute="bottom" secondItem="2mn-dL-6dI" secondAttribute="bottom" constant="30" id="9OO-cR-6t5"/>
+                            <constraint firstItem="8Vs-iS-Ngf" firstAttribute="trailing" secondItem="kOg-xB-1hv" secondAttribute="trailing" id="Bxm-uw-g9h"/>
+                            <constraint firstItem="8Vs-iS-Ngf" firstAttribute="trailing" secondItem="2mn-dL-6dI" secondAttribute="trailing" constant="30" id="JPo-yd-w7v"/>
+                            <constraint firstItem="8Vs-iS-Ngf" firstAttribute="bottom" secondItem="kOg-xB-1hv" secondAttribute="bottom" id="TSe-7W-o0r"/>
+                            <constraint firstItem="kOg-xB-1hv" firstAttribute="top" secondItem="8Vs-iS-Ngf" secondAttribute="top" id="VTn-Tb-xli"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8Vs-iS-Ngf"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Projects" id="LiN-tY-g81"/>
+                    <connections>
+                        <outlet property="btnAddProject" destination="2mn-dL-6dI" id="wFx-5X-2r2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y4b-4U-Bgf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3966" y="-655"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Chart" width="22.5" height="22.5"/>
+        <image name="Chart" width="25" height="25"/>
         <image name="Elephant" width="585" height="395"/>
         <image name="Email-login" width="24" height="24"/>
         <image name="Lock" width="24" height="24"/>
-        <image name="OrderSample" width="30" height="30"/>
-        <image name="Seperate" width="30" height="30"/>
-        <image name="TeamMembers" width="30" height="30"/>
+        <image name="Order" width="25" height="25"/>
+        <image name="Separate" width="25" height="25"/>
+        <image name="Team" width="25" height="25"/>
         <image name="call_white" width="64" height="64"/>
         <image name="info" width="48" height="48"/>
         <image name="mansion" width="64" height="64"/>
