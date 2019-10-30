@@ -142,6 +142,10 @@ class Project {
 					customer.setNote(note: note)
 				}
 				
+				if let star = currentJsonCustomer["star"] as? Int {
+					customer.setStar(star: star)
+				}
+				
 				//Add customer to list seperated by calling status
 				if (customer.callStatus == 0) {
 					self.customerListSeperated[KEY_STILL_NOT]?.append(customer)

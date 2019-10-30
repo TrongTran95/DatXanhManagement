@@ -250,6 +250,8 @@
 		804F4FD922DC32C50083044C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				80B9C2DA23620C8F009D0623 /* UserListTVC.swift */,
+				80957D372365D4A00028541C /* ProjectListTVC.swift */,
 				804F4FE522DCAB120083044C /* ProjectTVC.swift */,
 				80C3413422DDB700001F77F5 /* CustomerListTVC.swift */,
 				80C3413622DDC81C001F77F5 /* CustomerDetailTVC.swift */,
@@ -276,9 +278,7 @@
 				A2DF72AD230269C400FA24FB /* TeamSettingTVController.swift */,
 				8084E97A2364ACF600A13BE8 /* ChartVC.swift */,
 				A2D1DF08230F7CEA00735E13 /* SeperateVC.swift */,
-				80B9C2DA23620C8F009D0623 /* UserListTVC.swift */,
 				8084E9782364224300A13BE8 /* ChangePasswordVC.swift */,
-				80957D372365D4A00028541C /* ProjectListTVC.swift */,
 				80957D392365D4B30028541C /* ProjectListVC.swift */,
 			);
 			path = Controller;

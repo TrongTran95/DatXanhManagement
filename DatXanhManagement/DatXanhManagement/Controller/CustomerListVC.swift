@@ -43,6 +43,10 @@ class CustomerListVC: UIViewController {
 		view.settings.starMargin = 5
 		view.settings.fillMode = .full
 		view.translatesAutoresizingMaskIntoConstraints = false
+		
+		view.didTouchCosmos = { rating in
+			self.flagStar = true
+		}
 		//https://www.youtube.com/watch?v=Y4A_y29cy7Q
 		return view
 	}()
@@ -85,49 +89,84 @@ class CustomerListVC: UIViewController {
 	
 	//Cancel button, turn off customer detail view, back to customer list
 	@IBAction func backToCustomerListButtonClicked(_ sender: Any) {
-		flagStar = true
 		if (flagStar == true || flagNote == true){
 			let alert = create1ActionAlert(title: ALERT_DATA_CHANGED, message: ALERT_ASK_FOR_SAVE, actionTitle: "Save", cancelTitle: "Cancel", cancelCompletion: {
 				//Handle for cancel action
-				self.handleCancelingAfterChooseInAlert()
+				self.hideCustomerDetailView()
 			}) {
 				//self.handleCancelingAfterChooseInAlert()
 				//Handle for save action
 				//Change in both rating star and note
 				if (self.flagStar == true && self.flagNote == true) {
-					//Check 400 characters
-					if self.txtvNote.text.count > 400 {
-						
-					} else {
-						self.flagNote = false
+					self.updateNote {
+						self.updateStar {
+							self.hideCustomerDetailView()
+						}
 					}
-					
-					self.flagStar = false
-					
 				}
 				//Change in rating star
 				else if (self.flagStar == true && self.flagNote == false){
-					self.flagStar = false
+					self.updateStar {
+						self.hideCustomerDetailView()
+					}
 				}
 				//Change in and note
 				else {
-					self.flagNote = false
+					self.updateNote {
+						self.hideCustomerDetailView()
+					}
 				}
 			}
 			self.present(alert, animated: true, completion: nil)
+		} else {
+			hideCustomerDetailView()
 		}
-		
 	}
 	
-	func handleCancelingAfterChooseInAlert(){
-		//Hide Customer detail view
-		viewCustomerDetailContainer.isHidden = true
-		UIView.animate(withDuration: 0.5) {
-			self.viewCustomerDetailContainer.alpha = 0
+	func updateNote(completionHandler: @escaping () -> ()){
+		//Check 400 characters
+		if self.txtvNote.text.count > 400 {
+			self.present(createCancelAlert(title: "Your typed is too long", message: "", cancelTitle: "Cancel"), animated: true, completion: nil)
+			return
 		}
-		txtvNote.resignFirstResponder()
-		viewNoteContainer.isHidden = false
-		btnInfoEdit.setImage(#imageLiteral(resourceName: "info"), for: .normal)
+		Services.shared.updateNote(idCustomer: self.chosenCustomer.idCustomer, note: self.txtvNote.text) { (error) in
+			if (error) {
+				self.present(createCancelAlert(title: "Can't save note", message: "", cancelTitle: "Cancel"), animated: true, completion: nil)
+				return
+			}
+			DispatchQueue.main.async {
+				self.chosenCustomer.setNote(note: self.txtvNote.text)
+				completionHandler()
+			}
+		}
+	}
+	
+	func updateStar(completionHandler: @escaping () -> ()){
+		Services.shared.updateRatingStar(idCustomer: self.chosenCustomer.idCustomer, star: Int(self.cosmosView.rating), completion: { (error) in
+			if (error) {
+				self.present(createCancelAlert(title: "Can't save rating information", message: "", cancelTitle: "Cancel"), animated: true, completion: nil)
+				return
+			}
+			self.chosenCustomer.setStar(star: Int(self.cosmosView.rating))
+			completionHandler()
+		})
+	}
+	
+	func hideCustomerDetailView(){
+		DispatchQueue.main.async {
+			//Hide Customer detail view
+			self.viewCustomerDetailContainer.isHidden = true
+			UIView.animate(withDuration: 0.5) {
+				self.viewCustomerDetailContainer.alpha = 0
+			}
+			self.txtvNote.resignFirstResponder()
+			self.txtvNote.text = NOTE_PLACE_HOLDER
+			self.txtvNote.textColor = UIColor.lightGray
+			self.viewNoteContainer.isHidden = false
+			self.btnInfoEdit.setImage(#imageLiteral(resourceName: "info"), for: .normal)
+			self.flagStar = false
+			self.flagNote = false
+		}
 	}
 	
 	override func viewDidLoad() {
@@ -168,14 +207,14 @@ class CustomerListVC: UIViewController {
 	}
 	
 	func setupUI() {
-		viewRating.addSubview(cosmosView)
 		viewRating.layer.cornerRadius = 20
-		
 		let contraints = AutoLayout.shared.getCenterConstraint(currentView: cosmosView, destinationView: viewRating)
+		viewRating.addSubview(cosmosView)
 		viewRating.addConstraints(contraints)
 		
+		cosmosView.rating = Double(chosenCustomer.star)
 //		cosmosView.didTouchCosmos = { rating in
-//
+//			self.flagStar = true
 //		}
 		
 		txtvNote.delegate = self
@@ -310,6 +349,12 @@ class CustomerListVC: UIViewController {
 	}
 	
 	func showViewCustomerDetail(){
+		//Set star
+		cosmosView.rating = Double(chosenCustomer.star)
+		if (chosenCustomer.note != "") {
+			txtvNote.text = self.chosenCustomer.note
+			txtvNote.textColor = UIColor.black
+		}
 		//Reset scroll position to 0
 		tbCustomerDetail.contentOffset = CGPoint.zero
 		
@@ -567,6 +612,10 @@ extension CustomerListVC: UITextViewDelegate {
 			textView.text = NOTE_PLACE_HOLDER
 			textView.textColor = UIColor.lightGray
 		}
+	}
+	
+	func textViewDidChange(_ textView: UITextView) {
+		self.flagNote = true
 	}
 }
 

@@ -13,6 +13,20 @@ class Services {
     
     private init(){}
 	
+	func updateNote(idCustomer: Int, note: String, completion: @escaping (Bool) -> ()){
+		let strParams = "idCustomer=" + "\(idCustomer)" + "&note=" + "\(note)"
+		getJsonUsingPost(strURL: urlUpdateNote, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
+	func updateRatingStar(idCustomer: Int, star: Int, completion: @escaping (Bool) -> ()){
+		let strParams = "idCustomer=" + "\(idCustomer)" + "&star=" + "\(star)"
+		getJsonUsingPost(strURL: urlUpdateRatingStar, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
 	func getBriefInfoOfCustomer(idCustomer: Int, completion: @escaping (BriefCustomer) -> ()){
 		let strParams = "idCustomer=" + "\(idCustomer)"
 		getJsonUsingPost(strURL: urlGetBriefInfoOfCustomer, strParams: strParams) { (json) in

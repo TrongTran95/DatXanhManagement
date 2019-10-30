@@ -73,3 +73,7 @@ public let urlGetUserType: String = "\(urlHostApi)GetUserType.php"
 public let urlUpdateIOSToken: String = "\(urlHostApi)UpdateIOSToken.php"
 
 public let urlGetBriefInfoOfCustomer: String = "\(urlHostApi)GetBriefInfoOfCustomer.php"
+
+public let urlUpdateRatingStar: String = "\(urlHostApi)UpdateRatingStar.php"
+
+public let urlUpdateNote: String = "\(urlHostApi)UpdateNote.php"
