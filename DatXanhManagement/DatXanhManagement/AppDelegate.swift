@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 								teamTBC.tabBar.items![1].title = ""
 								teamTBC.tabBar.items![2].title = ""
 								teamTBC.tabBar.items![3].title = ""
-								UITabBar.appearance().tintColor = barButtonColor
+								UITabBar.appearance().tintColor = colorOrange	
 								nc.viewControllers = [teamTBC]
 							}
 							

@@ -28,7 +28,10 @@ class TeamSettingTVController: UITableViewController {
 	func setupUI(){
 		self.tabBarController?.navigationItem.title = "Order Sample"
 		let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddMemberView))
-		self.tabBarController?.navigationItem.rightBarButtonItems = [addButton, self.editButtonItem]
+		addButton.tintColor = colorBlack
+		let editButton = self.editButtonItem
+		editButton.tintColor = colorBlack
+		self.tabBarController?.navigationItem.rightBarButtonItems = [addButton, editButton]
 	}
 	
 	@objc func showAddMemberView(){

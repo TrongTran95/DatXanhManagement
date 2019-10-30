@@ -51,15 +51,25 @@ class TeamTBC: UITabBarController, UITabBarControllerDelegate {
 			self.thirdTab.tabBarItem.title = "Seperate"
 			self.forthTab.title = "Chart"
 			
-			UITabBar.appearance().tintColor = barButtonColor
+			UITabBar.appearance().tintColor = colorOrange
 		}
 		
 		let accountButton = UIBarButtonItem(image: #imageLiteral(resourceName: "Account"), style: .plain, target: self, action: #selector(showActionSheet))
+		accountButton.tintColor = colorBlack
 		self.navigationItem.leftBarButtonItem = accountButton
 	}
 	
 	@objc func showActionSheet() {
-		let alert = UIAlertController(title: user.emailAddress, message: "", preferredStyle: .actionSheet)
+		let alert = UIAlertController(title: "", message: "Choose action", preferredStyle: .actionSheet)
+		let titleFont = [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 18.0)!]
+		let titleAttrString = NSMutableAttributedString(string: user.emailAddress, attributes: titleFont)
+
+//		let messageFont = [NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 0)!]
+//		let messageAttrString = NSMutableAttributedString(string: "a", attributes: messageFont)
+
+		alert.setValue(titleAttrString, forKey: "attributedTitle")
+//		alert.setValue(messageAttrString, forKey: "attributedMessage")
+
 		let actionChangePassword = UIAlertAction(title: "Change password", style: .default) { (action) in
 			self.performSegue(withIdentifier: "showChangePassword", sender: self)
 		}

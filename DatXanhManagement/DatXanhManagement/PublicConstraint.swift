@@ -26,4 +26,5 @@ let NOTE_PLACE_HOLDER = "Nhập ghi chú..."
 let ALERT_DATA_CHANGED = "Data changed"
 let ALERT_ASK_FOR_SAVE = "Do you want to save new data ?"
 
-let barButtonColor = UIColor(red: 255.0/255.0, green: 173.0/255.0, blue: 59.0/255.0, alpha: 1)
+let colorOrange = UIColor(red: 255.0/255.0, green: 173.0/255.0, blue: 59.0/255.0, alpha: 1)
+let colorBlack = UIColor(red: 50.0/255.0, green: 50.0/255.0, blue: 50.0/255.0, alpha: 1)

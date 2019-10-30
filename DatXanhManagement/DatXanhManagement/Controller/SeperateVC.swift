@@ -169,7 +169,9 @@ class SeperateVC: UIViewController {
 	func setupUI(){
 		self.tabBarController?.navigationItem.title = "Seperate"
 		addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showSeperateView))
+		addButton.tintColor = colorBlack
 		removeButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(removeUserEmailSeperateList))
+		removeButton.tintColor = colorBlack
 		self.tabBarController?.navigationItem.rightBarButtonItems = [addButton, removeButton]
 	}
 	
