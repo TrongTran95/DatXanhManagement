@@ -77,3 +77,11 @@ public let urlGetBriefInfoOfCustomer: String = "\(urlHostApi)GetBriefInfoOfCusto
 public let urlUpdateRatingStar: String = "\(urlHostApi)UpdateRatingStar.php"
 
 public let urlUpdateNote: String = "\(urlHostApi)UpdateNote.php"
+
+public let urlCheckProjectExist: String = "\(urlHostApi)CheckProjectExist.php"
+
+public let urlAddProject: String = "\(urlHostApi)AddProject.php"
+
+public let urlGetCallingDetailList: String = "\(urlHostApi)GetCallingDetailList.php"
+
+public let urlAddCallingDetail: String = "\(urlHostApi)AddCallingDetail.php"

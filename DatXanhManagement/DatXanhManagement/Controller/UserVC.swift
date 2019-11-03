@@ -189,12 +189,14 @@ class UserVC: UIViewController {
 		
 		//Get customer list before segue to customer list screen
 		projects[index].getCustomerList(emailTeam: projects[index].emailTeam, emailAddress: user.emailAddress) {
+			let currentProject = self.projects[index]
+			if (currentProject.customerListSeperated[KEY_STILL_NOT]!.count == 0 && currentProject.customerListSeperated[KEY_ALREADY]!.count == 0) {
+				DispatchQueue.main.async {
+					self.loadingView.removeFromSuperview()
+				}
+				return
+			}
 			DispatchQueue.main.async {
-				/*Test customer's all information
-				let cc = self.projects[indexPath.row].customerList[1]
-				print("\(cc.customerStatusID) - \(cc.dateContact) - \(cc.dayOfBirth) - \(cc.email) - \(cc.fbAccount) - \(cc.firstName) - \(cc.gender) - \(cc.idCustomer) - \(cc.lastName) - \(cc.message) - \(cc.phoneNumber) - \(cc.projectCode) - \(cc.callStatus) - \(cc.callSuccessTimes) - \(cc.callSuccessMinutes)")
-				*/
-				
 				//Go to customer list page
 				self.performSegue(withIdentifier: "showCustomerListPage", sender: self)
 				self.loadingView.removeFromSuperview()

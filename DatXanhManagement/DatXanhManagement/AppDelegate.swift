@@ -163,17 +163,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 							DispatchQueue.main.async {
 								
 								if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-//									self.window?.rootViewController = UserVC()
 									let nc = appDelegate.window?.rootViewController as! UINavigationController
 									
 									let vc = nc.viewControllers[0] as! UserVC
 									vc.emailTeam = emailTeam as! String
 									vc.emailPersonal = emailPersonal as! String
 									vc.customerId = Int((customerId as! NSString).doubleValue)
-//									vc.pushToNext()
+
 									appDelegate.window?.rootViewController?.dismiss(animated: false, completion: nil)
 									(appDelegate.window?.rootViewController as? UINavigationController)?.popToViewController(vc, animated: false)
-//									(appDelegate.window?.rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
 								}
 							}
 						} else {

@@ -13,6 +13,31 @@ class Services {
     
     private init(){}
 	
+	//Add user
+	func addCallingDetail(idCustomer: Int, type: Int, completion: @escaping (Bool) -> Void) {
+		let strParams = "idCustomer=" + "\(idCustomer)" + "&type=" + "\(type)"
+		getJsonUsingPost(strURL: urlAddCallingDetail, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
+	func getCallingDetailList(idCustomer: Int, completion: @escaping ([CallingDetail]) -> ()) {
+		let strParams = "idCustomer=" + "\(idCustomer)"
+		getJsonUsingPost(strURL: urlGetCallingDetailList, strParams: strParams) { (json) in
+			let callingDetailJson = json["callingDetailList"] as! [[String:Any]]
+			var callingDetailList:[CallingDetail] = []
+			for callingDetail in callingDetailJson {
+				let newCallingDetail = CallingDetail()
+				newCallingDetail.setId(id: callingDetail["id"] as? Int ?? 0)
+				newCallingDetail.setDate(date: callingDetail["date"] as? String ?? "")
+				newCallingDetail.setType(type: callingDetail["type"] as? Int ?? 0)
+				callingDetailList.append(newCallingDetail)
+			}
+			callingDetailList.sort(by: {$0.date > $1.date})
+			completion(callingDetailList)
+		}
+	}
+	
 	func updateNote(idCustomer: Int, note: String, completion: @escaping (Bool) -> ()){
 		let strParams = "idCustomer=" + "\(idCustomer)" + "&note=" + "\(note)"
 		getJsonUsingPost(strURL: urlUpdateNote, strParams: strParams) { (json) in
@@ -96,7 +121,7 @@ class Services {
 				newUserEmailSeperate.setCustomerID(customerID: userEmailSeperate["customerID"] as? Int ?? 0)
 				userEmailSeperateList.append(newUserEmailSeperate)
 			}
-			userEmailSeperateList.sort(by: {$0.receivedDate > $1.receivedDate})
+			userEmailSeperateList.sort(by: {$0.receivedDate < $1.receivedDate})
 			completion(userEmailSeperateList)
 		}
 	}
@@ -220,6 +245,13 @@ class Services {
 		}
 	}
 	
+	func checkProjectExist(name: String, completion: @escaping (Bool) -> Void){
+		let strParams = "name=" + name
+		getJsonUsingPost(strURL: urlCheckProjectExist, strParams: strParams) { (json) in
+			completion(json["exist"] as! Bool)
+		}
+	}
+	
 	func getUserType(emailAddress: String, completion: @escaping (Int) -> Void){
 		let strParams = "emailAddress=" + emailAddress
 		getJsonUsingPost(strURL: urlGetUserType, strParams: strParams) { (json) in
@@ -282,6 +314,13 @@ class Services {
 	func addUserProject(email: String, projectName: String, emailTeam: String, completion: @escaping(Bool) -> Void){
 		let strParams:String = "email=" + email + "&projectName=" + projectName + "&emailTeam=" + emailTeam
 		getJsonUsingPost(strURL: urlAddUserProject, strParams: strParams) { (json) in
+			completion(json["error"] as! Bool)
+		}
+	}
+	
+	func addProject(name: String, completion: @escaping(Bool) -> Void){
+		let strParams:String = "name=" + name
+		getJsonUsingPost(strURL: urlAddProject, strParams: strParams) { (json) in
 			completion(json["error"] as! Bool)
 		}
 	}

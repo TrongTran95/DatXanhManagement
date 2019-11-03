@@ -9,6 +9,7 @@
 import UIKit
 import CallKit
 import Cosmos
+import Toaster
 
 class CustomerListVC: UIViewController {
 	
@@ -34,22 +35,7 @@ class CustomerListVC: UIViewController {
 	
 	@IBOutlet weak var btnInfoEdit: UIButton!
 	
-	lazy var cosmosView: CosmosView = {
-		let view = CosmosView()
-		view.settings.filledImage = #imageLiteral(resourceName: "star_yellow").withRenderingMode(.alwaysOriginal)
-		view.settings.emptyImage = #imageLiteral(resourceName: "star_gray").withRenderingMode(.alwaysOriginal)
-		view.settings.totalStars = 5
-		view.settings.starSize = 30
-		view.settings.starMargin = 5
-		view.settings.fillMode = .full
-		view.translatesAutoresizingMaskIntoConstraints = false
-		
-		view.didTouchCosmos = { rating in
-			self.flagStar = true
-		}
-		//https://www.youtube.com/watch?v=Y4A_y29cy7Q
-		return view
-	}()
+	var cosmosView: CosmosView!
 	
 	var lblPlaceHolderNote : UILabel!
 	
@@ -75,6 +61,14 @@ class CustomerListVC: UIViewController {
 	
 	var flagStar: Bool = false
 	var flagNote: Bool = false
+	
+	var flagAddCallingDetail: Bool = false
+	
+	@IBAction func ClickedCallCustomer(_ sender: Any) {
+		flagAddCallingDetail = false
+		let phoneNumber = chosenCustomer.phoneNumber
+		phoneNumber.makeAColl()
+	}
 	
 	@IBAction func editOrInfoButtonClicked(_ sender: UIButton) {
 		if sender.currentImage == #imageLiteral(resourceName: "edit") {
@@ -207,15 +201,26 @@ class CustomerListVC: UIViewController {
 	}
 	
 	func setupUI() {
+		cosmosView = CosmosView()
+		cosmosView.translatesAutoresizingMaskIntoConstraints = false
+		//https://www.youtube.com/watch?v=Y4A_y29cy7Q
+		
 		viewRating.layer.cornerRadius = 20
 		let contraints = AutoLayout.shared.getCenterConstraint(currentView: cosmosView, destinationView: viewRating)
 		viewRating.addSubview(cosmosView)
 		viewRating.addConstraints(contraints)
 		
 		cosmosView.rating = Double(chosenCustomer.star)
-//		cosmosView.didTouchCosmos = { rating in
-//			self.flagStar = true
-//		}
+		cosmosView.settings.filledImage = #imageLiteral(resourceName: "star_yellow").withRenderingMode(.alwaysOriginal)
+		cosmosView.settings.emptyImage = #imageLiteral(resourceName: "star_gray").withRenderingMode(.alwaysOriginal)
+		cosmosView.settings.totalStars = 5
+		cosmosView.settings.starSize = 30
+		cosmosView.settings.starMargin = 5
+		cosmosView.settings.fillMode = .full
+		
+		cosmosView.didTouchCosmos = { rating in
+			self.flagStar = true
+		}
 		
 		txtvNote.delegate = self
 		if chosenCustomer.note == "" {
@@ -369,6 +374,13 @@ class CustomerListVC: UIViewController {
 			self.viewCustomerDetailContainer.alpha = 1
 		}
 	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if (segue.identifier == "showCallingDetail") {
+			guard let callingDetailVC = segue.destination as? CallingDetailVC else { return }
+			callingDetailVC.callingDetailList = chosenCustomer.callingDetailList
+		}
+	}
 }
 
 // MARK: Table view
@@ -486,6 +498,12 @@ extension CustomerListVC: UITableViewDelegate, UITableViewDataSource {
 			let cell = tbCustomerDetail.dequeueReusableCell(withIdentifier: "customerCell", for: indexPath) as! CustomerDetailTVC
 			let currentRow = indexPath.row
 			
+			if (currentRow == 3) {
+				cell.accessoryType = .disclosureIndicator
+			} else {
+				cell.accessoryType = .none
+			}
+			
 			//Check if customer name too long
 			let displayName = "\(chosenCustomer.lastName) \(chosenCustomer.firstName)"
 			let limitLength = 18
@@ -558,10 +576,15 @@ extension CustomerListVC: UITableViewDelegate, UITableViewDataSource {
 		else {
 			//Phone call row
 			if (indexPath.row == 3) {
-				let phoneNumber = chosenCustomer.phoneNumber
-				print(phoneNumber)
-				//				let trongs = "0783636848"
-				phoneNumber.makeAColl()
+				Services.shared.getCallingDetailList(idCustomer: chosenCustomer.idCustomer) { (callingDetailList) in
+					if (callingDetailList.count == 0) {
+						return
+					}
+					self.chosenCustomer.setCallingDetailList(callingDetailList: callingDetailList)
+					DispatchQueue.main.async {
+						self.performSegue(withIdentifier: "showCallingDetail", sender: self)
+					}
+				}
 			}
 		}
 	}
@@ -627,6 +650,12 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 			print("Disconnected")
 			//Customer accept the calling, change call status of customer and reset customer list
 			if (connectFlag == true) {
+				
+				if (!flagAddCallingDetail) {
+					flagAddCallingDetail = true
+				} else {
+					return
+				}
 				//Calculate times(mins) that user had called customer
 				let averageMins:Float = calculateCalllMinutes()
 				
@@ -638,11 +667,20 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 				chosenCustomer.setCallSuccessMinutes(callSuccessMinutes: averageMins)
 				//Update to server
 				chosenCustomer.updateCustomerCallingDetail { error in
-					if !error {
+					if error {
+						self.present(createCancelAlert(title: "Can't update calling detail", message: "", cancelTitle: "Cancel"), animated: true, completion: nil)
+						return
+					}
+					Services.shared.addCallingDetail(idCustomer: self.chosenCustomer.idCustomer, type: CallingDetailType.Received.rawValue) { (error) in
+						if (error) {
+							self.present(createCancelAlert(title: "Can't save calling history", message: "", cancelTitle: "Cancel"), animated: true, completion: nil)
+							return
+						}
 						//Reset customer list
 						self.project.checkAndResetCustomerList()
 						//reload table's data
 						DispatchQueue.main.async {
+							Toast(text: "Saved to calling history", duration: Delay.short).show()
 							self.tbCustomerList.reloadData()
 						}
 						//Get customer list
@@ -660,7 +698,21 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 			}
 			//Customer not accept the calling, change call fail times
 			else {
-				
+				if (!flagAddCallingDetail) {
+					flagAddCallingDetail = true
+				} else {
+					return
+				}
+				//ADD CUSTOMER CALLING DETAIL HERE
+				Services.shared.addCallingDetail(idCustomer: chosenCustomer.idCustomer, type: CallingDetailType.NotPickUp.rawValue) { (error) in
+					if (error) {
+						self.present(createCancelAlert(title: "Can't save calling history", message: "", cancelTitle: "Cancel"), animated: true, completion: nil)
+						return
+					}
+					DispatchQueue.main.async {
+						Toast(text: "Saved to calling history", duration: Delay.short).show()
+					}
+				}
 			}
 		}
 		//User call customer
@@ -680,8 +732,8 @@ extension CustomerListVC: CustomerListTVCDelegate, CXCallObserverDelegate{
 	}
 	
 	func didPressCallButton(section: String, row: Int) {
+		flagAddCallingDetail = false
 		chosenCustomer = project.customerListSeperated[section]![row]
-		//let phoneNumber = chosenCustomer.phoneNumber
 		let phoneNumber = chosenCustomer.phoneNumber
 		phoneNumber.makeAColl()
 	}

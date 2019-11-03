@@ -16,7 +16,6 @@ class AutoLayout {
 		var arrConstraint: [NSLayoutConstraint] = []
 		for i in 0..<attributes.count {
 			let constraint = NSLayoutConstraint(item: currentView, attribute: attributes[i], relatedBy: .equal, toItem: destinationView, attribute: attributes[i], multiplier: 1.0, constant: 0)
-//			NSLayoutConstraint.activate([constraint])
 
 			arrConstraint.append(constraint)
 		}

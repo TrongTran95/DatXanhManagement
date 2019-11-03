@@ -12,14 +12,14 @@ Example:
 Shows: ★★★★☆ (123)
 
 */
-@IBDesignable open class CosmosView: UIView {
+open class CosmosView: UIView {
     
   /**
   
   The currently shown number of stars, usually between 1 and 5. If the value is decimal the stars will be shown according to the Fill Mode setting.
 
   */
-  @IBInspectable open var rating: Double = CosmosDefaultSettings.rating {
+  open var rating: Double = CosmosDefaultSettings.rating {
     didSet {
       if oldValue != rating {
         update()
@@ -28,7 +28,7 @@ Shows: ★★★★☆ (123)
   }
   
   /// Currently shown text. Set it to nil to display just the stars without text.
-  @IBInspectable open var text: String? {
+  open var text: String? {
     didSet {
       if oldValue != text {
         update()
@@ -337,103 +337,103 @@ Shows: ★★★★☆ (123)
   
   // MARK: - Properties inspectable from the storyboard
   
-  @IBInspectable var totalStars: Int = CosmosDefaultSettings.totalStars {
+   var totalStars: Int = CosmosDefaultSettings.totalStars {
     didSet {
       settings.totalStars = totalStars
     }
   }
   
-  @IBInspectable var starSize: Double = CosmosDefaultSettings.starSize {
+   var starSize: Double = CosmosDefaultSettings.starSize {
     didSet {
       settings.starSize = starSize
     }
   }
   
-  @IBInspectable var filledColor: UIColor = CosmosDefaultSettings.filledColor {
+   var filledColor: UIColor = CosmosDefaultSettings.filledColor {
     didSet {
       settings.filledColor = filledColor
     }
   }
   
-  @IBInspectable var emptyColor: UIColor = CosmosDefaultSettings.emptyColor {
+   var emptyColor: UIColor = CosmosDefaultSettings.emptyColor {
     didSet {
       settings.emptyColor = emptyColor
     }
   }
     
-  @IBInspectable var emptyBorderColor: UIColor = CosmosDefaultSettings.emptyBorderColor {
+   var emptyBorderColor: UIColor = CosmosDefaultSettings.emptyBorderColor {
       didSet {
           settings.emptyBorderColor = emptyBorderColor
       }
   }
   
-  @IBInspectable var emptyBorderWidth: Double = CosmosDefaultSettings.emptyBorderWidth {
+   var emptyBorderWidth: Double = CosmosDefaultSettings.emptyBorderWidth {
       didSet {
           settings.emptyBorderWidth = emptyBorderWidth
       }
   }
   
-  @IBInspectable var filledBorderColor: UIColor = CosmosDefaultSettings.filledBorderColor {
+   var filledBorderColor: UIColor = CosmosDefaultSettings.filledBorderColor {
       didSet {
           settings.filledBorderColor = filledBorderColor
       }
   }
   
-  @IBInspectable var filledBorderWidth: Double = CosmosDefaultSettings.filledBorderWidth {
+   var filledBorderWidth: Double = CosmosDefaultSettings.filledBorderWidth {
       didSet {
           settings.filledBorderWidth = filledBorderWidth
       }
   }
   
-  @IBInspectable var starMargin: Double = CosmosDefaultSettings.starMargin {
+   var starMargin: Double = CosmosDefaultSettings.starMargin {
     didSet {
       settings.starMargin = starMargin
     }
   }
   
-  @IBInspectable var fillMode: Int = CosmosDefaultSettings.fillMode.rawValue {
+   var fillMode: Int = CosmosDefaultSettings.fillMode.rawValue {
     didSet {
       settings.fillMode = StarFillMode(rawValue: fillMode) ?? CosmosDefaultSettings.fillMode
     }
   }
   
-  @IBInspectable var textSize: Double = CosmosDefaultSettings.textSize {
+   var textSize: Double = CosmosDefaultSettings.textSize {
     didSet {
       settings.textFont = settings.textFont.withSize(CGFloat(textSize))
     }
   }
   
-  @IBInspectable var textMargin: Double = CosmosDefaultSettings.textMargin {
+   var textMargin: Double = CosmosDefaultSettings.textMargin {
     didSet {
       settings.textMargin = textMargin
     }
   }
   
-  @IBInspectable var textColor: UIColor = CosmosDefaultSettings.textColor {
+   var textColor: UIColor = CosmosDefaultSettings.textColor {
     didSet {
       settings.textColor = textColor
     }
   }
   
-  @IBInspectable var updateOnTouch: Bool = CosmosDefaultSettings.updateOnTouch {
+   var updateOnTouch: Bool = CosmosDefaultSettings.updateOnTouch {
     didSet {
       settings.updateOnTouch = updateOnTouch
     }
   }
   
-  @IBInspectable var minTouchRating: Double = CosmosDefaultSettings.minTouchRating {
+   var minTouchRating: Double = CosmosDefaultSettings.minTouchRating {
     didSet {
       settings.minTouchRating = minTouchRating
     }
   }
   
-  @IBInspectable var filledImage: UIImage? {
+   var filledImage: UIImage? {
     didSet {
       settings.filledImage = filledImage
     }
   }
   
-  @IBInspectable var emptyImage: UIImage? {
+   var emptyImage: UIImage? {
     didSet {
       settings.emptyImage = emptyImage
     }

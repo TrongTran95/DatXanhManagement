@@ -134,6 +134,36 @@ class AdminVC: UIViewController {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		
+		pvProject.delegate = self
+		pvProject.dataSource = self
+		
+    }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+		setupData()
+		setupUI()
+	}
+	
+	func setupData(){
+		Services.shared.getAllUser { (users) in
+			self.users = users
+			DispatchQueue.main.async {
+				self.tvUserList.reloadData()
+			}
+		}
+		Services.shared.getAllProject { (projects) in
+			self.projects = projects
+			DispatchQueue.main.async {
+				self.pvProject.reloadAllComponents()
+			}
+		}
+	}
+	
+	
+	func setupUI(){
 		viewRealAddUser.translatesAutoresizingMaskIntoConstraints = false
 		
 		viewAddUserHeight = viewRealAddUser.frame.size.height
@@ -144,31 +174,16 @@ class AdminVC: UIViewController {
 		
 		btnShowAddView.layer.cornerRadius = btnShowAddView.frame.size.height / 2
 		
-		pvProject.delegate = self
-		pvProject.dataSource = self
-		
-		Services.shared.getAllUser { (users) in
-			self.users = users
-			DispatchQueue.main.async {
-				self.tvUserList.reloadData()
-			}
-		}
-    }
-	
-	override func viewWillAppear(_ animated: Bool) {
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-		NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-		
-		Services.shared.getAllProject { (projects) in
-			self.projects = projects
-			DispatchQueue.main.async {
-				self.pvProject.reloadAllComponents()
-			}
-		}
-		
 		let signoutButton = UIBarButtonItem(image: #imageLiteral(resourceName: "sign-out"), style: .plain, target: self, action: #selector(signOut))
+		let btnProject = UIBarButtonItem(image: #imageLiteral(resourceName: "department"), style: .plain, target: self, action: #selector(showProjectVC))
+		signoutButton.tintColor = colorBlack
+		btnProject.tintColor = colorBlack
+		self.navigationItem.rightBarButtonItem = btnProject
 		self.navigationItem.leftBarButtonItem = signoutButton
-
+	}
+	
+	@objc func showProjectVC(){
+		self.performSegue(withIdentifier: "showProject", sender: self)
 	}
 	
 	@objc func signOut(){

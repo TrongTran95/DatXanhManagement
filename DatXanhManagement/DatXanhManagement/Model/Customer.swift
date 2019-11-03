@@ -29,11 +29,15 @@ class Customer {
 	private(set) public var callStatus:Int
 	private(set) public var callSuccessTimes:Int
 	private(set) public var callSuccessMinutes:Float
+	private(set) public var callingDetailList:[CallingDetail]
     
     private(set) public var statusNewcomer:Int
 	
 	private(set) public var note:String
 	private(set) public var star:Int
+	
+	
+	
 	
 	init() {
 		self.idCustomer = 0
@@ -56,10 +60,15 @@ class Customer {
 		self.callStatus = 0
 		self.callSuccessTimes = 0
         self.callSuccessMinutes = 0
+		self.callingDetailList = []
         
         self.statusNewcomer = 0
 		self.note = ""
 		self.star = 0
+	}
+	
+	func setCallingDetailList(callingDetailList: [CallingDetail]){
+		self.callingDetailList = callingDetailList
 	}
 	
 	func setStar(star: Int){

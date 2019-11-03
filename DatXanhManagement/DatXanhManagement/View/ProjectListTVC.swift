@@ -10,10 +10,21 @@ import UIKit
 
 class ProjectListTVC: UITableViewCell {
 
-    override func awakeFromNib() {
+	@IBOutlet weak var lblOrderNumber: UILabel!
+	
+	@IBOutlet weak var lblProjectName: UILabel!
+	
+	@IBOutlet weak var imgOrderNumber: UIImageView!
+	
+	func setData(orderNumber: Int, projectName: String){
+		lblOrderNumber.text = "\(orderNumber)"
+		lblProjectName.text = projectName
+	}
+	
+	override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
+		imgOrderNumber.layer.cornerRadius = 5
+	}
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

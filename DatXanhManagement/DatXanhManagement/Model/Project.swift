@@ -65,6 +65,10 @@ class Project {
 		print(strParams)
 		getJsonUsingPost(strURL: urlGetCustomerList, strParams: strParams) { (json) in
 			let arrCustomer = json["customers"] as! [[String:Any]]
+			if (arrCustomer.count == 0) {
+				completion()
+				return
+			}
 			//Assign customer list
 			for i in 0..<arrCustomer.count {
 				let currentJsonCustomer = arrCustomer[i]
@@ -156,9 +160,9 @@ class Project {
 				//After get all calling detail of customer, do completion
 				if (self.customerListSeperated[KEY_STILL_NOT]!.count + self.customerListSeperated[KEY_ALREADY]!.count == arrCustomer.count) {
 					//Sort
-					self.customerListSeperated[KEY_STILL_NOT] = self.customerListSeperated[KEY_STILL_NOT]?.sorted(by: {$0.idCustomer > $1.idCustomer})
+					self.customerListSeperated[KEY_STILL_NOT] = self.customerListSeperated[KEY_STILL_NOT]?.sorted(by: {$0.dateContact < $1.dateContact})
 					//Sort
-					self.customerListSeperated[KEY_ALREADY] = self.customerListSeperated[KEY_ALREADY]?.sorted(by: {$0.idCustomer > $1.idCustomer})
+					self.customerListSeperated[KEY_ALREADY] = self.customerListSeperated[KEY_ALREADY]?.sorted(by: {$0.dateContact < $1.dateContact})
 					completion()
 				}
 			}
