@@ -97,7 +97,7 @@
 		802870A52311267F000FD176 /* AddSeperateTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddSeperateTVC.xib; sourceTree = "<group>"; };
 		802DC7D12352105200169BB3 /* DesignableUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableUI.swift; sourceTree = "<group>"; };
 		8036D63522DCCAA40080775C /* Customer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customer.swift; sourceTree = "<group>"; };
-		804F4FC322DB67180083044C /* DatXanhManagement.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatXanhManagement.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		804F4FC322DB67180083044C /* Reads CRM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reads CRM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		804F4FC622DB67180083044C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		804F4FC822DB67180083044C /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		804F4FCB22DB67180083044C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		804F4FBA22DB67180083044C = {
 			isa = PBXGroup;
 			children = (
-				804F4FC522DB67180083044C /* DatXanhManagement */,
+				804F4FC522DB67180083044C /* ReadsCRM */,
 				800EC67322F527ED00E1CBA9 /* OneSignalNotificationServiceExtension */,
 				804F4FC422DB67180083044C /* Products */,
 				475D433AAF2701958F4593ED /* Pods */,
@@ -213,13 +213,13 @@
 		804F4FC422DB67180083044C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				804F4FC322DB67180083044C /* DatXanhManagement.app */,
+				804F4FC322DB67180083044C /* Reads CRM.app */,
 				800EC67222F527ED00E1CBA9 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		804F4FC522DB67180083044C /* DatXanhManagement */ = {
+		804F4FC522DB67180083044C /* ReadsCRM */ = {
 			isa = PBXGroup;
 			children = (
 				8086BDE522F52C2A00E94F08 /* DatXanhManagement.entitlements */,
@@ -237,7 +237,7 @@
 				A201D99B230A663E001F2872 /* Services.swift */,
 				A2CF02B4230E32D1002CE7FD /* AutoLayout.swift */,
 			);
-			path = DatXanhManagement;
+			path = ReadsCRM;
 			sourceTree = "<group>";
 		};
 		804F4FD822DC32B60083044C /* Model */ = {
@@ -334,9 +334,9 @@
 			productReference = 800EC67222F527ED00E1CBA9 /* OneSignalNotificationServiceExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		804F4FC222DB67180083044C /* DatXanhManagement */ = {
+		804F4FC222DB67180083044C /* Reads CRM */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 804F4FD522DB67190083044C /* Build configuration list for PBXNativeTarget "DatXanhManagement" */;
+			buildConfigurationList = 804F4FD522DB67190083044C /* Build configuration list for PBXNativeTarget "Reads CRM" */;
 			buildPhases = (
 				BCD8720C69C6F27FFD65EF48 /* [CP] Check Pods Manifest.lock */,
 				804F4FBF22DB67180083044C /* Sources */,
@@ -349,9 +349,9 @@
 			dependencies = (
 				800EC67822F527ED00E1CBA9 /* PBXTargetDependency */,
 			);
-			name = DatXanhManagement;
+			name = "Reads CRM";
 			productName = DatXanhManagement;
-			productReference = 804F4FC322DB67180083044C /* DatXanhManagement.app */;
+			productReference = 804F4FC322DB67180083044C /* Reads CRM.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -385,7 +385,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 804F4FBE22DB67180083044C /* Build configuration list for PBXProject "DatXanhManagement" */;
+			buildConfigurationList = 804F4FBE22DB67180083044C /* Build configuration list for PBXProject "Reads CRM" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -398,7 +398,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				804F4FC222DB67180083044C /* DatXanhManagement */,
+				804F4FC222DB67180083044C /* Reads CRM */,
 				800EC67122F527ED00E1CBA9 /* OneSignalNotificationServiceExtension */,
 			);
 		};
@@ -730,11 +730,11 @@
 			baseConfigurationReference = C6F8943D25EB14039DFEF298 /* Pods-DatXanhManagement.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DatXanhManagement/DatXanhManagement.entitlements;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WY86QYTGHL;
-				INFOPLIST_FILE = DatXanhManagement/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ReadsCRM/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -753,11 +753,11 @@
 			baseConfigurationReference = E8E4AECCFA8F47DDDAD807B6 /* Pods-DatXanhManagement.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DatXanhManagement/DatXanhManagement.entitlements;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WY86QYTGHL;
-				INFOPLIST_FILE = DatXanhManagement/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ReadsCRM/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -783,7 +783,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		804F4FBE22DB67180083044C /* Build configuration list for PBXProject "DatXanhManagement" */ = {
+		804F4FBE22DB67180083044C /* Build configuration list for PBXProject "Reads CRM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				804F4FD322DB67190083044C /* Debug */,
@@ -792,7 +792,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		804F4FD522DB67190083044C /* Build configuration list for PBXNativeTarget "DatXanhManagement" */ = {
+		804F4FD522DB67190083044C /* Build configuration list for PBXNativeTarget "Reads CRM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				804F4FD622DB67190083044C /* Debug */,
