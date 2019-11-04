@@ -895,16 +895,15 @@
                                                     <rect key="frame" x="10" y="15" width="40" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9999" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P6h-5P-T3u">
-                                                            <rect key="frame" x="1" y="0.5" width="38.5" height="38.5"/>
+                                                            <rect key="frame" x="2" y="1.5" width="36.5" height="36.5"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="P6h-5P-T3u" secondAttribute="height" multiplier="1:1" id="uzf-1p-Dgg"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                            <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.8666666666666667" green="0.31372549019607843" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="P6h-5P-T3u" firstAttribute="centerX" secondItem="tlm-iL-3a3" secondAttribute="centerX" id="eTc-58-xx8"/>
                                                         <constraint firstAttribute="width" constant="40" id="fUz-4N-sfH"/>
@@ -913,13 +912,13 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trần Đức Trọng" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bj2-3Y-k0u">
-                                                    <rect key="frame" x="60" y="15.5" width="260" height="20.5"/>
+                                                    <rect key="frame" x="80" y="15.5" width="240" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.1960784314" green="0.1960784314" blue="0.1960784314" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01283636840" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E58-8u-y9u">
-                                                    <rect key="frame" x="61" y="38" width="259" height="18"/>
+                                                    <rect key="frame" x="81" y="38" width="239" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
@@ -945,22 +944,32 @@
                                                         <constraint firstAttribute="bottom" secondItem="btk-V4-f6w" secondAttribute="bottom" constant="5" id="zmB-3U-Chf"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star5" translatesAutoresizingMaskIntoConstraints="NO" id="wtw-eT-41W">
+                                                    <rect key="frame" x="55" y="25" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="GOO-gV-ZRr"/>
+                                                        <constraint firstAttribute="width" constant="20" id="WvR-FF-t41"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="E58-8u-y9u" firstAttribute="centerY" secondItem="wDO-ib-CPN" secondAttribute="centerY" constant="12" id="1he-jM-rEj"/>
+                                                <constraint firstItem="Rub-yW-5kT" firstAttribute="leading" secondItem="E58-8u-y9u" secondAttribute="trailing" constant="10" id="7v3-5y-Ljg"/>
+                                                <constraint firstItem="wtw-eT-41W" firstAttribute="centerY" secondItem="wDO-ib-CPN" secondAttribute="centerY" id="C4f-nf-YEe"/>
+                                                <constraint firstItem="Rub-yW-5kT" firstAttribute="leading" secondItem="bj2-3Y-k0u" secondAttribute="trailing" constant="10" id="NIB-gu-IQt"/>
                                                 <constraint firstItem="bj2-3Y-k0u" firstAttribute="centerY" secondItem="wDO-ib-CPN" secondAttribute="centerY" constant="-9" id="Op4-1J-9RK"/>
-                                                <constraint firstItem="bj2-3Y-k0u" firstAttribute="leading" secondItem="tlm-iL-3a3" secondAttribute="trailing" constant="10" id="Op5-mL-h8G"/>
+                                                <constraint firstItem="E58-8u-y9u" firstAttribute="leading" secondItem="wtw-eT-41W" secondAttribute="trailing" constant="6" id="OrW-tF-ow6"/>
                                                 <constraint firstAttribute="trailing" secondItem="Rub-yW-5kT" secondAttribute="trailing" constant="5" id="X2u-dQ-QCP"/>
-                                                <constraint firstItem="Rub-yW-5kT" firstAttribute="leading" secondItem="bj2-3Y-k0u" secondAttribute="trailing" constant="10" id="foz-Zv-aPG"/>
-                                                <constraint firstItem="E58-8u-y9u" firstAttribute="leading" secondItem="tlm-iL-3a3" secondAttribute="trailing" constant="11" id="mN2-QR-cuM"/>
+                                                <constraint firstItem="wtw-eT-41W" firstAttribute="leading" secondItem="tlm-iL-3a3" secondAttribute="trailing" constant="5" id="etF-7E-vxE"/>
+                                                <constraint firstItem="bj2-3Y-k0u" firstAttribute="leading" secondItem="wtw-eT-41W" secondAttribute="trailing" constant="5" id="fG5-my-Igd"/>
                                                 <constraint firstItem="tlm-iL-3a3" firstAttribute="centerY" secondItem="wDO-ib-CPN" secondAttribute="centerY" id="q1g-e3-2u3"/>
                                                 <constraint firstItem="tlm-iL-3a3" firstAttribute="leading" secondItem="wDO-ib-CPN" secondAttribute="leading" constant="10" id="rEI-0x-nrF"/>
-                                                <constraint firstItem="Rub-yW-5kT" firstAttribute="leading" secondItem="E58-8u-y9u" secondAttribute="trailing" constant="10" id="uAR-Ii-mIj"/>
                                                 <constraint firstItem="Rub-yW-5kT" firstAttribute="centerY" secondItem="wDO-ib-CPN" secondAttribute="centerY" id="won-PB-N2Z"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="btnPhoneCall" destination="btk-V4-f6w" id="NXw-YZ-n7f"/>
+                                            <outlet property="imgRatingStar" destination="wtw-eT-41W" id="krb-Gh-E3A"/>
                                             <outlet property="lblCustomerName" destination="bj2-3Y-k0u" id="TgH-jT-PpT"/>
                                             <outlet property="lblOrder" destination="P6h-5P-T3u" id="rIH-jQ-87T"/>
                                             <outlet property="lblPhoneNumber" destination="E58-8u-y9u" id="6Jb-qS-1US"/>
@@ -1183,7 +1192,6 @@
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="ClickedCallCustomer:" destination="ThK-9Z-SVy" eventType="touchUpInside" id="9zd-bb-hBK"/>
-                                                                    <action selector="backToCustomerListButtonClicked:" destination="ThK-9Z-SVy" eventType="touchUpInside" id="EUt-Pr-m2z"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -1260,7 +1268,7 @@
             </objects>
             <point key="canvasLocation" x="3965.5999999999999" y="133.5832083958021"/>
         </scene>
-        <!--Calling DetailVC-->
+        <!--Calling History-->
         <scene sceneID="lOg-EP-aAU">
             <objects>
                 <viewController id="u9U-9k-Sbu" customClass="CallingDetailVC" customModule="DatXanhManagement" customModuleProvider="target" sceneMemberID="viewController">
@@ -1323,6 +1331,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="0D9-iS-4dg"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Calling History" id="6vb-f3-T8f"/>
                     <connections>
                         <outlet property="tvCallingDetailList" destination="YxR-V8-12F" id="egg-Zq-foW"/>
                     </connections>
@@ -1841,12 +1850,13 @@
         <image name="Lock" width="24" height="24"/>
         <image name="Order" width="25" height="25"/>
         <image name="Separate" width="25" height="25"/>
+        <image name="Star5" width="64.791900634765625" height="64.791900634765625"/>
         <image name="Team" width="25" height="25"/>
         <image name="call_white" width="64" height="64"/>
         <image name="info" width="48" height="48"/>
         <image name="mansion" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RtT-E4-jTn"/>
+        <segue reference="Ge8-hM-Lft"/>
     </inferredMetricsTieBreakers>
 </document>

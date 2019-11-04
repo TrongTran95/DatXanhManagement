@@ -66,6 +66,7 @@ class CustomerListVC: UIViewController {
 	
 	@IBAction func ClickedCallCustomer(_ sender: Any) {
 		flagAddCallingDetail = false
+		hideCustomerDetailView()
 		let phoneNumber = chosenCustomer.phoneNumber
 		phoneNumber.makeAColl()
 	}
@@ -160,6 +161,7 @@ class CustomerListVC: UIViewController {
 			self.btnInfoEdit.setImage(#imageLiteral(resourceName: "info"), for: .normal)
 			self.flagStar = false
 			self.flagNote = false
+			self.tbCustomerList.reloadData()
 		}
 	}
 	
@@ -471,20 +473,14 @@ extension CustomerListVC: UITableViewDelegate, UITableViewDataSource {
 					displayName = "..\(displayName.maxLengthFromRightToLeft(length: limitLength))"
 				}
 			}
-			cell.lblCustomerName.text = displayName
-			
-			//Set customer phone number
-			cell.lblPhoneNumber.text = currentCustomer.phoneNumber
-			
-			//Set order of customer
-			cell.lblOrder.text = "\(indexPath.row + 1)"
+			cell.setData(name: displayName, phoneNumber: currentCustomer.phoneNumber, order: indexPath.row + 1, star: currentCustomer.star)
 			
 			//Set color for called customer
-			if (indexPath.section == 1) {
-				cell.viewOrder.backgroundColor = UIColor(red: 36/255, green: 161/255, blue: 94/255, alpha: 1)
-			} else {
-				cell.viewOrder.backgroundColor = UIColor(red: 221/255, green: 80/255, blue: 94/255, alpha: 1)
-			}
+//			if (indexPath.section == 1) {
+//				cell.viewOrder.backgroundColor = UIColor(red: 36/255, green: 161/255, blue: 94/255, alpha: 1)
+//			} else {
+//				cell.viewOrder.backgroundColor = UIColor(red: 221/255, green: 80/255, blue: 94/255, alpha: 1)
+//			}
 			
 			//Set tag for button phone call
 			cell.btnPhoneCall.tag = indexPath.row

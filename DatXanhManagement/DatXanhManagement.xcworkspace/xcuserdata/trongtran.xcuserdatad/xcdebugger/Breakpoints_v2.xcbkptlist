@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DatXanhManagement/Controller/CustomerListVC.swift"
-            timestampString = "594364132.7179199"
+            timestampString = "594447105.297159"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "734"
-            endingLineNumber = "734"
+            startingLineNumber = "730"
+            endingLineNumber = "730"
             landmarkName = "didPressCallButton(section:row:)"
             landmarkType = "7">
          </BreakpointContent>
